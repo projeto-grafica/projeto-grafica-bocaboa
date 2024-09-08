@@ -1,16 +1,8 @@
-import { themes as prismThemes } from 'prism-react-renderer';
-
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Projeto Gráfica',
-
-  // URL de produção do site
   url: 'https://projeto-grafica.github.io',
-
-  // Caminho base para GitHub Pages
-  baseUrl: '/',
-
-  // Configuração do GitHub Pages
+  baseUrl: '/projeto-grafica-bocaboa/',
   organizationName: 'projeto-grafica',
   projectName: 'projeto-grafica-bocaboa',
 
@@ -24,7 +16,6 @@ const config = {
   presets: [
     [
       'classic',
-      /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
@@ -36,26 +27,24 @@ const config = {
     ],
   ],
 
-  themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
-      image: 'img/docusaurus-social-card.jpg',
-      navbar: {
-        title: 'Projeto Gráfica',
-        items: [
-          {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
-            position: 'left',
-            label: 'Documentação',
-          },
-        ],
-      },
-      prism: {
-        theme: prismThemes.github,
-        darkTheme: prismThemes.dracula,
-      },
-    }),
+  themeConfig: ({
+    image: 'img/docusaurus-social-card.jpg',
+    navbar: {
+      title: 'Projeto Gráfica',
+      items: [
+        {
+          type: 'docSidebar',
+          sidebarId: 'tutorialSidebar',
+          position: 'left',
+          label: 'Documentação',
+        },
+      ],
+    },
+    prism: {
+      theme: prismThemes.github,
+      darkTheme: prismThemes.dracula,
+    },
+  }),
 };
 
 export default config;
