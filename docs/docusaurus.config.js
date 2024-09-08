@@ -5,14 +5,14 @@ const config = {
   title: 'Projeto Gráfica',
 
   // URL de produção do site
-  url: 'https://projeto-grafica.github.io/projeto-grafica-bocaboa/',
+  url: 'https://projeto-grafica.github.io',
 
   // Caminho base para GitHub Pages
   baseUrl: '/',
 
   // Configuração do GitHub Pages
-  organizationName: 'projeto-grafica', // Nome da organização GitHub
-  projectName: 'projeto-grafica-bocaboa', // Nome do repositório GitHub
+  organizationName: 'projeto-grafica',
+  projectName: 'projeto-grafica-bocaboa',
 
   onBrokenMarkdownLinks: 'warn',
 
