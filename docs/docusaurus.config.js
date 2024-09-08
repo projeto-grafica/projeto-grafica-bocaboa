@@ -8,7 +8,7 @@ const config = {
   url: 'https://projeto-grafica.github.io/projeto-grafica-bocaboa/',
 
   // Caminho base para GitHub Pages
-  baseUrl: '/projeto-grafica-bocaboa/',
+  baseUrl: '/',
 
   // Configuração do GitHub Pages
   organizationName: 'projeto-grafica', // Nome da organização GitHub
