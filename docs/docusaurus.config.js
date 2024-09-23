@@ -1,5 +1,6 @@
 /** @type {import('@docusaurus/types').Config} */
-const config = {
+
+module.exports = {
   title: 'Projeto Gráfica',
   url: 'https://projeto-grafica.github.io',
   baseUrl: '/projeto-grafica-bocaboa/',
@@ -16,18 +17,18 @@ const config = {
   presets: [
     [
       'classic',
-      ({
+      {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
-      }),
+      },
     ],
   ],
 
-  themeConfig: ({
+  themeConfig: {
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
       title: 'Projeto Gráfica',
@@ -40,11 +41,6 @@ const config = {
         },
       ],
     },
-    prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
-    },
-  }),
+  },
 };
 
-export default config;
