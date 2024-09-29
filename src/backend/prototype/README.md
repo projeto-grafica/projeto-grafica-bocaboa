@@ -1,4 +1,4 @@
-# quarkus
+# prototype
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
@@ -49,33 +49,30 @@ Or, if you don't have GraalVM installed, you can run the native executable build
 ./mvnw package -Dnative -Dquarkus.native.container-build=true
 ```
 
-You can then execute your native executable with: `./target/quarkus-1.0-SNAPSHOT-runner`
+You can then execute your native executable with: `./target/prototype-1.0-SNAPSHOT-runner`
 
 If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
 
 ## Related Guides
 
-- REST resources for Hibernate ORM with Panache ([guide](https://quarkus.io/guides/rest-data-panache)): Generate Jakarta
-  REST resources for your Hibernate Panache entities and repositories
-- JDBC Driver - H2 ([guide](https://quarkus.io/guides/datasource)): Connect to the H2 database via JDBC
 - RESTEasy Classic JSON-B ([guide](https://quarkus.io/guides/rest-json)): JSON-B serialization support for RESTEasy
   Classic
 - SmallRye OpenAPI ([guide](https://quarkus.io/guides/openapi-swaggerui)): Document your REST APIs with OpenAPI - comes
   with Swagger UI
 - RESTEasy Classic ([guide](https://quarkus.io/guides/resteasy)): REST endpoint framework implementing Jakarta REST and
   more
-- Cache ([guide](https://quarkus.io/guides/cache)): Enable application data caching in CDI beans
+- SmallRye Health ([guide](https://quarkus.io/guides/smallrye-health)): Monitor service health
 
 ## Provided Code
-
-### REST Data with Panache
-
-Generating Jakarta REST resources with Panache
-
-[Related guide section...](https://quarkus.io/guides/rest-data-panache)
 
 ### RESTEasy JAX-RS
 
 Easily start your RESTful Web Services
 
 [Related guide section...](https://quarkus.io/guides/getting-started#the-jax-rs-resources)
+
+### SmallRye Health
+
+Monitor your application's health using SmallRye Health
+
+[Related guide section...](https://quarkus.io/guides/smallrye-health)

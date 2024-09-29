@@ -4,8 +4,6 @@ import com.bocaboa.exception.custom.BadRequestException;
 import com.bocaboa.exception.custom.EntityNotFoundException;
 import com.bocaboa.generic.entity.GenericEntity;
 import com.bocaboa.generic.utils.Updatable;
-import io.quarkus.cache.CacheInvalidate;
-import io.quarkus.cache.CacheResult;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
@@ -80,7 +78,6 @@ public abstract class GenericResource<T extends GenericEntity> {
             @APIResponse(responseCode = "200", description = "List of entities returned successfully."),
             @APIResponse(responseCode = "500", description = "Internal server error.")
     })
-    @CacheResult(cacheName = "entities-cache")
     public List<T> getAll(
             @QueryParam("page") @DefaultValue("0") int page,
             @QueryParam("size") @DefaultValue("10") int size
@@ -127,7 +124,6 @@ public abstract class GenericResource<T extends GenericEntity> {
             @APIResponse(responseCode = "201", description = "Entity created successfully."),
             @APIResponse(responseCode = "400", description = "Error in entity creation.")
     })
-    @CacheInvalidate(cacheName = "entities-cache")
     public Response create(T entity) {
         if (entity == null) {
             throw new BadRequestException("The provided entity is empty or invalid.");
@@ -154,7 +150,6 @@ public abstract class GenericResource<T extends GenericEntity> {
             @APIResponse(responseCode = "200", description = "Entity updated successfully."),
             @APIResponse(responseCode = "404", description = "Entity not found.")
     })
-    @CacheInvalidate(cacheName = "entities-cache")
     public Response update(@PathParam("id") Long id, T entity) {
         T existingEntity = entityManager.find(entityClass, id);
         if (existingEntity == null) {
