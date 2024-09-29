@@ -1,0 +1,32 @@
+name: TESTS
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Code
+        uses: actions/checkout@v2
+
+      - name: Config Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+
+      - name: Give execute permission to mvnw
+        run: chmod +x src/backend/app/mvnw
+
+      - name: Run Java Tests
+        working-directory: src/backend/app
+        run: ./mvnw test
