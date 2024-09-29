@@ -1,6 +1,6 @@
-package com.nsync.exception.mapper;
+package com.bocaboa.exception.mapper;
 
-import com.nsync.exception.AppException;
+import com.bocaboa.exception.AppException;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;

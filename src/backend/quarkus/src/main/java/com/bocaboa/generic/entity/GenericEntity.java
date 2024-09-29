@@ -1,4 +1,4 @@
-package com.nsync.generic.entity;
+package com.bocaboa.generic.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.GeneratedValue;

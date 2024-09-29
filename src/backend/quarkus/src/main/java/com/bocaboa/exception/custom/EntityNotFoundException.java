@@ -1,6 +1,6 @@
-package com.nsync.exception.custom;
+package com.bocaboa.exception.custom;
 
-import com.nsync.exception.AppException;
+import com.bocaboa.exception.AppException;
 import jakarta.ws.rs.core.Response;
 
 /**

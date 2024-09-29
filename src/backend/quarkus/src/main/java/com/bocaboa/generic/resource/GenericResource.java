@@ -1,9 +1,9 @@
-package com.nsync.generic.resource;
+package com.bocaboa.generic.resource;
 
-import com.nsync.exception.custom.BadRequestException;
-import com.nsync.exception.custom.EntityNotFoundException;
-import com.nsync.generic.entity.GenericEntity;
-import com.nsync.generic.utils.Updatable;
+import com.bocaboa.exception.custom.BadRequestException;
+import com.bocaboa.exception.custom.EntityNotFoundException;
+import com.bocaboa.generic.entity.GenericEntity;
+import com.bocaboa.generic.utils.Updatable;
 import io.quarkus.cache.CacheInvalidate;
 import io.quarkus.cache.CacheResult;
 import jakarta.inject.Inject;

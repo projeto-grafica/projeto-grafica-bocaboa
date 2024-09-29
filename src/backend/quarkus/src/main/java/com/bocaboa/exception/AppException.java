@@ -1,4 +1,6 @@
-package com.nsync.exception;
+package com.bocaboa.exception;
+
+import lombok.Getter;
 
 /**
  * Represents a custom application exception that extends {@link RuntimeException}.
@@ -9,6 +11,7 @@ package com.nsync.exception;
  *
  * @author mauroDasChagas
  */
+@Getter
 public class AppException extends RuntimeException {
 
     private final int statusCode;
@@ -22,14 +25,5 @@ public class AppException extends RuntimeException {
     public AppException(String message, int statusCode) {
         super(message);
         this.statusCode = statusCode;
-    }
-
-    /**
-     * Retrieves the HTTP status code associated with this exception.
-     *
-     * @return the HTTP status code
-     */
-    public int getStatusCode() {
-        return this.statusCode;
     }
 }

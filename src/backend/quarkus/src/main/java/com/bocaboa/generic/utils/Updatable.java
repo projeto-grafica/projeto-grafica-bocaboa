@@ -1,4 +1,4 @@
-package com.nsync.generic.utils;
+package com.bocaboa.generic.utils;
 
 import java.lang.reflect.Field;
 
