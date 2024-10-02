@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="pt-BR" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-Requisitos" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.5.2">
+<title data-rh="true">Requisitos Funcionais | Projeto Gráfica</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://projeto-grafica.github.io/projeto-grafica-bocaboa/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://projeto-grafica.github.io/projeto-grafica-bocaboa/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://projeto-grafica.github.io/projeto-grafica-bocaboa/docs/Requisitos"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Requisitos Funcionais | Projeto Gráfica"><meta data-rh="true" name="description" content="Requisitos funcionais são especificações que descrevem o que um sistema deve fazer para atender às necessidades dos usuários e cumprir suas funções principais. Eles definem as ações, comportamentos e serviços que o sistema deve proporcionar, detalhando as funcionalidades que devem ser implementadas para resolver problemas específicos ou suportar processos de negócios. Esses requisitos geralmente abordam aspectos como operações que o sistema deve executar, interações com usuários e outros sistemas, e regras de processamento de dados. Ao contrário dos requisitos não funcionais, que se concentram em atributos como desempenho e segurança, os requisitos funcionais focam nas capacidades e comportamentos diretos do sistema."><meta data-rh="true" property="og:description" content="Requisitos funcionais são especificações que descrevem o que um sistema deve fazer para atender às necessidades dos usuários e cumprir suas funções principais. Eles definem as ações, comportamentos e serviços que o sistema deve proporcionar, detalhando as funcionalidades que devem ser implementadas para resolver problemas específicos ou suportar processos de negócios. Esses requisitos geralmente abordam aspectos como operações que o sistema deve executar, interações com usuários e outros sistemas, e regras de processamento de dados. Ao contrário dos requisitos não funcionais, que se concentram em atributos como desempenho e segurança, os requisitos funcionais focam nas capacidades e comportamentos diretos do sistema."><link data-rh="true" rel="canonical" href="https://projeto-grafica.github.io/projeto-grafica-bocaboa/docs/Requisitos"><link data-rh="true" rel="alternate" href="https://projeto-grafica.github.io/projeto-grafica-bocaboa/docs/Requisitos" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://projeto-grafica.github.io/projeto-grafica-bocaboa/docs/Requisitos" hreflang="x-default"><link rel="stylesheet" href="/projeto-grafica-bocaboa/assets/css/styles.d2862100.css">
+<script src="/projeto-grafica-bocaboa/assets/js/runtime~main.d4192559.js" defer="defer"></script>
+<script src="/projeto-grafica-bocaboa/assets/js/main.5b9f3fea.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Pular para o conteúdo principal"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Pular para o conteúdo principal</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Alternar a barra de navegação" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/projeto-grafica-bocaboa/"><b class="navbar__title text--truncate">Projeto Gráfica</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/projeto-grafica-bocaboa/docs/Planejamento">Documentação</a></div><div class="navbar__items navbar__items--right"><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-label="Alterar entre os modos claro e escuro (modo modo claro ativado)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Volte para o topo" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/projeto-grafica-bocaboa/docs/Planejamento">Planejamento</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/projeto-grafica-bocaboa/docs/Requisitos">Requisitos Funcionais</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/projeto-grafica-bocaboa/docs/Benchmarking">Benchmarking</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/projeto-grafica-bocaboa/docs/Personas">Personas</a></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Página Inicial" class="breadcrumbs__link" href="/projeto-grafica-bocaboa/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Requisitos Funcionais</span><meta itemprop="position" content="1"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">Nessa página</button></div><div class="theme-doc-markdown markdown"><header><h1>Requisitos Funcionais</h1></header>
+<p>Requisitos funcionais são especificações que descrevem o que um sistema deve fazer para atender às necessidades dos usuários e cumprir suas funções principais. Eles definem as ações, comportamentos e serviços que o sistema deve proporcionar, detalhando as funcionalidades que devem ser implementadas para resolver problemas específicos ou suportar processos de negócios. Esses requisitos geralmente abordam aspectos como operações que o sistema deve executar, interações com usuários e outros sistemas, e regras de processamento de dados. Ao contrário dos requisitos não funcionais, que se concentram em atributos como desempenho e segurança, os requisitos funcionais focam nas capacidades e comportamentos diretos do sistema.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="rf001---cadastro-e-gerenciamento-de-usuário">RF001 - Cadastro e gerenciamento de usuário<a href="#rf001---cadastro-e-gerenciamento-de-usuário" class="hash-link" aria-label="Link direto para RF001 - Cadastro e gerenciamento de usuário" title="Link direto para RF001 - Cadastro e gerenciamento de usuário">​</a></h2>
+<p><strong>Novos usuários devem ser capazes de cadastrar um perfil na aplicação</strong></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="critérios-de-aceitação">Critérios de aceitação<a href="#critérios-de-aceitação" class="hash-link" aria-label="Link direto para Critérios de aceitação" title="Link direto para Critérios de aceitação">​</a></h3>
+<ul>
+<li>A aplicação deve permitir que um novo usuário (cliente) se cadastre no sistema.</li>
+<li>Todos os campos obrigatórios devem ser preenchidos para que o cadastro seja realizado com sucesso.</li>
+<li>O sistema deve validar os campos, garantindo que informações como email estejam em um formato válido e que a senha atenda aos critérios de segurança.</li>
+<li>A aplicação deve verificar se o usuário (cliente) já existe no sistema antes de efetuar o cadastro.</li>
+<li>Caso o usuário (cliente) já esteja registrado, o sistema deve exibir uma mensagem informando que o cadastro não pode ser duplicado e sugerir a recuperação da senha.</li>
+<li>Após o cadastro, o sistema deve enviar uma confirmação por email ao usuário, contendo um link para a ativação do perfil.</li>
+<li>O perfil do usuário (cliente) só será ativado após a confirmação via email.</li>
+<li>O usuário (cliente) cadastrado deve ser adicionado ao banco de dados e estar acessível para operações futuras (edição, visualização).</li>
+<li>Após o cadastro, o usuário deve poder recuperar a senha e editar seu perfil.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="rf002---cadastro-e-gerenciamento-de-produtos">RF002 - Cadastro e gerenciamento de produtos<a href="#rf002---cadastro-e-gerenciamento-de-produtos" class="hash-link" aria-label="Link direto para RF002 - Cadastro e gerenciamento de produtos" title="Link direto para RF002 - Cadastro e gerenciamento de produtos">​</a></h2>
+<p><strong>A aplicação deve permitir que os usuários (administradores) cadastrem e gerenciem produtos</strong></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="critérios-de-aceitação-1">Critérios de aceitação<a href="#critérios-de-aceitação-1" class="hash-link" aria-label="Link direto para Critérios de aceitação" title="Link direto para Critérios de aceitação">​</a></h3>
+<ul>
+<li>A aplicação deve permitir que o usuário (administrador) cadastre um novo produto no sistema.</li>
+<li>Todos os campos obrigatórios devem ser preenchidos para que o cadastro seja realizado com sucesso.</li>
+<li>A aplicação deve verificar se o produto já existe no sistema antes de efetuar o cadastro.</li>
+<li>Caso o produto já esteja registrado, o sistema deve exibir uma mensagem informando que o cadastro não pode ser duplicado.</li>
+<li>A aplicação deve permitir que o usuário (administrador) visualize a lista de produtos cadastrados.</li>
+<li>A interface de gerenciamento deve permitir a filtragem e a pesquisa de produtos.</li>
+<li>O usuário (administrador) deve poder editar as informações de um produto existente.</li>
+<li>O usuário (administrador) deve poder excluir produtos existentes.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="rf003---catálogo-de-produtos">RF003 - Catálogo de produtos<a href="#rf003---catálogo-de-produtos" class="hash-link" aria-label="Link direto para RF003 - Catálogo de produtos" title="Link direto para RF003 - Catálogo de produtos">​</a></h2>
+<p><strong>A aplicação deve permitir que os usuários (clientes) visualizem todos os produtos disponíveis na página inicial.</strong></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="critérios-de-aceitação-2">Critérios de aceitação<a href="#critérios-de-aceitação-2" class="hash-link" aria-label="Link direto para Critérios de aceitação" title="Link direto para Critérios de aceitação">​</a></h3>
+<ul>
+<li>A aplicação deve exibir uma lista de todos os produtos disponíveis.</li>
+<li>A aplicação deve permitir que os usuários (clientes) pesquisem os produtos por critérios.</li>
+<li>A aplicação deve permitir que os usuários (clientes) ordenem a lista de produtos por critérios.</li>
+<li>Os usuários (clientes) devem ser capazes de filtrar os produtos por critérios.</li>
+<li>A aplicação deve fornecer uma página detalhada para cada produto contendo as informações detalhadas.</li>
+<li>Os usuários (clientes) devem ser capazes de adicionar produtos à lista de favoritos diretamente da página do catálogo.</li>
+<li>A aplicação deve fornecer uma navegação clara para retornar ao catálogo de produtos após a visualização de um item específico.</li>
+<li>A aplicação deve exibir um indicador de disponibilidade, caso o produto esteja esgotado, diretamente na listagem de produtos.</li>
+<li>A aplicação deve permitir que os usuários (clientes) alternem entre diferentes páginas ou seções de produtos.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="rf004---lista-de-favoritos">RF004 - Lista de favoritos<a href="#rf004---lista-de-favoritos" class="hash-link" aria-label="Link direto para RF004 - Lista de favoritos" title="Link direto para RF004 - Lista de favoritos">​</a></h2>
+<p><strong>A aplicação deve permitir que os usuários (clientes) possuam uma lista de produtos favoritos e gerenciá-los.</strong></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="critérios-de-aceitação-3">Critérios de aceitação<a href="#critérios-de-aceitação-3" class="hash-link" aria-label="Link direto para Critérios de aceitação" title="Link direto para Critérios de aceitação">​</a></h3>
+<ul>
+<li>A aplicação deve permitir que o usuário adicione produtos à sua lista de favoritos a partir da página de detalhes do produto.</li>
+<li>A interface deve fornecer um mecanismo visual claro (ex: ícone de estrela ou coração) para adicionar produtos aos favoritos.</li>
+<li>O usuário deve poder gerenciar sua lista de favoritos, incluindo a capacidade de remover, ordenar ou filtrar os produtos listados.</li>
+<li>O ícone de favoritos deve refletir a alteração quando um produto for removido da lista.</li>
+<li>O usuário deve ter acesso a uma página ou seção onde possa visualizar todos os produtos adicionados à sua lista de favoritos.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="rf005---personalização-de-itens">RF005 - Personalização de itens<a href="#rf005---personalização-de-itens" class="hash-link" aria-label="Link direto para RF005 - Personalização de itens" title="Link direto para RF005 - Personalização de itens">​</a></h2>
+<p><strong>A aplicação deve permitir que os usuários (clientes) possam personalizar características dos produtos a serem comprados.</strong></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="critérios-de-aceitação-4">Critérios de aceitação<a href="#critérios-de-aceitação-4" class="hash-link" aria-label="Link direto para Critérios de aceitação" title="Link direto para Critérios de aceitação">​</a></h3>
+<ul>
+<li>A aplicação deve permitir que os usuários selecionem e personalizem várias características dos produtos.</li>
+<li>O usuário deve ser capaz de imprimir esqueletos dos tamanhos unitários de itens disponíveis para a característica selecionada.</li>
+<li>A aplicação deve validar as personalizações para garantir a compatibilidade entre as opções.</li>
+<li>O usuário deve poder revisar todas as personalizações antes de finalizar a compra.</li>
+<li>A aplicação deve permitir que o usuário edite suas personalizações antes de finalizar a compra, retornando à tela de personalização sem perder as configurações feitas anteriormente.</li>
+<li>A aplicação deve calcular automaticamente o preço final do produto com base nas personalizações selecionadas pelo usuário, exibindo o custo adicional ou desconto de forma clara.</li>
+<li>A aplicação deve informar ao usuário sobre tempo de produção ou limitações de devolução.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="rf006---carrinho-de-compras">RF006 - Carrinho de compras<a href="#rf006---carrinho-de-compras" class="hash-link" aria-label="Link direto para RF006 - Carrinho de compras" title="Link direto para RF006 - Carrinho de compras">​</a></h2>
+<p><strong>A aplicação deve permitir que os usuários (clientes) possuam um carrinho de compras para adicionar produtos interessados.</strong></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="critérios-de-aceitação-5">Critérios de aceitação<a href="#critérios-de-aceitação-5" class="hash-link" aria-label="Link direto para Critérios de aceitação" title="Link direto para Critérios de aceitação">​</a></h3>
+<ul>
+<li>A aplicação deve permitir que os usuários (clientes) adicionem produtos ao carrinho de compras a partir das páginas de listagem e detalhes dos produtos.</li>
+<li>O usuário (clientes) deve ser capaz de especificar a quantidade de cada produto ao adicioná-lo ao carrinho.</li>
+<li>O usuário (clientes) deve ter acesso a uma visualização do conteúdo do carrinho de compras, incluindo produtos, quantidades, preços unitários e o total geral.</li>
+<li>A aplicação deve permitir que o usuário (clientes) atualize as quantidades de produtos no carrinho e remova itens indesejados.</li>
+<li>A aplicação deve permitir que o usuário (clientes) inicie o processo de checkout a partir do carrinho de compras.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="rf007---processamento-de-compra">RF007 - Processamento de compra<a href="#rf007---processamento-de-compra" class="hash-link" aria-label="Link direto para RF007 - Processamento de compra" title="Link direto para RF007 - Processamento de compra">​</a></h2>
+<p><strong>A aplicação deve permitir que os usuários (clientes) possam finalizar sua compra e acessar o acompanhamento do pedido.</strong></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="critérios-de-aceitação-6">Critérios de aceitação<a href="#critérios-de-aceitação-6" class="hash-link" aria-label="Link direto para Critérios de aceitação" title="Link direto para Critérios de aceitação">​</a></h3>
+<ul>
+<li>A aplicação deve permitir que o usuário (clientes) conclua o processo de compra a partir do carrinho de compras.</li>
+<li>O processo de checkout deve incluir etapas para revisar o pedido, inserir informações de pagamento e fornecer detalhes de envio.</li>
+<li>A aplicação deve exibir um resumo completo do pedido, incluindo taxas adicionais, impostos e o total a ser pago.</li>
+<li>A aplicação deve permitir que o usuário insira e processe informações de pagamento, como detalhes de cartão de crédito, métodos de pagamento alternativos ou códigos de cupom.</li>
+<li>A aplicação deve permitir que o usuário salve e reutilize as informações de pagamento para futuras compras (ex: &quot;pagar novamente com Mercado Pago&quot;).</li>
+<li>Após a finalização da compra, a aplicação deve fornecer uma confirmação clara e detalhada do pedido, incluindo um número de pedido, resumo dos itens, e o total pago.</li>
+<li>A aplicação deve enviar um e-mail de confirmação para o usuário com os detalhes do pedido e informações sobre o próximo passo.</li>
+<li>O usuário deve poder acessar uma seção de acompanhamento de pedidos a partir de sua conta para verificar o status atual do pedido.</li>
+<li>A aplicação deve fornecer atualizações sobre o progresso do pedido, incluindo status (ex: &quot;Em processamento&quot;, &quot;Enviado&quot;, &quot;Entregue&quot;).</li>
+<li>Os usuários (administradores) devem conseguir atualizar o progresso do pedido.</li>
+<li>Os usuários (administradores) devem conseguir cancelar uma compra.</li>
+<li>A aplicação deve realizar o estorno automático do valor pago ao usuário (clientes) em caso de cancelamento da compra.</li>
+<li>A aplicação deve notificar o usu ário sobre alterações importantes no status do pedido, como despacho e entrega, por meio de e-mails ou notificações dentro da aplicação.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="rf008---histórico-de-compras">RF008 - Histórico de compras<a href="#rf008---histórico-de-compras" class="hash-link" aria-label="Link direto para RF008 - Histórico de compras" title="Link direto para RF008 - Histórico de compras">​</a></h2>
+<p><strong>A aplicação deve permitir que os usuários (clientes) possam acessar o histórico de compras e que os usuários (administradores) possam ver o histórico de compras dos clientes.</strong></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="critérios-de-aceitação-7">Critérios de aceitação<a href="#critérios-de-aceitação-7" class="hash-link" aria-label="Link direto para Critérios de aceitação" title="Link direto para Critérios de aceitação">​</a></h3>
+<ul>
+<li>Os usuários (clientes) devem poder acessar uma seção de histórico de compras em sua conta.</li>
+<li>O histórico deve listar todas as compras realizadas pelo usuário (clientes), incluindo detalhes como data, produtos comprados, quantidades e valores.</li>
+<li>Os usuários (clientes) devem ser capazes de filtrar o histórico por critérios relevantes.</li>
+<li>Os usuários (administradores) devem ter acesso a uma seção de histórico de compras que permita visualizar todos os históricos de compras.</li>
+<li>Os usuários (administradores) devem poder buscar e filtrar o histórico por cliente e outros critérios relevantes.</li>
+<li>Os usuários (clientes) devem ter acesso apenas ao seu próprio histórico de compras.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="rf009---gestão-de-estoque">RF009 - Gestão de estoque<a href="#rf009---gestão-de-estoque" class="hash-link" aria-label="Link direto para RF009 - Gestão de estoque" title="Link direto para RF009 - Gestão de estoque">​</a></h2>
+<p><strong>A aplicação deve permitir que os usuários (administradores) sejam capazes de alterar a disponibilidade de produtos.</strong></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="critérios-de-aceitação-8">Critérios de aceitação<a href="#critérios-de-aceitação-8" class="hash-link" aria-label="Link direto para Critérios de aceitação" title="Link direto para Critérios de aceitação">​</a></h3>
+<ul>
+<li>A aplicação deve permitir que os administradores definam a disponibilidade dos produtos.</li>
+<li>A aplicação deve exibir os produtos mesmo quando estiverem indisponíveis, em todos os locais onde eles são mostrados.</li>
+<li>A aplicação deve informar quando um item não estiver disponível.</li>
+<li>A aplicação deve impedir que itens indisponíveis que estejam em carrinhos sejam processados.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="rf010---funcionalidades-administrativas">RF010 - Funcionalidades administrativas<a href="#rf010---funcionalidades-administrativas" class="hash-link" aria-label="Link direto para RF010 - Funcionalidades administrativas" title="Link direto para RF010 - Funcionalidades administrativas">​</a></h2>
+<p><strong>Os usuários (administradores) devem ter acesso a funcionalidades para gerenciar a aplicação.</strong></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="critérios-de-aceitação-9">Critérios de aceitação<a href="#critérios-de-aceitação-9" class="hash-link" aria-label="Link direto para Critérios de aceitação" title="Link direto para Critérios de aceitação">​</a></h3>
+<ul>
+<li>A aplicação deve permitir que os administradores visualizem todos os usuários cadastrados.</li>
+<li>A aplicação deve permitir que os administradores gerenciem configurações do sistema, como métodos de pagamento, opções de envio e políticas de desconto.</li>
+<li>A aplicação deve oferecer relatórios administrativos sobre vendas, desempenho de produtos e comportamento dos clientes para apoiar a tomada de decisões.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="rf011---atendimento-ao-cliente">RF011 - Atendimento ao cliente<a href="#rf011---atendimento-ao-cliente" class="hash-link" aria-label="Link direto para RF011 - Atendimento ao cliente" title="Link direto para RF011 - Atendimento ao cliente">​</a></h2>
+<p><strong>A aplicação deve permitir que os usuários (clientes) possam acessar um portal que os direciona para o WhatsApp do comércio para serem atendidos.</strong></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="critérios-de-aceitação-10">Critérios de aceitação<a href="#critérios-de-aceitação-10" class="hash-link" aria-label="Link direto para Critérios de aceitação" title="Link direto para Critérios de aceitação">​</a></h3>
+<ul>
+<li>A aplicação deve apresentar respostas para as principais dúvidas dos clientes.</li>
+<li>A aplicação deve direcionar os usuários para o WhatsApp do comércio quando o botão ou link de atendimento for clicado.</li>
+<li>A aplicação deve utilizar um link clicável ou um botão que abra o WhatsApp com uma mensagem predefinida ou uma conversa iniciada.</li>
+</ul>
+<hr>
+<h1>Requisitos Não Funcionais</h1>
+<p>Requisitos não funcionais são especificações que definem as qualidades e restrições que um sistema deve atender, mas que não estão diretamente relacionadas às funcionalidades específicas que ele oferece. Esses requisitos abordam aspectos como desempenho, segurança, usabilidade, confiabilidade, e escalabilidade, descrevendo como o sistema deve se comportar em termos de eficiência e experiência do usuário. Por exemplo, um requisito não funcional pode especificar que o sistema deve ser capaz de processar um determinado número de transações por segundo ou garantir que a interface seja acessível para pessoas com deficiências. Embora não descrevam o que o sistema deve fazer, esses requisitos são cruciais para assegurar que o sistema funcione de maneira segura e eficiente, proporcionando uma experiência de usuário satisfatória e atendendo aos padrões de qualidade necessários para o sucesso do projeto.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="rnf001---desempenho-do-sistema"><strong>RNF001 - Desempenho do Sistema</strong><a href="#rnf001---desempenho-do-sistema" class="hash-link" aria-label="Link direto para rnf001---desempenho-do-sistema" title="Link direto para rnf001---desempenho-do-sistema">​</a></h2>
+<p><strong>Descrição</strong>: O sistema deve ser capaz de processar até 1.000 requisições simultâneas com tempo de resposta máximo de 2 segundos para 95% das requisições.</p>
+<p><strong>Critérios de Aceitação</strong>:</p>
+<ul>
+<li>O sistema deve manter um tempo de resposta de até 2 segundos para 95% das requisições em cenários de alta demanda.</li>
+<li>Deve ser realizada uma simulação com 1.000 usuários simultâneos para verificar a estabilidade do sistema.</li>
+</ul>
+<p><strong>Justificativa</strong>: Esse requisito garante que o sistema funcione de forma eficiente, mesmo em momentos de alta demanda, melhorando a experiência do usuário.</p>
+<p><strong>Impacto no Sistema</strong>: Pode exigir melhorias na infraestrutura de servidores e otimização de consultas ao banco de dados.</p>
+<p><strong>Plano de Teste</strong>:</p>
+<ul>
+<li>Realizar testes de carga com ferramentas como JMeter ou Gatling para simular 1.000 usuários simultâneos e medir o tempo de resposta.</li>
+</ul>
+<p><strong>Prioridade</strong>: Alta</p>
+<p><strong>Dependências</strong>: Depende do RNF003 – Infraestrutura Escalável.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="rnf002---usabilidade-e-acessibilidade">RNF002 - Usabilidade e Acessibilidade**<a href="#rnf002---usabilidade-e-acessibilidade" class="hash-link" aria-label="Link direto para RNF002 - Usabilidade e Acessibilidade**" title="Link direto para RNF002 - Usabilidade e Acessibilidade**">​</a></h2>
+<p><strong>Descrição</strong>: A interface do sistema deve seguir as diretrizes de acessibilidade WCAG 2.1 para garantir que usuários com deficiências possam navegar e interagir com o sistema.</p>
+<p><strong>Critérios de Aceitação</strong>:</p>
+<ul>
+<li>Todos os elementos da interface devem ser navegáveis via teclado.</li>
+<li>As imagens devem conter descrições alternativas (alt-text) adequadas.</li>
+<li>A interface deve oferecer contraste suficiente entre texto e fundo (pelo menos 4.5:1).</li>
+<li>O conteúdo deve ser acessível a leitores de tela.</li>
+</ul>
+<p><strong>Justificativa</strong>: Garantir a acessibilidade para todos os usuários, incluindo aqueles com deficiências visuais ou motoras, é fundamental para promover a inclusão.</p>
+<p><strong>Impacto no Sistema</strong>: Pode exigir ajustes no design da interface e na implementação do frontend para garantir conformidade com as diretrizes.</p>
+<p><strong>Plano de Teste</strong>:</p>
+<ul>
+<li>Realizar testes de acessibilidade usando ferramentas como WAVE e axe.</li>
+<li>Testar a navegação por teclado e o uso de leitores de tela como NVDA.</li>
+</ul>
+<p><strong>Prioridade</strong>: Média</p>
+<p><strong>Dependências</strong>: Depende da implementação do design da interface e do sistema de frontend.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="rnf003---escalabilidade-horizontal"><strong>RNF003 - Escalabilidade Horizontal</strong><a href="#rnf003---escalabilidade-horizontal" class="hash-link" aria-label="Link direto para rnf003---escalabilidade-horizontal" title="Link direto para rnf003---escalabilidade-horizontal">​</a></h2>
+<p><strong>Descrição</strong>: O sistema deve ser capaz de escalar horizontalmente, permitindo a adição de novos servidores para suportar o aumento da carga de trabalho.</p>
+<p><strong>Critérios de Aceitação</strong>:</p>
+<ul>
+<li>O sistema deve ser capaz de adicionar novos servidores sem interromper o serviço existente.</li>
+<li>A escalabilidade deve permitir o aumento de capacidade em até 500% da carga atual.</li>
+<li>O sistema deve balancear automaticamente o tráfego entre os servidores disponíveis.</li>
+</ul>
+<p><strong>Justificativa</strong>: A escalabilidade horizontal permite que o sistema suporte o crescimento do número de usuários e transações, garantindo desempenho adequado mesmo em picos de uso.</p>
+<p><strong>Impacto no Sistema</strong>: Exige o uso de balanceadores de carga e arquitetura adequada para suportar múltiplos servidores.</p>
+<p><strong>Plano de Teste</strong>:</p>
+<ul>
+<li>Simular aumento de carga e verificar se novos servidores são integrados corretamente.</li>
+<li>Testar o balanceamento de carga entre os servidores disponíveis.</li>
+</ul>
+<p><strong>Prioridade</strong>: Alta</p>
+<p><strong>Dependências</strong>: Depende da implementação de balanceadores de carga e infraestrutura escalável.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="rnf004---confiabilidade-e-tolerância-a-falhas"><strong>RNF004 - Confiabilidade e Tolerância a Falhas</strong><a href="#rnf004---confiabilidade-e-tolerância-a-falhas" class="hash-link" aria-label="Link direto para rnf004---confiabilidade-e-tolerância-a-falhas" title="Link direto para rnf004---confiabilidade-e-tolerância-a-falhas">​</a></h2>
+<p><strong>Descrição</strong>: O sistema deve ter um tempo de disponibilidade (uptime) mínimo de 99,9% ao longo de um mês, com tolerância a falhas em caso de interrupções no servidor primário.</p>
+<p><strong>Critérios de Aceitação</strong>:</p>
+<ul>
+<li>O sistema deve ser capaz de transferir automaticamente as operações para um servidor de backup em caso de falha do servidor primário.</li>
+<li>O tempo de inatividade não pode exceder 43 minutos em um mês.</li>
+<li>A recuperação automática do sistema deve ser concluída em até 1 minuto após a falha.</li>
+</ul>
+<p><strong>Justificativa</strong>: A confiabilidade é essencial para garantir que o sistema esteja disponível para os usuários na maior parte do tempo, minimizando interrupções.</p>
+<p><strong>Impacto no Sistema</strong>: Pode exigir a configuração de servidores redundantes e a implementação de mecanismos de failover.</p>
+<p><strong>Plano de Teste</strong>:</p>
+<ul>
+<li>Simular a falha do servidor primário e monitorar a transição para o servidor de backup.</li>
+<li>Medir o tempo de inatividade e o tempo de recuperação automática.</li>
+</ul>
+<p><strong>Prioridade</strong>: Alta</p>
+<p><strong>Dependências</strong>: Depende da implementação de servidores redundantes e failover.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="rnf005---portabilidade-em-dispositivos-móveis"><strong>RNF005 - Portabilidade em Dispositivos Móveis</strong><a href="#rnf005---portabilidade-em-dispositivos-móveis" class="hash-link" aria-label="Link direto para rnf005---portabilidade-em-dispositivos-móveis" title="Link direto para rnf005---portabilidade-em-dispositivos-móveis">​</a></h2>
+<p><strong>Descrição</strong>: O sistema deve ser totalmente compatível com dispositivos móveis (smartphones e tablets), ajustando sua interface para diferentes tamanhos de tela.</p>
+<p><strong>Critérios de Aceitação</strong>:</p>
+<ul>
+<li>A interface deve se ajustar de forma responsiva a telas menores (smartphones e tablets).</li>
+<li>Todos os recursos e funcionalidades devem estar disponíveis em dispositivos móveis.</li>
+<li>O sistema deve ser compatível com os principais navegadores móveis (Chrome, Safari).</li>
+</ul>
+<p><strong>Justificativa</strong>: A compatibilidade com dispositivos móveis é essencial para alcançar usuários que acessam o sistema de diferentes plataformas e dispositivos.</p>
+<p><strong>Impacto no Sistema</strong>: Requer ajustes no design da interface e testes em diferentes dispositivos e navegadores.</p>
+<p><strong>Plano de Teste</strong>:</p>
+<ul>
+<li>Realizar testes de compatibilidade em diferentes dispositivos móveis e navegadores.</li>
+<li>Verificar a responsividade da interface e o funcionamento completo das funcionalidades.</li>
+</ul>
+<p><strong>Prioridade</strong>: Média</p>
+<p><strong>Dependências</strong>: Depende da implementação de design responsivo e testes de compatibilidade em dispositivos móveis.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="rnf006---proteção-de-dados-e-privacidade"><strong>RNF006 - Proteção de Dados e Privacidade</strong><a href="#rnf006---proteção-de-dados-e-privacidade" class="hash-link" aria-label="Link direto para rnf006---proteção-de-dados-e-privacidade" title="Link direto para rnf006---proteção-de-dados-e-privacidade">​</a></h2>
+<p><strong>Descrição</strong>: O sistema deve garantir que todos os dados sensíveis dos usuários, como informações pessoais e de pagamento, sejam criptografados durante a transmissão e em repouso, seguindo as diretrizes da LGPD (Lei Geral de Proteção de Dados) e GDPR (General Data Protection Regulation).</p>
+<p><strong>Critérios de Aceitação</strong>:</p>
+<ul>
+<li>Todas as informações pessoais, como nome, endereço, e dados de pagamento, devem ser criptografadas usando um algoritmo seguro (AES-256).</li>
+<li>A transmissão de dados entre o cliente e o servidor deve ser protegida por HTTPS (SSL/TLS).</li>
+<li>O sistema deve implementar uma política de privacidade que informe os usuários sobre a coleta e uso de seus dados.</li>
+<li>Os usuários devem poder solicitar a exclusão ou anonimização de seus dados pessoais.</li>
+</ul>
+<p><strong>Justificativa</strong>: A proteção de dados sensíveis é fundamental para garantir a privacidade do usuário e evitar vazamentos de dados, em conformidade com as legislações de proteção de dados.</p>
+<p><strong>Impacto no Sistema</strong>: Pode exigir a implementação de criptografia em banco de dados e revisão das rotas de transmissão de dados, bem como a atualização da política de privacidade.</p>
+<p><strong>Plano de Teste</strong>:</p>
+<ul>
+<li>Testar a criptografia dos dados em repouso e durante a transmissão.</li>
+<li>Verificar a aplicação de SSL/TLS nas comunicações entre o cliente e o servidor.</li>
+<li>Simular tentativas de acesso não autorizado a dados sensíveis para validar a proteção.</li>
+</ul>
+<p><strong>Prioridade</strong>: Alta</p>
+<p><strong>Dependências</strong>: Depende da implementação de mecanismos de criptografia e configuração de certificados SSL.</p></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Páginas de documentação"><a class="pagination-nav__link pagination-nav__link--prev" href="/projeto-grafica-bocaboa/docs/Planejamento"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">Planejamento</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/projeto-grafica-bocaboa/docs/Benchmarking"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">Benchmarking</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#rf001---cadastro-e-gerenciamento-de-usuário" class="table-of-contents__link toc-highlight">RF001 - Cadastro e gerenciamento de usuário</a><ul><li><a href="#critérios-de-aceitação" class="table-of-contents__link toc-highlight">Critérios de aceitação</a></li></ul></li><li><a href="#rf002---cadastro-e-gerenciamento-de-produtos" class="table-of-contents__link toc-highlight">RF002 - Cadastro e gerenciamento de produtos</a><ul><li><a href="#critérios-de-aceitação-1" class="table-of-contents__link toc-highlight">Critérios de aceitação</a></li></ul></li><li><a href="#rf003---catálogo-de-produtos" class="table-of-contents__link toc-highlight">RF003 - Catálogo de produtos</a><ul><li><a href="#critérios-de-aceitação-2" class="table-of-contents__link toc-highlight">Critérios de aceitação</a></li></ul></li><li><a href="#rf004---lista-de-favoritos" class="table-of-contents__link toc-highlight">RF004 - Lista de favoritos</a><ul><li><a href="#critérios-de-aceitação-3" class="table-of-contents__link toc-highlight">Critérios de aceitação</a></li></ul></li><li><a href="#rf005---personalização-de-itens" class="table-of-contents__link toc-highlight">RF005 - Personalização de itens</a><ul><li><a href="#critérios-de-aceitação-4" class="table-of-contents__link toc-highlight">Critérios de aceitação</a></li></ul></li><li><a href="#rf006---carrinho-de-compras" class="table-of-contents__link toc-highlight">RF006 - Carrinho de compras</a><ul><li><a href="#critérios-de-aceitação-5" class="table-of-contents__link toc-highlight">Critérios de aceitação</a></li></ul></li><li><a href="#rf007---processamento-de-compra" class="table-of-contents__link toc-highlight">RF007 - Processamento de compra</a><ul><li><a href="#critérios-de-aceitação-6" class="table-of-contents__link toc-highlight">Critérios de aceitação</a></li></ul></li><li><a href="#rf008---histórico-de-compras" class="table-of-contents__link toc-highlight">RF008 - Histórico de compras</a><ul><li><a href="#critérios-de-aceitação-7" class="table-of-contents__link toc-highlight">Critérios de aceitação</a></li></ul></li><li><a href="#rf009---gestão-de-estoque" class="table-of-contents__link toc-highlight">RF009 - Gestão de estoque</a><ul><li><a href="#critérios-de-aceitação-8" class="table-of-contents__link toc-highlight">Critérios de aceitação</a></li></ul></li><li><a href="#rf010---funcionalidades-administrativas" class="table-of-contents__link toc-highlight">RF010 - Funcionalidades administrativas</a><ul><li><a href="#critérios-de-aceitação-9" class="table-of-contents__link toc-highlight">Critérios de aceitação</a></li></ul></li><li><a href="#rf011---atendimento-ao-cliente" class="table-of-contents__link toc-highlight">RF011 - Atendimento ao cliente</a><ul><li><a href="#critérios-de-aceitação-10" class="table-of-contents__link toc-highlight">Critérios de aceitação</a></li></ul></li><li><a href="#rnf001---desempenho-do-sistema" class="table-of-contents__link toc-highlight"><strong>RNF001 - Desempenho do Sistema</strong></a></li><li><a href="#rnf002---usabilidade-e-acessibilidade" class="table-of-contents__link toc-highlight">RNF002 - Usabilidade e Acessibilidade**</a></li><li><a href="#rnf003---escalabilidade-horizontal" class="table-of-contents__link toc-highlight"><strong>RNF003 - Escalabilidade Horizontal</strong></a></li><li><a href="#rnf004---confiabilidade-e-tolerância-a-falhas" class="table-of-contents__link toc-highlight"><strong>RNF004 - Confiabilidade e Tolerância a Falhas</strong></a></li><li><a href="#rnf005---portabilidade-em-dispositivos-móveis" class="table-of-contents__link toc-highlight"><strong>RNF005 - Portabilidade em Dispositivos Móveis</strong></a></li><li><a href="#rnf006---proteção-de-dados-e-privacidade" class="table-of-contents__link toc-highlight"><strong>RNF006 - Proteção de Dados e Privacidade</strong></a></li></ul></div></div></div></div></main></div></div></div></div>
+</body>
+</html>
