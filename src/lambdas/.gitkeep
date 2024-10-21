@@ -1,0 +1,404 @@
+<div align="justify">
+
+# Lambdas
+
+Esse documento tem como objetivo organizar todas as lambdas que serão criadas para o projeto, adicionar explicações breves sobre seus objetivos, exemplos de seus payloads e responses, além da descrição de seus objetivos e formas de acesso rápido.
+
+## 1. Gerenciamento de Usuários 👤
+
+Este grupo de funções Lambda é responsável por gerenciar todas as operações relacionadas aos usuários da plataforma.
+
+### 1.1 createUser
+
+**Objetivo**: Registrar novos usuários na plataforma.
+
+**Payload de exemplo**:
+```json
+{
+  "name": "João Silva",
+  "email": "joao.silva@email.com",
+  "password": "senhaSegura123",
+  "role": "client"
+}
+```
+
+**Resposta de exemplo**:
+```json
+{
+  "message": "Usuário criado com sucesso",
+  "userId": "12345"
+}
+```
+
+### 1.2 loginUser
+
+**Objetivo**: Autenticar usuários existentes.
+
+**Payload de exemplo**:
+```json
+{
+  "email": "joao.silva@email.com",
+  "password": "senhaSegura123"
+}
+```
+
+**Resposta de exemplo**:
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "userId": "12345"
+}
+```
+
+### 1.3 getUserProfile
+
+**Objetivo**: Recuperar informações do perfil do usuário.
+
+**Payload de exemplo**:
+```json
+{
+  "userId": "12345"
+}
+```
+
+**Resposta de exemplo**:
+```json
+{
+  "name": "João Silva",
+  "email": "joao.silva@email.com",
+  "previousOrders": [
+    {
+      "orderId": "ORDER123",
+      "date": "2024-10-15",
+      "status": "delivered"
+    }
+  ]
+}
+```
+
+### 1.4 updateUserProfile
+
+**Objetivo**: Atualizar informações do perfil do usuário.
+
+**Payload de exemplo**:
+```json
+{
+  "userId": "12345",
+  "name": "João Silva Jr.",
+  "email": "joao.silva.jr@email.com"
+}
+```
+
+**Resposta de exemplo**:
+```json
+{
+  "message": "Perfil atualizado com sucesso",
+  "userId": "12345"
+}
+```
+
+## 2. Gerenciamento de Pedidos 🛒
+
+Este grupo de funções Lambda lida com a criação, atualização e consulta de pedidos na plataforma.
+
+### 2.1 createOrder
+
+**Objetivo**: Criar um novo pedido no sistema.
+
+**Payload de exemplo**:
+```json
+{
+  "clientId": "12345",
+  "stickerId": "STICKER789",
+  "personalized": false,
+  "quantity": 50
+}
+```
+
+**Resposta de exemplo**:
+```json
+{
+  "orderId": "ORDER456",
+  "status": "pending"
+}
+```
+
+### 2.2 updateOrderStatus
+
+**Objetivo**: Atualizar o status de um pedido existente.
+
+**Payload de exemplo**:
+```json
+{
+  "orderId": "ORDER456",
+  "status": "preparing"
+}
+```
+
+**Resposta de exemplo**:
+```json
+{
+  "message": "Status do pedido atualizado com sucesso",
+  "orderId": "ORDER456",
+  "newStatus": "preparing"
+}
+```
+
+### 2.3 getOrderDetails
+
+**Objetivo**: Consultar detalhes de um pedido específico.
+
+**Payload de exemplo**:
+```json
+{
+  "orderId": "ORDER456"
+}
+```
+
+**Resposta de exemplo**:
+```json
+{
+  "orderId": "ORDER456",
+  "clientId": "12345",
+  "stickerId": "STICKER789",
+  "quantity": 50,
+  "status": "preparing",
+  "createdAt": "2024-10-20T14:30:00Z"
+}
+```
+
+### 2.4 listClientOrders
+
+**Objetivo**: Listar todos os pedidos de um cliente específico.
+
+**Payload de exemplo**:
+```json
+{
+  "clientId": "12345"
+}
+```
+
+**Resposta de exemplo**:
+```json
+{
+  "orders": [
+    {
+      "orderId": "ORDER456",
+      "status": "preparing",
+      "createdAt": "2024-10-20T14:30:00Z"
+    },
+    {
+      "orderId": "ORDER789",
+      "status": "delivered",
+      "createdAt": "2024-10-15T10:00:00Z"
+    }
+  ]
+}
+```
+
+## 3. Gerenciamento de Produtos (Stickers) 🖼️
+
+Este grupo de funções Lambda é responsável por gerenciar o catálogo de stickers disponíveis na plataforma.
+
+### 3.1 createSticker
+
+**Objetivo**: Adicionar um novo sticker ao catálogo.
+
+**Payload de exemplo**:
+```json
+{
+  "name": "Sticker Emoji Feliz",
+  "description": "Sticker redondo com emoji sorridente",
+  "price": 2.99,
+  "width": 5,
+  "height": 5,
+  "paperType": "vinil",
+  "color": "amarelo",
+  "shape": "redondo"
+}
+```
+
+**Resposta de exemplo**:
+```json
+{
+  "message": "Sticker criado com sucesso",
+  "stickerId": "STICKER101"
+}
+```
+
+### 3.2 updateSticker
+
+**Objetivo**: Atualizar informações de um sticker existente.
+
+**Payload de exemplo**:
+```json
+{
+  "stickerId": "STICKER101",
+  "price": 3.49,
+  "description": "Sticker redondo com emoji super feliz"
+}
+```
+
+**Resposta de exemplo**:
+```json
+{
+  "message": "Sticker atualizado com sucesso",
+  "stickerId": "STICKER101"
+}
+```
+
+### 3.3 listStickers
+
+**Objetivo**: Listar todos os stickers disponíveis no e-commerce.
+
+**Payload de exemplo**:
+```json
+{
+  "priceRange": {
+    "min": 1.99,
+    "max": 5.99
+  },
+  "shape": "redondo"
+}
+```
+
+**Resposta de exemplo**:
+```json
+{
+  "stickers": [
+    {
+      "stickerId": "STICKER101",
+      "name": "Sticker Emoji Feliz",
+      "price": 3.49
+    },
+    {
+      "stickerId": "STICKER102",
+      "name": "Sticker Lua Cheia",
+      "price": 4.99
+    }
+  ]
+}
+```
+
+### 3.4 getStickerDetails
+
+**Objetivo**: Consultar detalhes de um sticker específico.
+
+**Payload de exemplo**:
+```json
+{
+  "stickerId": "STICKER101"
+}
+```
+
+**Resposta de exemplo**:
+```json
+{
+  "stickerId": "STICKER101",
+  "name": "Sticker Emoji Feliz",
+  "description": "Sticker redondo com emoji super feliz",
+  "price": 3.49,
+  "width": 5,
+  "height": 5,
+  "paperType": "vinil",
+  "color": "amarelo",
+  "shape": "redondo"
+}
+```
+
+## 4. Gerenciamento de Promoções 🏷️
+
+Este grupo de funções Lambda é responsável por criar e aplicar promoções aos produtos da plataforma.
+
+### 4.1 createPromotion
+
+**Objetivo**: Criar uma nova promoção para stickers.
+
+**Payload de exemplo**:
+```json
+{
+  "name": "Promoção de Verão",
+  "description": "20% de desconto em stickers selecionados",
+  "startDate": "2024-12-01T00:00:00Z",
+  "endDate": "2024-12-31T23:59:59Z",
+  "percentageDiscount": 20,
+  "stickers": ["STICKER101", "STICKER102", "STICKER103"]
+}
+```
+
+**Resposta de exemplo**:
+```json
+{
+  "message": "Promoção criada com sucesso",
+  "promotionId": "PROMO001"
+}
+```
+
+### 4.2 applyPromotion
+
+**Objetivo**: Aplicar uma promoção a um pedido específico.
+
+**Payload de exemplo**:
+```json
+{
+  "orderId": "ORDER456",
+  "promotionId": "PROMO001"
+}
+```
+
+**Resposta de exemplo**:
+```json
+{
+  "message": "Promoção aplicada com sucesso",
+  "orderId": "ORDER456",
+  "originalValue": 100.00,
+  "discountedValue": 80.00
+}
+```
+
+### 4.3 listActivePromotions
+
+**Objetivo**: Listar todas as promoções ativas.
+
+**Payload de exemplo**:
+```json
+{}
+```
+
+**Resposta de exemplo**:
+```json
+{
+  "activePromotions": [
+    {
+      "promotionId": "PROMO001",
+      "name": "Promoção de Verão",
+      "percentageDiscount": 20,
+      "endDate": "2024-12-31T23:59:59Z"
+    },
+    {
+      "promotionId": "PROMO002",
+      "name": "Desconto de Natal",
+      "percentageDiscount": 15,
+      "endDate": "2024-12-25T23:59:59Z"
+    }
+  ]
+}
+```
+
+## 5. Sistemas de Pagamentos (Futuro) 💳
+
+A-definir
+
+## 6. Notificações e Atualizações 📢
+
+A-definir
+
+## 7. Logs e Monitoramento 📊
+
+A-definir
+
+---
+
+Este documento fornece uma visão geral das funções Lambda planejadas para a plataforma de e-commerce de stickers. Cada função tem um objetivo específico e trabalha em conjunto para fornecer uma experiência completa e eficiente para os usuários da plataforma.
+
+</div>
