@@ -1,5 +1,15 @@
+import json
+
+
 def handle(event, stickers_table):
-    sticker_id = event['pathParameters']['id']
+    path_parameters = event.get('pathParameters', {})
+
+    sticker_id = path_parameters.get('id')
+    if not sticker_id:
+        return {
+            'statusCode': 400,
+            'body': json.dumps({'message': 'Sticker ID is required'})
+        }
 
     response = stickers_table.get_item(
         Key={'id': sticker_id}

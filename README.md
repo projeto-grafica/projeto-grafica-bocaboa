@@ -2,11 +2,13 @@
 
 # Projeto Gráfica BocaBoa
 
-O projeto para a gráfica BocaBoa consiste no desenvolvimento de uma aplicação web com front-end e back-end para a criação de etiquetas personalizadas.
+O projeto para a gráfica BocaBoa consiste no desenvolvimento de uma aplicação web com front-end e back-end para a
+criação de etiquetas personalizadas.
 
 ---
 
 ## API Gateway base URL
+
 ```
 https://dwt1enboq6.execute-api.us-east-1.amazonaws.com/
 ```
@@ -22,7 +24,7 @@ https://dwt1enboq6.execute-api.us-east-1.amazonaws.com/
    Body:
    ```json
    ```  
-   
+
    Exemplo de output:
    ```json
    {
@@ -46,7 +48,7 @@ https://dwt1enboq6.execute-api.us-east-1.amazonaws.com/
       "count": 1
    }
    ```
-2. **Criar um sticker (POST /stickers) - 201**  
+2. **Criar um sticker (POST /stickers) - 201**
 
    Body:
    ```json
@@ -60,7 +62,7 @@ https://dwt1enboq6.execute-api.us-east-1.amazonaws.com/
       "shape": "rectangle"
    }
    ```  
-   
+
    Exemplo de output:
    ```json
    {
@@ -78,9 +80,31 @@ https://dwt1enboq6.execute-api.us-east-1.amazonaws.com/
       "promotion_id": null
    }
    ```
-3. **Obter um sticker específico (GET /stickers/{id})**  
-4. **Atualizar um sticker (PUT /stickers/{id})**  
-5. **Deletar um sticker (DELETE /stickers/{id})**  
+3. **Obter um sticker específico (GET /stickers/{id}) - 200**
+
+   Body:
+   ```json
+   ```  
+   
+   Exemplo de output:
+   ```json
+   {
+      "created_at": "2025-01-12T20:58:43.656330",
+      "width": "100",
+      "height": "100",
+      "created_by": null,
+      "paperType": "glossy",
+      "promotion_id": null,
+      "shape": "rectangle",
+      "price": "18",
+      "description": "A test sticker",
+      "id": "4153299416331907745",
+      "name": "Test Sticker",
+      "color": "full_color"
+   }
+   ```
+4. **Atualizar um sticker (PUT /stickers/{id})**
+5. **Deletar um sticker (DELETE /stickers/{id})**
 
 ---
 
