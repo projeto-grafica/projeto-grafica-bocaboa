@@ -17,32 +17,67 @@ https://dwt1enboq6.execute-api.us-east-1.amazonaws.com/
 
 ### /stickers
 
-1. **Listar stickers disponíveis (GET /stickers)**  
+1. **Listar stickers disponíveis (GET /stickers) - 200**
 
-    Body:
-    ```json
-    ```  
+   Body:
+   ```json
+   ```  
    
-    Exemplo de output:
-    ```json
-    {
+   Exemplo de output:
+   ```json
+   {
       "items": [
-        {
-          "id": "1",
-          "name": "Test Sticker",
-          "description": "A test sticker",
-          "width": 100,
-          "height": 100,
-          "paperType": "glossy",
-          "color": "full_color",
-          "shape": "rectangle"
-        }
+         {
+            "created_at": "2025-01-12T20:58:43.656330",
+            "width": "100",
+            "height": "100",
+            "created_by": null,
+            "paperType": "glossy",
+            "promotion_id": null,
+            "shape": "rectangle",
+            "price": "18",
+            "description": "A test sticker",
+            "id": "4153299416331907745",
+            "name": "Test Sticker",
+            "color": "full_color"
+         }
       ],
       "lastEvaluatedKey": null,
       "count": 1
-    }
-    ```
-2. **Criar um sticker (POST /stickers)**  
+   }
+   ```
+2. **Criar um sticker (POST /stickers) - 201**  
+
+   Body:
+   ```json
+   {
+      "name": "Test Sticker",
+      "description": "A test sticker",
+      "width": 100,
+      "height": 100,
+      "paperType": "glossy",
+      "color": "full_color",
+      "shape": "rectangle"
+   }
+   ```  
+   
+   Exemplo de output:
+   ```json
+   {
+      "id": "4153299416331907745",
+      "name": "Test Sticker",
+      "description": "A test sticker",
+      "width": 100,
+      "height": 100,
+      "paperType": "glossy",
+      "color": "full_color",
+      "shape": "rectangle",
+      "price": "18.00",
+      "created_by": null,
+      "created_at": "2025-01-12T20:58:43.656330",
+      "promotion_id": null
+   }
+   ```
 3. **Obter um sticker específico (GET /stickers/{id})**  
 4. **Atualizar um sticker (PUT /stickers/{id})**  
 5. **Deletar um sticker (DELETE /stickers/{id})**  

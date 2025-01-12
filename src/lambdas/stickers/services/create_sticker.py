@@ -1,13 +1,14 @@
 import datetime
+import json
 
 from src.lambdas.stickers.services.utils.utils import validate_sticker_data, calculate_price
 
 
 def handle(event, stickers_table, user_id):
-    body = event['body']
+    body = json.loads(event['body'])
     validate_sticker_data(body)
 
-    sticker_id = str(hash(datetime.now().isoformat()))
+    sticker_id = str(hash(datetime.datetime.now().isoformat()))
 
     price = calculate_price(
         body['width'],
@@ -28,7 +29,7 @@ def handle(event, stickers_table, user_id):
         'shape': body['shape'],
         'price': price,
         'created_by': user_id,
-        'created_at': datetime.now().isoformat(),
+        'created_at': datetime.datetime.now().isoformat(),
         'promotion_id': body.get('promotion_id')
     }
 

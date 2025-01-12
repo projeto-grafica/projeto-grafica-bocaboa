@@ -11,6 +11,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 def lambda_handler(event, context):
+
     try:
         http_method = event["requestContext"]["http"]["method"]
         path = event["requestContext"]["http"]["path"]
