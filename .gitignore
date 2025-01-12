@@ -60,3 +60,15 @@ venv
 .python-version
 
 zip/
+
+# Ignore .terraform directory
+.terraform/
+.terraform.lock.hcl
+.terraform.tfstate.lock.info
+.terraformrc
+terraform.rc
+*.tfvars
+*.tfvars.json
+secret.tfvars
+
+/src/terraform/deployments/
