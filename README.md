@@ -85,7 +85,7 @@ https://dwt1enboq6.execute-api.us-east-1.amazonaws.com/
    Exemplo de Body:
    ```json
    ```  
-   
+
    Exemplo de output:
    ```json
    {
@@ -118,7 +118,7 @@ https://dwt1enboq6.execute-api.us-east-1.amazonaws.com/
      "promotion_id": "promo123"
    }
    ```  
-   
+
    Exemplo de output:
    ```json
    {
@@ -136,7 +136,15 @@ https://dwt1enboq6.execute-api.us-east-1.amazonaws.com/
       "color": "full_color"
    }
    ```
-5. **Deletar um sticker (DELETE /stickers/{id})**
+5. **Deletar um sticker (DELETE /stickers/{id}) - 204**
+
+   Exemplo de Body:
+   ```json
+   ```  
+
+   Exemplo de output:
+   ```json
+   ```
 
 ---
 
