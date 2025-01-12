@@ -1,4 +1,4 @@
-from src.lambdas.stickers.utils import validate_sticker_data, calculate_price
+from src.lambdas.stickers.services.utils.utils import validate_sticker_data, calculate_price
 
 
 def handle(event, stickers_table, user_id, user_role):

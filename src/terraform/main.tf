@@ -5,7 +5,7 @@ provider "aws" {
 
 # API Gateway
 resource "aws_apigatewayv2_api" "main" {
-  name          = "sticker-shop-api"
+  name          = "boca-boa-api"
   protocol_type = "HTTP"
 }
 
