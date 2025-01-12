@@ -93,17 +93,6 @@ src/
       - delete_user
       """
 
-    stickers/
-      lambda_function.py
-      # Operações com etiquetas
-      """
-      - create_sticker
-      - get_sticker
-      - list_stickers
-      - update_sticker
-      - delete_sticker
-      """
-
     orders/
       lambda_function.py
       # Gerenciamento de pedidos
