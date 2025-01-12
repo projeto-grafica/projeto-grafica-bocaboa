@@ -1,4 +1,30 @@
-# projeto-grafica-bocaboa
+<div align="justify">
+
+# Projeto Gráfica BocaBoa
+
+O projeto para a gráfica BocaBoa consiste no desenvolvimento de uma aplicação web com front-end e back-end para a criação de etiquetas personalizadas.
+
+## API Gateway base URL
+```
+https://dwt1enboq6.execute-api.us-east-1.amazonaws.com/
+```
+
+## Rotas disponíveis
+
+### /stickers
+
+### /orders
+
+### /admin
+
+### /auth
+
+### /users
+
+### /payments
+
+
+## Anotações
 
 ```
 src/
@@ -63,3 +89,5 @@ src/
       - get_payment_status
       """
 ```
+
+</div>
