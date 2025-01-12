@@ -17,7 +17,7 @@ https://dwt1enboq6.execute-api.us-east-1.amazonaws.com/
 
 ### /stickers
 
-1. **Listar stickers disponíveis (GET /stickers)**
+1. **Listar stickers disponíveis (GET /stickers)**  
     Body:
     ```json
     ```
@@ -40,10 +40,10 @@ https://dwt1enboq6.execute-api.us-east-1.amazonaws.com/
       "count": 1
     }
     ```
-2. **Criar um sticker (POST /stickers)**
-3. **Obter um sticker específico (GET /stickers/{id})**
-4. **Atualizar um sticker (PUT /stickers/{id})**
-5. **Deletar um sticker (DELETE /stickers/{id})**
+2. **Criar um sticker (POST /stickers)**  
+3. **Obter um sticker específico (GET /stickers/{id})**  
+4. **Atualizar um sticker (PUT /stickers/{id})**  
+5. **Deletar um sticker (DELETE /stickers/{id})**  
 
 ---
 
