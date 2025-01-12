@@ -4,25 +4,68 @@
 
 O projeto para a gráfica BocaBoa consiste no desenvolvimento de uma aplicação web com front-end e back-end para a criação de etiquetas personalizadas.
 
+---
+
 ## API Gateway base URL
 ```
 https://dwt1enboq6.execute-api.us-east-1.amazonaws.com/
 ```
 
+---
+
 ## Rotas disponíveis
 
 ### /stickers
 
+1. **Listar stickers disponíveis (GET /stickers)**
+    Body:
+    ```json
+    ```
+    Exemplo de output:
+    ```json
+    {
+      "items": [
+        {
+          "id": "1",
+          "name": "Test Sticker",
+          "description": "A test sticker",
+          "width": 100,
+          "height": 100,
+          "paperType": "glossy",
+          "color": "full_color",
+          "shape": "rectangle"
+        }
+      ],
+      "lastEvaluatedKey": null,
+      "count": 1
+    }
+    ```
+2. **Criar um sticker (POST /stickers)**
+3. **Obter um sticker específico (GET /stickers/{id})**
+4. **Atualizar um sticker (PUT /stickers/{id})**
+5. **Deletar um sticker (DELETE /stickers/{id})**
+
+---
+
 ### /orders
+
+---
 
 ### /admin
 
+---
+
 ### /auth
+
+---
 
 ### /users
 
+---
+
 ### /payments
 
+---
 
 ## Anotações
 
