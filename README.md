@@ -21,7 +21,7 @@ https://dwt1enboq6.execute-api.us-east-1.amazonaws.com/
 
 1. **Listar stickers disponíveis (GET /stickers) - 200**
 
-   Body:
+   Exemplo de Body:
    ```json
    ```  
 
@@ -50,7 +50,7 @@ https://dwt1enboq6.execute-api.us-east-1.amazonaws.com/
    ```
 2. **Criar um sticker (POST /stickers) - 201**
 
-   Body:
+   Exemplo de Body:
    ```json
    {
       "name": "Test Sticker",
@@ -82,7 +82,7 @@ https://dwt1enboq6.execute-api.us-east-1.amazonaws.com/
    ```
 3. **Obter um sticker específico (GET /stickers/{id}) - 200**
 
-   Body:
+   Exemplo de Body:
    ```json
    ```  
    
@@ -103,7 +103,39 @@ https://dwt1enboq6.execute-api.us-east-1.amazonaws.com/
       "color": "full_color"
    }
    ```
-4. **Atualizar um sticker (PUT /stickers/{id})**
+4. **Atualizar um sticker (PUT /stickers/{id}) - 200**
+
+   Exemplo de Body:
+   ```json
+   {
+     "name": "Updated Sticker Name",
+     "description": "Updated description for the sticker.",
+     "width": 10,
+     "height": 20,
+     "paperType": "glossy",
+     "color": "full_color",
+     "shape": "circle",
+     "promotion_id": "promo123"
+   }
+   ```  
+   
+   Exemplo de output:
+   ```json
+   {
+      "created_at": "2025-01-12T20:58:43.656330",
+      "height": "20",
+      "width": "10",
+      "created_by": null,
+      "paperType": "glossy",
+      "promotion_id": "promo123",
+      "shape": "circle",
+      "description": "Updated description for the sticker.",
+      "id": "4153299416331907745",
+      "price": "0.43",
+      "name": "Updated Sticker Name",
+      "color": "full_color"
+   }
+   ```
 5. **Deletar um sticker (DELETE /stickers/{id})**
 
 ---
