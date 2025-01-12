@@ -1,9 +1,11 @@
+import json
+
 from src.lambdas.stickers.services.utils.utils import validate_sticker_data, calculate_price
 
 
 def handle(event, stickers_table, user_id, user_role):
     sticker_id = event['pathParameters']['id']
-    body = event['body']
+    body = json.loads(event['body'])
 
     # check if the sticker exists
     response = stickers_table.get_item(
@@ -35,7 +37,7 @@ def handle(event, stickers_table, user_id, user_role):
     )
 
     update_expr = """
-        SET name = :name,
+        SET #name = :name,
             description = :description,
             width = :width,
             height = :height,
@@ -45,6 +47,10 @@ def handle(event, stickers_table, user_id, user_role):
             price = :price,
             promotion_id = :promotion_id
     """
+
+    expr_attribute_names = {
+        '#name': 'name'
+    }
 
     expr_values = {
         ':name': body['name'],
@@ -61,6 +67,7 @@ def handle(event, stickers_table, user_id, user_role):
     stickers_table.update_item(
         Key={'id': sticker_id},
         UpdateExpression=update_expr,
+        ExpressionAttributeNames=expr_attribute_names,
         ExpressionAttributeValues=expr_values
     )
 
