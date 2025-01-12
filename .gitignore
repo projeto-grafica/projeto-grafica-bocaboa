@@ -72,3 +72,5 @@ terraform.rc
 secret.tfvars
 
 /src/terraform/deployments/
+/src/terraform/terraform.tfstate
+/src/terraform/terraform.tfstate.backup
