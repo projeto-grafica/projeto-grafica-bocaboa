@@ -58,3 +58,5 @@ next-env.d.ts
 # python
 venv
 .python-version
+
+zip/
