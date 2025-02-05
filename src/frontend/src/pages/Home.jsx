@@ -1,9 +1,18 @@
+import BannerPromotions from "../components/BannerPromotions";
+import styled from "styled-components";
+
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5vh;
+`
+
 const Home = () => {
     return (
-        <div>
-            <h1>Home</h1>
-            <p>Welcome to the Home page</p>
-        </div>
+        <Container>
+            <BannerPromotions Image={"https://ceoptions.com/wp-content/uploads/2021/09/Promotional-Marketing-Strategies-to-Boost-Sales.jpg"} />
+        </Container>
     );
 }
 
