@@ -11,7 +11,6 @@ import { useState } from "react";
 const Nav = styled.nav`
     display: flex;
     flex-direction: column;
-    justify-content: center;
 `
 
 const Promotion = styled.div`
@@ -109,7 +108,7 @@ const Navbar = () => {
                     <Link to={'/'}>Share Print</Link>
                     <SearchBar search={searchWords} setSearchWords={setSearchWords}/>
                     <ContainerIcons>
-                        <Link to={'/favoritos'}>
+                        <Link to={'perfil/favoritos'}>
                             <IoHeartOutline size={24} color="white" />
                         </Link>
                         <Link to={'/carrinho'}>
@@ -118,7 +117,7 @@ const Navbar = () => {
                         {user ? (
                             <IoPersonOutline size={24} color="white" onClick={logout} />
                         ) : (
-                            <Link to="/login">
+                            <Link to="/perfil">
                                 <IoPersonOutline size={24} color="white" />
                             </Link>
                         )}
@@ -132,11 +131,11 @@ const Navbar = () => {
             {showElements && (
                 <LinksBar>
                     <div className="container">
-                        <Link to="/panfletos">Panfletos</Link>
-                        <Link to="/etiquetas">Etiquetas</Link>
-                        <Link to="/envelopes">Envelopes</Link>
-                        <Link to="/adesivos">Adesivos</Link>
-                        <Link to="/cartoes">Cartões</Link>
+                        <Link to="produtos/panfletos">Panfletos</Link>
+                        <Link to="produtos/etiquetas">Etiquetas</Link>
+                        <Link to="produtos/envelopes">Envelopes</Link>
+                        <Link to="produtos/adesivos">Adesivos</Link>
+                        <Link to="produtos/cartoes">Cartões</Link>
                     </div>
                 </LinksBar>
             )}   

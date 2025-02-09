@@ -1,6 +1,7 @@
 import BannerPromotions from "../components/BannerPromotions";
 import styled from "styled-components";
 import BlockCards from "../components/BlockCards";
+import ImageBanner from "../assets/image.png";
 
 const Container = styled.div`
     display: flex;
@@ -12,8 +13,9 @@ const Container = styled.div`
 const Home = () => {
     return (
         <Container>
-            <BannerPromotions Image={"https://ceoptions.com/wp-content/uploads/2021/09/Promotional-Marketing-Strategies-to-Boost-Sales.jpg"} />
+            <BannerPromotions Image={ImageBanner} />
             <BlockCards title={"Em alta"} />
+            <BlockCards title={"Para você"} />
         </Container>
     );
 }
