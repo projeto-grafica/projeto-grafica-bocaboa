@@ -1,14 +1,44 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
-// Criar o contexto
 const AuthContext = createContext();
 
-// Provedor do contexto de autenticação
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState(() => {
+        const storedUser = localStorage.getItem("user");
+        const expiration = localStorage.getItem("session_expiration");
 
-    const login = (userData) => setUser(userData);
-    const logout = () => setUser(null);
+        if (storedUser && expiration) {
+            const now = new Date().getTime();
+            if (now > Number(expiration)) {
+                localStorage.removeItem("user");
+                localStorage.removeItem("session_expiration");
+                return null; // Sessão expirada
+            }
+            return JSON.parse(storedUser);
+        }
+
+        return null;
+    });
+
+    useEffect(() => {
+        if (user) {
+            const expirationTime = new Date().getTime() + 30 * 60 * 1000; // 30 minutos
+            localStorage.setItem("session_expiration", expirationTime);
+        }
+    }, [user]);
+
+    const login = (userData) => {
+        const expirationTime = new Date().getTime() + 30 * 60 * 1000; // 30 minutos
+        setUser(userData);
+        localStorage.setItem("user", JSON.stringify(userData));
+        localStorage.setItem("session_expiration", expirationTime);
+    };
+
+    const logout = () => {
+        setUser(null);
+        localStorage.removeItem("user");
+        localStorage.removeItem("session_expiration");
+    };
 
     return (
         <AuthContext.Provider value={{ user, login, logout }}>
@@ -17,5 +47,4 @@ export const AuthProvider = ({ children }) => {
     );
 };
 
-// Hook para usar o contexto
 export const useAuth = () => useContext(AuthContext);
