@@ -1,9 +1,10 @@
 import datetime
 import json
 
+
 def handle(event, orders_table, client_id):
     body = json.loads(event['body'])
-    
+
     order = {
         'id': str(hash(datetime.datetime.now().isoformat())),
         'client_id': client_id,
@@ -12,9 +13,9 @@ def handle(event, orders_table, client_id):
         'date': datetime.datetime.now().isoformat(),
         'status': 'preparing'  # Initial status
     }
-    
+
     orders_table.put_item(Item=order)
-    
+
     return {
         'statusCode': 201,
         'body': order
