@@ -3,7 +3,10 @@ provider "aws" {
   profile = "personal"
 }
 
-# API Gateway
+# ---------------------
+#   API Gateway
+# ---------------------
+
 resource "aws_apigatewayv2_api" "main" {
   name          = "boca-boa-api"
   protocol_type = "HTTP"
@@ -15,7 +18,10 @@ resource "aws_apigatewayv2_stage" "main" {
   auto_deploy = true
 }
 
-# DynamoDB Tables
+# ---------------------
+#   Dynamodb
+# ---------------------
+
 module "users_table" {
   source        = "./modules/dynamodb"
   table_name    = "users"
@@ -43,6 +49,10 @@ module "promotions_table" {
   hash_key_name = "id"
   hash_key_type = "S"
 }
+
+# ---------------------
+#   IAM Roles
+# ---------------------
 
 # IAM Role for Lambda
 resource "aws_iam_role" "lambda_role" {
@@ -97,7 +107,11 @@ resource "aws_iam_role_policy_attachment" "lambda_logs" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
-# Stickers Lambda Function
+# ---------------------
+#   Lambdas
+# ---------------------
+
+# Stickers
 module "stickers_lambda" {
   source               = "./modules/lambda"
   function_name        = "stickers_handler"
@@ -109,7 +123,23 @@ module "stickers_lambda" {
   api_gw_execution_arn = aws_apigatewayv2_api.main.execution_arn
 }
 
-# Stickers API Routes
+# Orders
+module "orders_lambda" {
+  source               = "./modules/lambda"
+  function_name        = "orders_handler"
+  role_arn             = aws_iam_role.lambda_role.arn
+  handler              = "lambda_function.lambda_handler"
+  zip_file             = "./deployments/orders.zip"
+  layers = []
+  environment_variables = {}
+  api_gw_execution_arn = aws_apigatewayv2_api.main.execution_arn
+}
+
+# ---------------------
+#   API Routes
+# ---------------------
+
+# Stickers
 module "stickers_create_route" {
   source            = "./modules/api_gateway"
   api_id            = aws_apigatewayv2_api.main.id
@@ -150,7 +180,7 @@ module "stickers_delete_route" {
   lambda_invoke_arn = module.stickers_lambda.invoke_arn
 }
 
-# Orders API Routes
+# Orders
 module "orders_create_route" {
   source            = "./modules/api_gateway"
   api_id            = aws_apigatewayv2_api.main.id
