@@ -149,3 +149,36 @@ module "stickers_delete_route" {
   path              = "/stickers/{id}"
   lambda_invoke_arn = module.stickers_lambda.invoke_arn
 }
+
+# Orders API Routes
+module "orders_create_route" {
+  source            = "./modules/api_gateway"
+  api_id            = aws_apigatewayv2_api.main.id
+  method            = "POST"
+  path              = "/orders"
+  lambda_invoke_arn = module.orders_lambda.invoke_arn
+}
+
+module "orders_get_route" {
+  source            = "./modules/api_gateway"
+  api_id            = aws_apigatewayv2_api.main.id
+  method            = "GET"
+  path              = "/orders/{id}"
+  lambda_invoke_arn = module.orders_lambda.invoke_arn
+}
+
+module "orders_list_route" {
+  source            = "./modules/api_gateway"
+  api_id            = aws_apigatewayv2_api.main.id
+  method            = "GET"
+  path              = "/orders"
+  lambda_invoke_arn = module.orders_lambda.invoke_arn
+}
+
+module "orders_update_status_route" {
+  source            = "./modules/api_gateway"
+  api_id            = aws_apigatewayv2_api.main.id
+  method            = "PUT"
+  path              = "/orders/{id}/status"
+  lambda_invoke_arn = module.orders_lambda.invoke_arn
+}
