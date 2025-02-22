@@ -1,31 +1,35 @@
 import json
 
-def handle(event, cognito, client_id):
+def handle(body, cognito, client_id):
     try:
-        body = json.loads(event['body'])
+        email = body.get('email')
+        password = body.get('password')
         
-        if 'email' not in body or 'password' not in body:
+        if not email or not password:
             return {
                 'statusCode': 400,
                 'body': json.dumps({'message': 'Email and password are required'})
             }
-            
+        
+        # Authenticate user
         response = cognito.initiate_auth(
             ClientId=client_id,
             AuthFlow='USER_PASSWORD_AUTH',
             AuthParameters={
-                'USERNAME': body['email'],
-                'PASSWORD': body['password']
+                'USERNAME': email,
+                'PASSWORD': password
             }
         )
         
         return {
             'statusCode': 200,
             'body': json.dumps({
-                'accessToken': response['AuthenticationResult']['AccessToken'],
-                'refreshToken': response['AuthenticationResult']['RefreshToken'],
-                'idToken': response['AuthenticationResult']['IdToken'],
-                'expiresIn': response['AuthenticationResult']['ExpiresIn']
+                'message': 'Login successful',
+                'tokens': {
+                    'accessToken': response['AuthenticationResult']['AccessToken'],
+                    'refreshToken': response['AuthenticationResult']['RefreshToken'],
+                    'idToken': response['AuthenticationResult']['IdToken']
+                }
             })
         }
         
@@ -34,9 +38,13 @@ def handle(event, cognito, client_id):
             'statusCode': 401,
             'body': json.dumps({'message': 'Invalid credentials'})
         }
+    except cognito.exceptions.UserNotConfirmedException:
+        return {
+            'statusCode': 400,
+            'body': json.dumps({'message': 'User is not confirmed'})
+        }
     except Exception as e:
-        print(f"Error during login: {str(e)}")
         return {
             'statusCode': 500,
-            'body': json.dumps({'message': 'Error during login'})
+            'body': json.dumps({'message': str(e)})
         }
