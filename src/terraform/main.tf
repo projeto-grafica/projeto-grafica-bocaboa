@@ -245,7 +245,7 @@ module "orders_lambda" {
 #   API Routes
 # ---------------------
 
-# Users
+# Auth
 module "users_signup_route" {
   source            = "./modules/api_gateway"
   api_id            = aws_apigatewayv2_api.main.id
@@ -268,33 +268,6 @@ module "users_confirm_signup_route" {
   method            = "POST"
   path              = "/auth/confirm"
   lambda_invoke_arn = module.auth_lambda.invoke_arn
-}
-
-module "users_get_route" {
-  source            = "./modules/api_gateway"
-  api_id            = aws_apigatewayv2_api.main.id
-  method            = "GET"
-  path              = "/users/{userId}"
-  lambda_invoke_arn = module.users_lambda.invoke_arn
-  authorizer_id     = aws_apigatewayv2_authorizer.main.id
-}
-
-module "users_update_route" {
-  source            = "./modules/api_gateway"
-  api_id            = aws_apigatewayv2_api.main.id
-  method            = "PUT"
-  path              = "/users/{userId}"
-  lambda_invoke_arn = module.users_lambda.invoke_arn
-  authorizer_id     = aws_apigatewayv2_authorizer.main.id
-}
-
-module "users_delete_route" {
-  source            = "./modules/api_gateway"
-  api_id            = aws_apigatewayv2_api.main.id
-  method            = "DELETE"
-  path              = "/users/{userId}"
-  lambda_invoke_arn = module.users_lambda.invoke_arn
-  authorizer_id     = aws_apigatewayv2_authorizer.main.id
 }
 
 # Stickers
