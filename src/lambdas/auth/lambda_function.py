@@ -2,6 +2,8 @@ import json
 import os
 import boto3
 
+from src.lambdas.auth.services import login, logout, refresh_token
+
 cognito = boto3.client('cognito-idp')
 USER_POOL_ID = os.environ['COGNITO_USER_POOL_ID']
 CLIENT_ID = os.environ['COGNITO_CLIENT_ID']
@@ -12,13 +14,13 @@ def lambda_handler(event, context):
         path = event['requestContext']['http']['path']
         
         if method == 'POST' and path == '/auth/login':
-            return login_handler(event, cognito, CLIENT_ID)
+            return login.handle(event, cognito, CLIENT_ID)
             
         elif method == 'POST' and path == '/auth/logout':
-            return logout_handler(event, cognito)
+            return logout.handle(event, cognito)
             
         elif method == 'POST' and path == '/auth/refresh':
-            return refresh_token_handler(event, cognito, CLIENT_ID)
+            return refresh_token.handle(event, cognito, CLIENT_ID)
             
         else:
             return {
