@@ -17,6 +17,80 @@ https://dwt1enboq6.execute-api.us-east-1.amazonaws.com/
 
 ## Rotas disponíveis
 
+### /auth
+
+1. **Criar uma nova conta (POST /auth/signup) - 200**
+
+   Exemplo de Body:
+
+   ```json
+   {
+     "email": "user@example.com",
+     "password": "StrongP@ssw0rd123"
+   }
+   ```
+
+   Exemplo de output:
+
+   ```json
+   {
+     "message": "User created successfully. Please check your email for confirmation code.",
+     "userSub": "94f8a4a8-7031-706b-58da-d839a19c3fee"
+   }
+   ```
+
+2. **Confirmar conta (POST /auth/confirm) - 200**
+
+   Exemplo de Body:
+
+   ```json
+   {
+     "email": "user@example.com",
+     "confirmationCode": "123456"
+   }
+   ```
+
+   Exemplo de output:
+
+   ```json
+   {
+     "message": "Email confirmed successfully"
+   }
+   ```
+
+3. **Login (POST /auth/login) - 200**
+
+   Exemplo de Body:
+
+   ```json
+   {
+     "email": "user@example.com",
+     "password": "StrongP@ssw0rd123"
+   }
+   ```
+
+   Exemplo de output:
+
+   ```json
+   {
+     "message": "Login successful",
+     "tokens": {
+       "idToken": "eyJraWQiOiJ...",
+       "accessToken": "eyJraWQiOi...",
+       "refreshToken": "eyJjdHki..."
+     }
+   }
+   ```
+
+**Observações:**
+
+- Todas as senhas devem ter no mínimo 8 caracteres, incluindo letras maiúsculas, minúsculas, números e caracteres especiais
+- O código de confirmação é enviado para o email cadastrado e expira em 24 horas
+- Os tokens retornados no login devem ser utilizados para autenticar requisições em rotas protegidas
+- O accessToken deve ser incluído no header Authorization como "Bearer {token}"
+
+---
+
 ### /stickers
 
 1. **Listar stickers disponíveis (GET /stickers) - 200**
@@ -171,10 +245,6 @@ https://dwt1enboq6.execute-api.us-east-1.amazonaws.com/
 ---
 
 ### /admin
-
----
-
-### /auth
 
 ---
 
