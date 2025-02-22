@@ -109,7 +109,7 @@ https://v10k527pp4.execute-api.us-east-1.amazonaws.com
      "created_at": "2025-02-22T14:28:28.007141",
      "id": "44c8d4e8-90a1-7001-13a0-48ff0aa14dd0",
      "role": "client",
-     "email": "chagasma.dev@gmail.com"
+     "email": "user@example.com"
    }
    ```
 
@@ -129,7 +129,7 @@ https://v10k527pp4.execute-api.us-east-1.amazonaws.com
    {
      "updated_at": "2025-02-22T15:09:05.128004",
      "created_at": "2025-02-22T14:28:28.007141",
-     "email": "chagasma.dev@gmail.com",
+     "email": "user@example.com",
      "id": "44c8d4e8-90a1-7001-13a0-48ff0aa14dd0",
      "role": "admin"
    }
