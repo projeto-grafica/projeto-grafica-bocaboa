@@ -1,6 +1,7 @@
 import json
 import os
 import boto3
+import logging
 
 from src.lambdas.auth.services import signup, login, confirm
 
@@ -8,11 +9,22 @@ cognito = boto3.client('cognito-idp')
 USER_POOL_ID = os.environ['COGNITO_USER_POOL_ID']
 CLIENT_ID = os.environ['COGNITO_CLIENT_ID']
 
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 def lambda_handler(event, context):
+    logger.info("Received event: %s", json.dumps(event, indent=2))
+    
     try:
-        route = event['rawPath']
-        method = event['requestContext']['http']['method']
+        # Handle both REST API and HTTP API event formats
+        if 'rawPath' in event:
+            # HTTP API format
+            route = event['rawPath']
+            method = event['requestContext']['http']['method']
+        else:
+            # REST API format
+            route = event['path']
+            method = event['httpMethod']
 
         if method != 'POST':
             return {
