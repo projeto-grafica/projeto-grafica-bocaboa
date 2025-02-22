@@ -19,7 +19,7 @@ resource "aws_cognito_user_pool" "main" {
   }
 
   username_attributes = ["email"]
-  auto_verify_attributes = ["email"]
+  auto_verified_attributes = ["email"]
 
   verification_message_template {
     default_email_option = "CONFIRM_WITH_CODE"
