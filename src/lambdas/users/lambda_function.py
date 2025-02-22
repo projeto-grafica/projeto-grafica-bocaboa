@@ -1,14 +1,17 @@
 import json
 import os
 import boto3
+import logging
 
 from src.lambdas.users.services import create_user, get_user, update_user, delete_user
 
 cognito = boto3.client('cognito-idp')
 dynamodb = boto3.resource('dynamodb')
-users_table = dynamodb.Table(os.environ['USERS_TABLE'])
+users_table = dynamodb.Table('users')
 USER_POOL_ID = os.environ['COGNITO_USER_POOL_ID']
 
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 def lambda_handler(event, context):
     try:
