@@ -195,7 +195,6 @@ src/
       lambda_function.py
       # Funções de autenticação
       """
-      - login
       - logout
       - refresh_token
       """
@@ -204,7 +203,6 @@ src/
       lambda_function.py
       # Gerenciamento de usuários
       """
-      - create_user
       - get_user
       - update_user
       - delete_user
