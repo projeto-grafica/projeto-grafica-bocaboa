@@ -45,6 +45,13 @@ resource "aws_cognito_user_pool_client" "main" {
 resource "aws_apigatewayv2_api" "main" {
   name          = "boca-boa-api"
   protocol_type = "HTTP"
+  
+  cors_configuration {
+    allow_headers = ["Content-Type", "Authorization"]
+    allow_methods = ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+    allow_origins = ["*"] # replace with frotend endpoint in production
+    max_age       = 300
+  }
 }
 
 resource "aws_apigatewayv2_stage" "main" {
