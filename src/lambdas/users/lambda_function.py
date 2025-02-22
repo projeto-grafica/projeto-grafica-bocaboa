@@ -1,6 +1,6 @@
 import json
 import logging
-from src.lambdas.users.services import get_user, update_user, delete_user
+from src.lambdas.users.services.user_service import get_user, update_user, delete_user
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)

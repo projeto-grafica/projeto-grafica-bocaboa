@@ -195,10 +195,7 @@ module "users_lambda" {
   handler       = "lambda_function.lambda_handler"
   zip_file      = "./deployments/users.zip"
   layers = []
-  environment_variables = {
-    COGNITO_USER_POOL_ID = aws_cognito_user_pool.main.id
-    COGNITO_CLIENT_ID    = aws_cognito_user_pool_client.main.id
-  }
+  environment_variables = {}
   api_gw_execution_arn = aws_apigatewayv2_api.main.execution_arn
 }
 
@@ -214,18 +211,6 @@ module "auth_lambda" {
     COGNITO_USER_POOL_ID = aws_cognito_user_pool.main.id
     COGNITO_CLIENT_ID    = aws_cognito_user_pool_client.main.id
   }
-  api_gw_execution_arn = aws_apigatewayv2_api.main.execution_arn
-}
-
-# Users
-module "users_lambda" {
-  source        = "./modules/lambda"
-  function_name = "users_handler"
-  role_arn      = aws_iam_role.lambda_role.arn
-  handler       = "lambda_function.lambda_handler"
-  zip_file      = "./deployments/users.zip"
-  layers = []
-  environment_variables = {}
   api_gw_execution_arn = aws_apigatewayv2_api.main.execution_arn
 }
 
