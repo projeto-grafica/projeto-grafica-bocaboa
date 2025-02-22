@@ -13,3 +13,7 @@ variable "path" {
 variable "lambda_invoke_arn" {
   type = string
 }
+
+variable "authorizer_id" {
+  default = null
+}

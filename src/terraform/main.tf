@@ -1,7 +1,42 @@
 provider "aws" {
-  region  = "us-east-1"
+  region  = var.region
   profile = "personal"
 }
+
+# ---------------------
+#   Cognito
+# ---------------------
+
+resource "aws_cognito_user_pool" "main" {
+  name = "boca-boa-user-pool"
+
+  password_policy {
+    minimum_length    = 8
+    require_lowercase = true
+    require_numbers   = true
+    require_symbols   = true
+    require_uppercase = true
+  }
+
+  username_attributes = ["email"]
+  auto_verify_attributes = ["email"]
+
+  verification_message_template {
+    default_email_option = "CONFIRM_WITH_CODE"
+  }
+}
+
+resource "aws_cognito_user_pool_client" "main" {
+  name         = "boca-boa-client"
+  user_pool_id = aws_cognito_user_pool.main.id
+
+  explicit_auth_flows = [
+    "ALLOW_USER_PASSWORD_AUTH",
+    "ALLOW_USER_SRP_AUTH",
+    "ALLOW_REFRESH_TOKEN_AUTH"
+  ]
+}
+
 
 # ---------------------
 #   API Gateway
@@ -16,6 +51,18 @@ resource "aws_apigatewayv2_stage" "main" {
   api_id      = aws_apigatewayv2_api.main.id
   name        = "$default"
   auto_deploy = true
+}
+
+resource "aws_apigatewayv2_authorizer" "main" {
+  api_id          = aws_apigatewayv2_api.main.id
+  authorizer_type = "JWT"
+  identity_sources = ["$request.header.Authorization"]
+  name            = "cognito-authorizer"
+
+  jwt_configuration {
+    audience = [aws_cognito_user_pool_client.main.id]
+    issuer = "https://cognito-idp.${var.region}.amazonaws.com/${aws_cognito_user_pool.main.id}"
+  }
 }
 
 # ---------------------
@@ -101,6 +148,28 @@ resource "aws_iam_role_policy" "dynamodb_policy" {
   })
 }
 
+resource "aws_iam_role_policy" "cognito_policy" {
+  name = "sticker_shop_cognito_policy"
+  role = aws_iam_role.lambda_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "cognito-idp:AdminCreateUser",
+          "cognito-idp:AdminSetUserPassword",
+          "cognito-idp:AdminInitiateAuth",
+          "cognito-idp:AdminRespondToAuthChallenge",
+          "cognito-idp:AdminConfirmSignUp"
+        ]
+        Resource = [aws_cognito_user_pool.main.arn]
+      }
+    ]
+  })
+}
+
 # CloudWatch Logs policy
 resource "aws_iam_role_policy_attachment" "lambda_logs" {
   role       = aws_iam_role.lambda_role.name
@@ -110,6 +179,21 @@ resource "aws_iam_role_policy_attachment" "lambda_logs" {
 # ---------------------
 #   Lambdas
 # ---------------------
+
+# Users
+module "users_lambda" {
+  source        = "./modules/lambda"
+  function_name = "users_handler"
+  role_arn      = aws_iam_role.lambda_role.arn
+  handler       = "lambda_function.lambda_handler"
+  zip_file      = "./deployments/users.zip"
+  layers = []
+  environment_variables = {
+    COGNITO_USER_POOL_ID = aws_cognito_user_pool.main.id
+    COGNITO_CLIENT_ID    = aws_cognito_user_pool_client.main.id
+  }
+  api_gw_execution_arn = aws_apigatewayv2_api.main.execution_arn
+}
 
 # Stickers
 module "stickers_lambda" {
@@ -138,6 +222,41 @@ module "orders_lambda" {
 # ---------------------
 #   API Routes
 # ---------------------
+
+# Users
+module "users_signup_route" {
+  source            = "./modules/api_gateway"
+  api_id            = aws_apigatewayv2_api.main.id
+  method            = "POST"
+  path              = "/auth/signup"
+  lambda_invoke_arn = module.users_lambda.invoke_arn
+}
+
+module "users_login_route" {
+  source            = "./modules/api_gateway"
+  api_id            = aws_apigatewayv2_api.main.id
+  method            = "POST"
+  path              = "/auth/login"
+  lambda_invoke_arn = module.users_lambda.invoke_arn
+}
+
+module "users_confirm_signup_route" {
+  source            = "./modules/api_gateway"
+  api_id            = aws_apigatewayv2_api.main.id
+  method            = "POST"
+  path              = "/auth/confirm"
+  lambda_invoke_arn = module.users_lambda.invoke_arn
+}
+
+# Update existing routes to use authorizer
+module "stickers_create_route" {
+  source            = "./modules/api_gateway"
+  api_id            = aws_apigatewayv2_api.main.id
+  method            = "POST"
+  path              = "/stickers"
+  lambda_invoke_arn = module.stickers_lambda.invoke_arn
+  authorizer_id     = aws_apigatewayv2_authorizer.main.id
+}
 
 # Stickers
 module "stickers_create_route" {
