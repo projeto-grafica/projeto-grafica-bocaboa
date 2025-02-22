@@ -1,23 +1,26 @@
 import json
-import os
 import boto3
-
-dynamodb = boto3.resource('dynamodb')
-orders_table = dynamodb.Table(os.environ['ORDERS_TABLE'])
+import logging
 
 from src.lambdas.orders.services import create_order, get_order, list_orders, update_order_status
 
+dynamodb = boto3.resource('dynamodb')
+orders_table = dynamodb.Table('orders')
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+
 
 def lambda_handler(event, context):
+    logger.info("Received event: %s", json.dumps(event, indent=2))
+    
     try:
-        # Extract authorization info from the event
         client_id = event['requestContext']['authorizer']['lambda']['sub']
         user_role = event['requestContext']['authorizer']['lambda']['role']
 
         method = event['requestContext']['http']['method']
         path = event['requestContext']['http']['path']
 
-        # Route the request to the appropriate handler
         if method == 'POST' and path == '/orders':
             return create_order.handle(event, orders_table, client_id)
 
