@@ -249,14 +249,14 @@ module "users_confirm_signup_route" {
 }
 
 # Update existing routes to use authorizer
-module "stickers_create_route" {
-  source            = "./modules/api_gateway"
-  api_id            = aws_apigatewayv2_api.main.id
-  method            = "POST"
-  path              = "/stickers"
-  lambda_invoke_arn = module.stickers_lambda.invoke_arn
-  authorizer_id     = aws_apigatewayv2_authorizer.main.id
-}
+# module "stickers_create_route" {
+#   source            = "./modules/api_gateway"
+#   api_id            = aws_apigatewayv2_api.main.id
+#   method            = "POST"
+#   path              = "/stickers"
+#   lambda_invoke_arn = module.stickers_lambda.invoke_arn
+#   authorizer_id     = aws_apigatewayv2_authorizer.main.id
+# }
 
 # Stickers
 module "stickers_create_route" {
