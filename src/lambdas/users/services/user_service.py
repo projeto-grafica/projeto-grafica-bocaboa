@@ -6,10 +6,11 @@ table = dynamodb.Table('users')
 
 def get_user(user_id):
     try:
-        response = table.get_item(Key={'id': int(user_id)})
+        response = table.get_item(Key={'id': str(user_id)})
         return response.get('Item')
     except Exception as e:
         raise Exception(f"Error getting user: {str(e)}")
+
 
 def update_user(user_id, updates):
     try:
@@ -28,7 +29,7 @@ def update_user(user_id, updates):
         attribute_names["#updated_at"] = "updated_at"
 
         response = table.update_item(
-            Key={'id': user_id},
+            Key={'id': str(user_id)},
             UpdateExpression=update_expression,
             ExpressionAttributeNames=attribute_names,
             ExpressionAttributeValues=expression_values,
@@ -40,7 +41,7 @@ def update_user(user_id, updates):
 
 def delete_user(user_id):
     try:
-        table.delete_item(Key={'id': int(user_id)})
+        table.delete_item(Key={'id': str(user_id)})
         return True
     except Exception as e:
         raise Exception(f"Error deleting user: {str(e)}")

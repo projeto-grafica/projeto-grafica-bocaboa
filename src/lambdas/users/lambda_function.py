@@ -9,17 +9,27 @@ def lambda_handler(event, context):
     logger.info("Received event: %s", json.dumps(event, indent=2))
     
     try:
-        method = event['requestContext']['http']['method']
-        path = event['rawPath']
+        # Handle both direct Lambda invocations and API Gateway requests
+        if 'requestContext' in event:
+            method = event['requestContext']['httpMethod']
+            path_parameters = event.get('pathParameters', {})
+        else:
+            method = event.get('httpMethod', event.get('method', 'GET'))
+            path_parameters = event.get('pathParameters', {})
         
-        # Get user_id from path parameters if present
-        path_parameters = event.get('pathParameters', {})
-        user_id = path_parameters.get('userId') if path_parameters else None
+        # Try to get user_id from either 'userId' or 'id' parameter
+        user_id = path_parameters.get('userId') or path_parameters.get('id')
+        logger.info(f"Extracted user_id: {user_id}")
         
-        # Get request body if present
         body = json.loads(event.get('body', '{}')) if event.get('body') else {}
         
-        if method == 'GET' and user_id:
+        if not user_id:
+            return {
+                'statusCode': 400,
+                'body': json.dumps({'message': 'User ID is required'})
+            }
+        
+        if method == 'GET':
             user = get_user(user_id)
             if not user:
                 return {
@@ -31,14 +41,14 @@ def lambda_handler(event, context):
                 'body': json.dumps(user)
             }
             
-        elif method == 'PUT' and user_id:
+        elif method == 'PUT':
             updated_user = update_user(user_id, body)
             return {
                 'statusCode': 200,
                 'body': json.dumps(updated_user)
             }
             
-        elif method == 'DELETE' and user_id:
+        elif method == 'DELETE':
             delete_user(user_id)
             return {
                 'statusCode': 200,
@@ -47,7 +57,7 @@ def lambda_handler(event, context):
             
         return {
             'statusCode': 400,
-            'body': json.dumps({'message': 'Invalid request'})
+            'body': json.dumps({'message': 'Invalid request method'})
         }
         
     except Exception as e:

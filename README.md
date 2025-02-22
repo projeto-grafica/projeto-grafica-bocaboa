@@ -91,6 +91,68 @@ https://v10k527pp4.execute-api.us-east-1.amazonaws.com
 
 ---
 
+### /users
+
+1. **Obter detalhes do usuário (GET /users/{id}) - 200**
+
+   Exemplo de Body:
+
+   ```json
+
+   ```
+
+   Exemplo de output:
+
+   ```json
+   {
+     "updated_at": "2025-02-22T14:28:28.007162",
+     "created_at": "2025-02-22T14:28:28.007141",
+     "id": "44c8d4e8-90a1-7001-13a0-48ff0aa14dd0",
+     "role": "client",
+     "email": "chagasma.dev@gmail.com"
+   }
+   ```
+
+2. **Atualizar usuário (PUT /users/{id}) - 200**
+
+   Exemplo de Body:
+
+   ```json
+   {
+     "role": "admin"
+   }
+   ```
+
+   Exemplo de output:
+
+   ```json
+   {
+     "updated_at": "2025-02-22T15:09:05.128004",
+     "created_at": "2025-02-22T14:28:28.007141",
+     "email": "chagasma.dev@gmail.com",
+     "id": "44c8d4e8-90a1-7001-13a0-48ff0aa14dd0",
+     "role": "admin"
+   }
+   ```
+
+3. **Deletar usuário (DELETE /users/{id}) - 200**
+
+   Exemplo de Body:
+
+   ```json
+
+   ```
+
+   Exemplo de output:
+
+   ```json
+   {
+     "message": "User deleted successfully"
+   }
+   ```
+
+---
+
 ### /stickers
 
 1. **Listar stickers disponíveis (GET /stickers) - 200**
@@ -245,10 +307,6 @@ https://v10k527pp4.execute-api.us-east-1.amazonaws.com
 ---
 
 ### /admin
-
----
-
-### /users
 
 ---
 
