@@ -46,7 +46,7 @@ https://dwt1enboq6.execute-api.us-east-1.amazonaws.com/
    ```json
    {
      "email": "user@example.com",
-     "confirmationCode": "123456"
+     "code": "123456"
    }
    ```
 
