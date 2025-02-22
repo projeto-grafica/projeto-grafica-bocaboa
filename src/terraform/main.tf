@@ -217,6 +217,18 @@ module "auth_lambda" {
   api_gw_execution_arn = aws_apigatewayv2_api.main.execution_arn
 }
 
+# Users
+module "users_lambda" {
+  source        = "./modules/lambda"
+  function_name = "users_handler"
+  role_arn      = aws_iam_role.lambda_role.arn
+  handler       = "lambda_function.lambda_handler"
+  zip_file      = "./deployments/users.zip"
+  layers = []
+  environment_variables = {}
+  api_gw_execution_arn = aws_apigatewayv2_api.main.execution_arn
+}
+
 # Stickers
 module "stickers_lambda" {
   source               = "./modules/lambda"
@@ -276,7 +288,7 @@ module "users_get_route" {
   api_id            = aws_apigatewayv2_api.main.id
   method            = "GET"
   path              = "/users/{id}"
-  lambda_invoke_arn = module.auth_lambda.invoke_arn
+  lambda_invoke_arn = module.users_lambda.invoke_arn
 }
 
 module "users_update_route" {
@@ -284,7 +296,7 @@ module "users_update_route" {
   api_id            = aws_apigatewayv2_api.main.id
   method            = "PUT"
   path              = "/users/{id}"
-  lambda_invoke_arn = module.auth_lambda.invoke_arn
+  lambda_invoke_arn = module.users_lambda.invoke_arn
 }
 
 module "users_delete_route" {
@@ -292,7 +304,7 @@ module "users_delete_route" {
   api_id            = aws_apigatewayv2_api.main.id
   method            = "DELETE"
   path              = "/users/{id}"
-  lambda_invoke_arn = module.auth_lambda.invoke_arn
+  lambda_invoke_arn = module.users_lambda.invoke_arn
 }
 
 # Stickers
