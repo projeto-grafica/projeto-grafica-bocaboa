@@ -1,6 +1,6 @@
 import json
 import boto3
-import datetime
+from datetime import datetime
 
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table('users')
@@ -8,11 +8,11 @@ table = dynamodb.Table('users')
 def create_user(user_sub, email, role='client'):
     try:
         item = {
-            'userId': user_sub,
+            'id': user_sub,
             'email': email,
             'role': role,
-            'createdAt': datetime.now().isoformat(),
-            'updatedAt': datetime.now().isoformat()
+            'created_at': datetime.now().isoformat(),
+            'updated_at': datetime.now().isoformat()
         }
         
         table.put_item(Item=item)

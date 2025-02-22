@@ -80,7 +80,7 @@ module "users_table" {
   source        = "./modules/dynamodb"
   table_name    = "users"
   hash_key_name = "id"
-  hash_key_type = "N"
+  hash_key_type = "S"
 }
 
 module "stickers_table" {

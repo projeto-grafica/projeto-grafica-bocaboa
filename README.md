@@ -10,7 +10,7 @@ criação de etiquetas personalizadas.
 ## API Gateway base URL
 
 ```
-https://dwt1enboq6.execute-api.us-east-1.amazonaws.com/
+https://ivrzwdcbmi.execute-api.us-east-1.amazonaws.com
 ```
 
 ---

@@ -6,7 +6,7 @@ table = dynamodb.Table('users')
 
 def get_user(user_id):
     try:
-        response = table.get_item(Key={'userId': user_id})
+        response = table.get_item(Key={'id': int(user_id)})
         return response.get('Item')
     except Exception as e:
         raise Exception(f"Error getting user: {str(e)}")
@@ -17,18 +17,18 @@ def update_user(user_id, updates):
         expression_values = {}
         
         for key, value in updates.items():
-            if key not in ['userId']:  # Prevent updating primary key
+            if key not in ['id']:  # Prevent updating primary key
                 update_expression += f"#{key} = :{key}, "
                 expression_values[f":{key}"] = value
         
-        update_expression += "#updatedAt = :updatedAt"
-        expression_values[":updatedAt"] = datetime.now().isoformat()
+        update_expression += "#updated_at = :updated_at"
+        expression_values[":updated_at"] = datetime.now().isoformat()
 
         attribute_names = {f"#{k}": k for k in updates.keys()}
-        attribute_names["#updatedAt"] = "updatedAt"
+        attribute_names["#updated_at"] = "updated_at"
 
         response = table.update_item(
-            Key={'userId': user_id},
+            Key={'id': user_id},
             UpdateExpression=update_expression,
             ExpressionAttributeNames=attribute_names,
             ExpressionAttributeValues=expression_values,
@@ -40,7 +40,7 @@ def update_user(user_id, updates):
 
 def delete_user(user_id):
     try:
-        table.delete_item(Key={'userId': user_id})
+        table.delete_item(Key={'id': int(user_id)})
         return True
     except Exception as e:
         raise Exception(f"Error deleting user: {str(e)}")
