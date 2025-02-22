@@ -270,6 +270,31 @@ module "users_confirm_signup_route" {
   lambda_invoke_arn = module.auth_lambda.invoke_arn
 }
 
+# Users
+module "users_get_route" {
+  source            = "./modules/api_gateway"
+  api_id            = aws_apigatewayv2_api.main.id
+  method            = "GET"
+  path              = "/users/{id}"
+  lambda_invoke_arn = module.auth_lambda.invoke_arn
+}
+
+module "users_update_route" {
+  source            = "./modules/api_gateway"
+  api_id            = aws_apigatewayv2_api.main.id
+  method            = "PUT"
+  path              = "/users/{id}"
+  lambda_invoke_arn = module.auth_lambda.invoke_arn
+}
+
+module "users_delete_route" {
+  source            = "./modules/api_gateway"
+  api_id            = aws_apigatewayv2_api.main.id
+  method            = "DELETE"
+  path              = "/users/{id}"
+  lambda_invoke_arn = module.auth_lambda.invoke_arn
+}
+
 # Stickers
 module "stickers_create_route" {
   source            = "./modules/api_gateway"

@@ -1,4 +1,24 @@
 import json
+import boto3
+import datetime
+
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table('users')
+
+def create_user(user_sub, email, role='client'):
+    try:
+        item = {
+            'userId': user_sub,
+            'email': email,
+            'role': role,
+            'createdAt': datetime.now().isoformat(),
+            'updatedAt': datetime.now().isoformat()
+        }
+        
+        table.put_item(Item=item)
+        return item
+    except Exception as e:
+        raise Exception(f"Error creating user: {str(e)}")
 
 def handle(body, cognito, user_pool_id, client_id):
     try:
@@ -23,6 +43,8 @@ def handle(body, cognito, user_pool_id, client_id):
                 }
             ]
         )
+        
+        create_user(response['UserSub'], email)
         
         return {
             'statusCode': 200,
