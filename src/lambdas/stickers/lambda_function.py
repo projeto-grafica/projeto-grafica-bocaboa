@@ -14,12 +14,14 @@ def lambda_handler(event, context):
     logger.info("Received event: %s", json.dumps(event, indent=2))
 
     try:
-        http_method = event["requestContext"]["http"]["method"]
-        path = event["requestContext"]["http"]["path"]
+        # Handle both event structures (HTTP API and REST API)
+        http_method = event.get("httpMethod") or event.get("requestContext", {}).get("http", {}).get("method")
+        path = event.get("path") or event.get("requestContext", {}).get("http", {}).get("path")
 
+        # Get user information from authorizer (if exists)
         authorizer = event.get('requestContext', {}).get('authorizer', {})
         user_id = authorizer.get('user_id')
-        user_role = authorizer.get('role', 'user')
+        user_role = authorizer.get('role', 'client')
 
         if http_method == 'POST' and path.endswith('/stickers'):
             result = create_sticker.handle(event, stickers_table, user_id)
@@ -53,6 +55,7 @@ def lambda_handler(event, context):
             'body': json.dumps({'message': str(e)})
         }
     except Exception as e:
+        logger.error("Error processing request: %s", str(e), exc_info=True)
         return {
             'statusCode': 500,
             'body': json.dumps({'message': str(e)})
