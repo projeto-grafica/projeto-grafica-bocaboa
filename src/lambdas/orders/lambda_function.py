@@ -15,11 +15,9 @@ def lambda_handler(event, context):
     logger.info("Received event: %s", json.dumps(event, indent=2))
 
     try:
-        # Handle both event structures (HTTP API and REST API)
         http_method = event.get("httpMethod") or event.get("requestContext", {}).get("http", {}).get("method")
         path = event.get("path") or event.get("requestContext", {}).get("http", {}).get("path")
 
-        # Get user information from authorizer (if exists)
         authorizer = event.get('requestContext', {}).get('authorizer', {})
         user_id = authorizer.get('user_id')
         user_role = authorizer.get('role', 'client')
@@ -27,16 +25,16 @@ def lambda_handler(event, context):
         if http_method == 'POST' and path.endswith('/orders'):
             result = create_order.handle(event, orders_table, user_id)
 
-        elif http_method == 'GET' and '/orders/' in path:
+        elif http_method == 'GET' and path.startswith('/orders/'):
             result = read_order.handle(event, orders_table)
 
         elif http_method == 'GET' and path.endswith('/orders'):
             result = list_orders.handle(event, orders_table, user_id, user_role)
 
-        elif http_method == 'PUT' and '/orders/' in path:
+        elif http_method == 'PUT' and path.startswith('/orders/'):
             result = update_order.handle(event, orders_table, user_id, user_role)
 
-        elif http_method == 'DELETE' and '/orders/' in path:
+        elif http_method == 'DELETE' and path.startswith('/orders/'):
             result = delete_order.handle(event, orders_table, user_id, user_role)
 
         else:
@@ -59,5 +57,5 @@ def lambda_handler(event, context):
         logger.error("Error processing request: %s", str(e), exc_info=True)
         return {
             'statusCode': 500,
-            'body': json.dumps({'message': str(e)})
+            'body': json.dumps({'message': 'Internal Server Error'})
         }

@@ -5,7 +5,7 @@ def handle(event, orders_table, user_id, user_role):
     order_id = event['pathParameters']['id']
     body = json.loads(event['body'])
 
-    # check if the order exists
+    # Verifica se o pedido existe
     response = orders_table.get_item(
         Key={'id': order_id}
     )
@@ -13,34 +13,23 @@ def handle(event, orders_table, user_id, user_role):
     if 'Item' not in response:
         return {
             'statusCode': 404,
-            'message': 'order not found'
+            'body': json.dumps({'message': 'Order not found'})
         }
 
     existing_order = response['Item']
 
-    # check permissions
-    if user_role != 'admin' and existing_order['created_by'] != user_id:
+    # Verifica permissões: somente o admin ou o dono do pedido pode atualizar
+    if user_role != 'admin' and existing_order['client_id'] != user_id:
         return {
             'statusCode': 403,
-            'message': 'Permission denied'
+            'body': json.dumps({'message': 'Permission denied'})
         }
 
-    update_expr = """
-        SET #name = :name,
-            description = :description,
-            width = :width,
-            height = :height,
-            paperType = :paperType,
-            color = :color,
-            shape = :shape,
-            price = :price,
-            promotion_id = :promotion_id
-    """
+    # Define o preço apenas se estiver no corpo da requisição
+    price = body.get('price', existing_order.get('price', 0))
 
-    expr_attribute_names = {
-        '#name': 'name'
-    }
-
+    update_expr = "SET #name = :name, description = :description, width = :width, height = :height, paperType = :paperType, color = :color, shape = :shape, price = :price"
+    expr_attribute_names = {'#name': 'name'}
     expr_values = {
         ':name': body['name'],
         ':description': body.get('description', ''),
@@ -50,9 +39,14 @@ def handle(event, orders_table, user_id, user_role):
         ':color': body['color'],
         ':shape': body['shape'],
         ':price': price,
-        ':promotion_id': body.get('promotion_id')
     }
 
+    # Adiciona promotion_id se estiver presente no corpo da requisição
+    if 'promotion_id' in body:
+        update_expr += ", promotion_id = :promotion_id"
+        expr_values[':promotion_id'] = body['promotion_id']
+
+    # Atualiza o pedido no banco de dados
     orders_table.update_item(
         Key={'id': order_id},
         UpdateExpression=update_expr,
@@ -60,11 +54,12 @@ def handle(event, orders_table, user_id, user_role):
         ExpressionAttributeValues=expr_values
     )
 
+    # Busca o pedido atualizado
     response = orders_table.get_item(
         Key={'id': order_id}
     )
 
     return {
         'statusCode': 200,
-        'body': response['Item']
+        'body': json.dumps(response['Item'])
     }
