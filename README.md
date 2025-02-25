@@ -304,6 +304,102 @@ https://v10k527pp4.execute-api.us-east-1.amazonaws.com
 
 ### /orders
 
+1. **Criar um pedido (POST /orders) - 201**
+
+   Exemplo de Body:
+
+   ```json
+   {
+      "client_id": 123,
+      "sticker_id": 456,
+      "personalized": true,
+      "date": "2025-02-24T20:58:43.656330",
+      "status": "preparing"
+   }
+
+   ```
+
+   Exemplo de output:
+
+   ```json
+   {
+     "id": "987654321",
+     "client_id": 123,
+     "sticker_id": 456,
+     "personalized": true,
+     "date": "2025-02-24T20:58:43.656330",
+     "status": "preparing"
+   }
+   ```
+
+2. **Listar pedidos (GET /orders) - 200**
+
+   Exemplo de output:
+
+   ```json
+   {
+     "items": [
+       {
+         "id": 987654321,
+         "client_id": 123,
+         "sticker_id": 456,
+         "personalized": true,
+         "date": "2025-02-24T20:58:43.656330",
+         "status": "preparing"
+       }
+     ],
+     "lastEvaluatedKey": null,
+     "count": 1
+   }
+   ```
+
+3. **Obter um pedido específico (GET /orders/{id}) - 200**
+
+   Exemplo de output:
+
+   ```json
+   {
+     "id": 987654321,
+     "client_id": 123,
+     "sticker_id": 456,
+     "personalized": true,
+     "date": "2025-02-24T20:58:43.656330",
+     "status": "preparing"
+   }
+   ```
+
+4. **Atualizar um pedido (PUT /orders/{id}) - 200**
+
+   Exemplo de Body:
+
+   ```json
+   {
+     "status": "finished"
+   }
+   ```
+
+   Exemplo de output:
+
+   ```json
+   {
+     "id": 987654321,
+     "client_id": 123,
+     "sticker_id": 456,
+     "personalized": false,
+     "date": "2025-02-24T20:58:43.656330",
+     "status": "finished",
+     "updated_at": "2025-02-24T22:10:15.123456"
+   }
+   ```
+
+5. **Deletar um pedido (DELETE /orders/{id}) - 204**
+
+   Exemplo de output:
+
+   ```json
+   
+   ```
+
 ---
 
 ### /admin
