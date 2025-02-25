@@ -45,12 +45,12 @@ resource "aws_cognito_user_pool_client" "main" {
 resource "aws_apigatewayv2_api" "main" {
   name          = "boca-boa-api"
   protocol_type = "HTTP"
-  
+
   cors_configuration {
     allow_headers = ["Content-Type", "Authorization"]
     allow_methods = ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
     allow_origins = ["*"] # replace with frotend endpoint in production
-    max_age       = 300
+    max_age = 300
   }
 }
 
@@ -189,11 +189,11 @@ resource "aws_iam_role_policy_attachment" "lambda_logs" {
 
 # Users
 module "users_lambda" {
-  source        = "./modules/lambda"
-  function_name = "users_handler"
-  role_arn      = aws_iam_role.lambda_role.arn
-  handler       = "lambda_function.lambda_handler"
-  zip_file      = "./deployments/users.zip"
+  source               = "./modules/lambda"
+  function_name        = "users_handler"
+  role_arn             = aws_iam_role.lambda_role.arn
+  handler              = "lambda_function.lambda_handler"
+  zip_file             = "./deployments/users.zip"
   layers = []
   environment_variables = {}
   api_gw_execution_arn = aws_apigatewayv2_api.main.execution_arn
@@ -331,37 +331,4 @@ module "stickers_delete_route" {
   method            = "DELETE"
   path              = "/stickers/{id}"
   lambda_invoke_arn = module.stickers_lambda.invoke_arn
-}
-
-# Orders
-module "orders_create_route" {
-  source            = "./modules/api_gateway"
-  api_id            = aws_apigatewayv2_api.main.id
-  method            = "POST"
-  path              = "/orders"
-  lambda_invoke_arn = module.orders_lambda.invoke_arn
-}
-
-module "orders_get_route" {
-  source            = "./modules/api_gateway"
-  api_id            = aws_apigatewayv2_api.main.id
-  method            = "GET"
-  path              = "/orders/{id}"
-  lambda_invoke_arn = module.orders_lambda.invoke_arn
-}
-
-module "orders_list_route" {
-  source            = "./modules/api_gateway"
-  api_id            = aws_apigatewayv2_api.main.id
-  method            = "GET"
-  path              = "/orders"
-  lambda_invoke_arn = module.orders_lambda.invoke_arn
-}
-
-module "orders_update_status_route" {
-  source            = "./modules/api_gateway"
-  api_id            = aws_apigatewayv2_api.main.id
-  method            = "PUT"
-  path              = "/orders/{id}/status"
-  lambda_invoke_arn = module.orders_lambda.invoke_arn
 }

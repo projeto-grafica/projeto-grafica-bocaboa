@@ -1,42 +1,41 @@
+import datetime
 import json
-import uuid
-from datetime import datetime
 
-def handle(event, orders_table, client_id):
-    try:
-        body = json.loads(event['body'])
-        
-        required_fields = ['sticker_id', 'is_custom']
-        for field in required_fields:
-            if field not in body:
-                return {
-                    'statusCode': 400,
-                    'body': json.dumps({'message': f'Missing required field: {field}'})
-                }
-        
-        # Create order object
-        order = {
-            'id': str(uuid.uuid4()),
-            'client_id': client_id,
-            'sticker_id': body['sticker_id'],
-            'is_custom': body['is_custom'],
-            'status': 'preparing',  # Default status
-            'created_at': datetime.utcnow().isoformat()
-        }
-        
-        # Save to DynamoDB
-        orders_table.put_item(Item=order)
-        
-        return {
-            'statusCode': 201,
-            'body': json.dumps(order)
-        }
-        
-    except Exception as e:
-        return {
-            'statusCode': 500,
-            'body': json.dumps({
-                'message': 'Error creating order',
-                'error': str(e)
-            })
-        }
+from src.lambdas.orders.services.utils.utils import validate_order_data, calculate_price
+
+
+def handle(event, orders_table, user_id):
+    body = json.loads(event['body'])
+    validate_order_data(body)
+
+    order_id = str(hash(datetime.datetime.now().isoformat()))
+
+    price = calculate_price(
+        body['width'],
+        body['height'],
+        body['paperType'],
+        body['color'],
+        body['shape']
+    )
+
+    order = {
+        'id': order_id,
+        'name': body['name'],
+        'description': body.get('description', ''),
+        'width': body['width'],
+        'height': body['height'],
+        'paperType': body['paperType'],
+        'color': body['color'],
+        'shape': body['shape'],
+        'price': price,
+        'created_by': user_id,
+        'created_at': datetime.datetime.now().isoformat(),
+        'promotion_id': body.get('promotion_id')
+    }
+
+    orders_table.put_item(Item=order)
+
+    return {
+        'statusCode': 201,
+        'body': order
+    }
