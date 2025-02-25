@@ -1,15 +1,7 @@
 import styled from "styled-components";
 
-const Input = styled.input`
-    width: 55%;
-    height: 6vh;
-    border-radius: 10px;
-    padding: 0 10px;
-    border: none;
-`
-
+// Componente de barra de pesquisa
 const SearchBar = ({ search, setSearchWords }) => {
-    
     return (
         <Input
             type="text"
@@ -19,5 +11,14 @@ const SearchBar = ({ search, setSearchWords }) => {
         />
     );
 }
+
+// Estilização do input da barra de pesquisa
+const Input = styled.input`
+    width: 55%;
+    height: 6vh;
+    border-radius: 10px;
+    padding: 0 10px;
+    border: none;
+`;
 
 export default SearchBar;

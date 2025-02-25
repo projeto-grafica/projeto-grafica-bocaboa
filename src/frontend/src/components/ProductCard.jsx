@@ -2,6 +2,37 @@ import styled from "styled-components";
 import { IoStar } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 
+// Componente de cartão de produto
+const ProdutCard = () => {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate('/produto/etiqueta');
+    };
+
+    return (
+        <Container onClick={handleClick}>
+            <div className="img">
+            </div>
+            <div className="info">
+                <div className="rate">
+                    <IoStar size={14} color="#F27E16" />
+                    <IoStar size={14} color="#F27E16" />
+                    <IoStar size={14} color="#F27E16" />
+                    <IoStar size={14} color="#F27E16" />
+                    <IoStar size={14} color="#F27E16" />
+                    <p className="starQuantity">5</p>
+                    <p className="rateQuantity">(4.200)</p>
+                </div>
+                <p>Etiqueta Redonda</p>
+                <p className="priceText">a partir de</p>
+                <p className="price"><b>R$100,00</b> / 100 un</p>
+            </div>
+        </Container>
+    );
+}
+
+// Estilização do cartão de produto
 const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -90,34 +121,5 @@ const Container = styled.div`
         }
     }
 `;
-
-const ProdutCard = () => {
-    const navigate = useNavigate();
-
-    const handleClick = () => {
-        navigate('/produto/etiqueta');
-    };
-
-    return (
-        <Container onClick={handleClick}>
-            <div className="img">
-            </div>
-            <div className="info">
-                <div className="rate">
-                    <IoStar size={14} color="#F27E16" />
-                    <IoStar size={14} color="#F27E16" />
-                    <IoStar size={14} color="#F27E16" />
-                    <IoStar size={14} color="#F27E16" />
-                    <IoStar size={14} color="#F27E16" />
-                    <p className="starQuantity">5</p>
-                    <p className="rateQuantity">(4.200)</p>
-                </div>
-                <p>Etiqueta Redonda</p>
-                <p className="priceText">a partir de</p>
-                <p className="price"><b>R$100,00</b> / 100 un</p>
-            </div>
-        </Container>
-    );
-};
 
 export default ProdutCard;

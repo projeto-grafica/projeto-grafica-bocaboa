@@ -330,10 +330,14 @@ const Produto = () => {
     const { nome } = useParams();
     const [activeOption, setActiveOption] = useState('tamanho');
 
+    const handleGoToCart = () => {
+        window.location.href = "/carrinho";
+    }
+
     return (
         <Container>
             <Breadcrumb>
-                <a href="/">Início</a> &gt; <a href="/produtos">Produtos</a> &gt; <a href="/produtos/etiquetas">Etiquetas</a> &gt; {nome.charAt(0).toUpperCase() + nome.slice(1)}
+                <a href="/">Início</a> &gt; <a href={"/produtos/" + nome}>Produtos</a> &gt; {nome.charAt(0).toUpperCase() + nome.slice(1)}
             </Breadcrumb>
 
             <ProductContainer>
@@ -372,8 +376,8 @@ const Produto = () => {
                         <Actions>
                             <p>Calcular Frete</p>
                             <div className="buttons">
-                                <button><IoCartOutline size={20} /> Adicionar ao carrinho</button>
-                                <button>Comprar Agora</button>
+                                <button onClick={handleGoToCart}><IoCartOutline size={20} /> Adicionar ao carrinho</button>
+                                <button onClick={handleGoToCart}>Comprar Agora</button>
                             </div>
                         </Actions>
                     </PriceContainer>

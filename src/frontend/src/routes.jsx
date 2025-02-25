@@ -1,6 +1,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home.jsx";
-import Cart from "./pages/Cart.jsx";
+import Carrinho from "./pages/Carrinho.jsx";
 import SearchResults from "./pages/SearchResults.jsx";
 import Login from "./pages/Login.jsx";
 import Perfil from "./pages/Perfil.jsx";
@@ -11,10 +11,12 @@ import Pedidos from "./pages/Pedidos.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import ProtectedRoute from "./ProtectedRoute.jsx";
 import Navbar from "./components/NavBar.jsx";
+import Cadastro from "./pages/Cadastro.jsx";
+import VerificarEmail from "./pages/VerificarEmail.jsx";
 
 const AppRoutes = () => {
     const location = useLocation(); 
-    const hideNavbar = ["/login", "/cadastro"].includes(location.pathname);
+    const hideNavbar = ["/login", "/cadastro", "/verificar-email"].includes(location.pathname);
 
     return (
         <>
@@ -22,9 +24,11 @@ const AppRoutes = () => {
 
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/carrinho" element={<Cart />} />
+                <Route path="/carrinho" element={<Carrinho />} />
                 <Route path="/pesquisa" element={<SearchResults />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/cadastro" element={<Cadastro />} />
+                <Route path="/verificar-email" element={<VerificarEmail />} />
                 <Route path="/perfil" element={<Perfil />} />
                 <Route path="/perfil/pedidos" element={<Pedidos />} />
                 <Route path="/produtos/:nome" element={<Produtos />} />

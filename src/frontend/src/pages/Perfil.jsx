@@ -6,7 +6,7 @@ import {
   IoPersonCircleOutline,
   IoHeartOutline,
 } from "react-icons/io5";
-import { useAuth } from "../AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 const Container = styled.div`
     padding: 2rem 7.5vw;
@@ -97,6 +97,10 @@ const CardDescription = styled.p`
 
 const Perfil = () => {
   const { user } = useAuth();
+  console.log(user); // Exemplo de uso do user
+  if (user && user.accessToken) {
+      console.log("Access Token:", user.accessToken);
+  }
 
   const cards = [
     {

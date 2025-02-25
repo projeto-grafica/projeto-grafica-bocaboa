@@ -1,5 +1,15 @@
 import styled from "styled-components";
 
+// Componente de banner de promoções
+const BannerPromotions = ({ Image }) => {
+    return (
+        <ContainerPromotions>
+            <img src={Image} alt="Promotions" />
+        </ContainerPromotions>
+    );
+}
+
+// Estilização do container de promoções
 const ContainerPromotions = styled.div`
     display: flex;
     justify-content: center;
@@ -13,14 +23,6 @@ const ContainerPromotions = styled.div`
         height: 100%;
         object-fit: cover;
     }
-`
-
-const BannerPromotions = ({ Image }) => {
-    return (
-        <ContainerPromotions>
-            <img src={Image} alt="Promotions" />
-        </ContainerPromotions>
-    );
-}
+`;
 
 export default BannerPromotions;

@@ -1,5 +1,5 @@
 import { Link, Links } from "react-router-dom";
-import { useAuth } from "../AuthContext";
+import { useAuth } from "../context/AuthContext.jsx";
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 import { IoHeartOutline } from "react-icons/io5";
@@ -8,87 +8,7 @@ import { IoPersonOutline } from "react-icons/io5";
 import SearchBar from "./SearchBar.jsx";
 import { useState } from "react";
 
-const Nav = styled.nav`
-    display: flex;
-    flex-direction: column;
-`
-
-const Promotion = styled.div`
-    display: flex;
-    justify-content: center;
-    background: linear-gradient(to right, #62A860, #F27E16);
-    width: 100vw;
-    padding: 5px 0;
-
-    p {
-        margin: 0;
-        font-size: 14px;
-        color: #2E2E30;
-        font-weight: 500;
-    }
-`
-
-const NavBar = styled.nav`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #2E2E30;
-    width: 100vw;
-    height: 12vh;
-    padding: 0 7.5vw;
-
-    a {
-        font-size: 32px;
-        color: white;
-        font-weight: 700;
-        text-decoration: none;
-        cursor: pointer;
-    }
-
-    .container{
-        display: flex;
-        justify-content: space-between;
-        width: 85vw;
-    }
-`
-
-const Line = styled.div`
-    width: 100vw;
-    height: 0.7vh;
-    background-color: #F27E16;    
-`
-
-const LinksBar = styled.nav`
-    display: flex;
-    justify-content: center;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100vw;
-    gap: 5vw;
-
-    .container {
-        display: flex;
-        justify-content: start;
-        width: 85vw;
-        padding: 15px 0;
-        gap: 5vw;
-
-        a {
-            font-size: 14px;
-            color: #2E2E30;
-            font-weight: 400;
-            text-decoration: none;
-        }
-    }
-`
-
-const ContainerIcons = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 12vw;
-`
-
+// Componente de barra de navegação
 const Navbar = () => {
     const { user, logout } = useAuth();
     const location = useLocation(); 
@@ -141,6 +61,88 @@ const Navbar = () => {
             )}   
         </Nav>
     );
-};
+}
+
+// Estilização dos componentes da barra de navegação
+const Nav = styled.nav`
+    display: flex;
+    flex-direction: column;
+`;
+
+const Promotion = styled.div`
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(to right, #62A860, #F27E16);
+    width: 100vw;
+    padding: 5px 0;
+
+    p {
+        margin: 0;
+        font-size: 14px;
+        color: #2E2E30;
+        font-weight: 500;
+    }
+`;
+
+const NavBar = styled.nav`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2E2E30;
+    width: 100vw;
+    height: 12vh;
+    padding: 0 7.5vw;
+
+    a {
+        font-size: 32px;
+        color: white;
+        font-weight: 700;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .container{
+        display: flex;
+        justify-content: space-between;
+        width: 85vw;
+    }
+`;
+
+const Line = styled.div`
+    width: 100vw;
+    height: 0.7vh;
+    background-color: #F27E16;    
+`;
+
+const LinksBar = styled.nav`
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100vw;
+    gap: 5vw;
+
+    .container {
+        display: flex;
+        justify-content: start;
+        width: 85vw;
+        padding: 15px 0;
+        gap: 5vw;
+
+        a {
+            font-size: 14px;
+            color: #2E2E30;
+            font-weight: 400;
+            text-decoration: none;
+        }
+    }
+`;
+
+const ContainerIcons = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 12vw;
+`;
 
 export default Navbar;
