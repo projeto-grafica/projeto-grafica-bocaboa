@@ -26,7 +26,8 @@ https://v10k527pp4.execute-api.us-east-1.amazonaws.com
    ```json
    {
      "email": "user@example.com",
-     "password": "StrongP@ssw0rd123"
+     "password": "StrongP@ssw0rd123",
+     "name": "User"
    }
    ```
 
@@ -81,6 +82,29 @@ https://v10k527pp4.execute-api.us-east-1.amazonaws.com
      }
    }
    ```
+
+4. **Reenviar código de confirmação (POST /auth/resend-code) - 200**
+
+   Exemplo de Body:
+
+   ```json
+   {
+     "email": "user@example.com"
+   }
+   ```
+
+   Exemplo de output:
+
+   ```json
+   {
+     "message": "Confirmation code resent successfully"
+   }
+   ```
+
+   Possíveis erros:
+   - 404: User not found
+   - 400: Invalid parameters
+   - 429: Too many attempts. Please try again later
 
 **Observações:**
 
