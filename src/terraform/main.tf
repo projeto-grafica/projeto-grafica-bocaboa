@@ -267,6 +267,14 @@ module "users_confirm_signup_route" {
   lambda_invoke_arn = module.auth_lambda.invoke_arn
 }
 
+module "resend_code_route" {
+  source            = "./modules/api_gateway"
+  api_id            = aws_apigatewayv2_api.main.id
+  method            = "POST"
+  path              = "/auth/resend-code"
+  lambda_invoke_arn = module.auth_lambda.invoke_arn
+}
+
 # Users
 module "users_get_route" {
   source            = "./modules/api_gateway"
