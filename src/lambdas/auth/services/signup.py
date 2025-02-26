@@ -1,51 +1,38 @@
 import json
 import boto3
-from datetime import datetime
+
+from src.lambdas.auth.models.user import User
 
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table('users')
 
-def create_user(user_sub, email, role='client'):
-    try:
-        item = {
-            'id': user_sub,
-            'email': email,
-            'role': role,
-            'created_at': datetime.now().isoformat(),
-            'updated_at': datetime.now().isoformat()
-        }
-        
-        table.put_item(Item=item)
-        return item
-    except Exception as e:
-        raise Exception(f"Error creating user: {str(e)}")
 
 def handle(body, cognito, user_pool_id, client_id):
     try:
         email = body.get('email')
         password = body.get('password')
-        
-        if not email or not password:
+        name = body.get('name')
+
+        if not email or not password or not name:
             return {
                 'statusCode': 400,
-                'body': json.dumps({'message': 'Email and password are required'})
+                'body': json.dumps({'message': 'Email, password, and name are required'})
             }
-        
-        # Create user in Cognito
+
         response = cognito.sign_up(
             ClientId=client_id,
             Username=email,
             Password=password,
             UserAttributes=[
-                {
-                    'Name': 'email',
-                    'Value': email
-                }
+                {'Name': 'email', 'Value': email},
+                {'Name': 'name', 'Value': name}
             ]
         )
-        
-        create_user(response['UserSub'], email)
-        
+
+        # Criar e salvar o usuário no DynamoDB
+        user = User(response['UserSub'], email, name)
+        user.save()
+
         return {
             'statusCode': 200,
             'body': json.dumps({
@@ -53,7 +40,7 @@ def handle(body, cognito, user_pool_id, client_id):
                 'userSub': response['UserSub']
             })
         }
-        
+
     except cognito.exceptions.UsernameExistsException:
         return {
             'statusCode': 400,
