@@ -19,7 +19,7 @@ const Navbar = () => {
         <Nav>
             {showElements && (
                 <Promotion>
-                    <p>Transforme suas ideias em realidade! Garanta 30% de desconto com o código CRIE30. Válido até 21/05!</p>
+                    <p>Transforme suas ideias em realidade! Garanta 30% de desconto com o código <PromotionHighlight>CRIE30</PromotionHighlight>. Válido até 21/05!</p>
                 </Promotion>
             )}      
 
@@ -34,13 +34,9 @@ const Navbar = () => {
                         <Link to={'/carrinho'}>
                             <IoCartOutline size={24} color="white" />
                         </Link>
-                        {user ? (
-                            <IoPersonOutline size={24} color="white" onClick={logout} />
-                        ) : (
-                            <Link to="/perfil">
-                                <IoPersonOutline size={24} color="white" />
-                            </Link>
-                        )}
+                        <Link to="/perfil">
+                            <IoPersonOutline size={24} color="white" />
+                        </Link>
                     </ContainerIcons>
                 </div>
 
@@ -70,17 +66,71 @@ const Nav = styled.nav`
 `;
 
 const Promotion = styled.div`
+    pointer-events: none;
     display: flex;
     justify-content: center;
     background: linear-gradient(to right, #62A860, #F27E16);
+    background-size: 200% auto;
     width: 100vw;
-    padding: 5px 0;
+    padding: 6px 0;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, 
+                      rgba(255, 255, 255, 0) 0%, 
+                      rgba(255, 255, 255, 0.2) 50%,
+                      rgba(255, 255, 255, 0) 100%);
+        animation: shine 2.5s infinite;
+    }
 
     p {
         margin: 0;
-        font-size: 14px;
+        font-size: 15px;
         color: #2E2E30;
-        font-weight: 500;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        text-align: center;
+    }
+
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        100% { background-position: 100% 50%; }
+    }
+    
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.015); }
+        100% { transform: scale(1); }
+    }
+    
+    @keyframes shine {
+        0% { left: -100%; }
+        100% { left: 100%; }
+    }
+`;
+
+const PromotionHighlight = styled.span`
+    background-color: purple;
+    color: white;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-weight: 700;
+    display: inline-block;
+    transform: rotate(-2deg);
+    animation: attention 3s ease-in-out infinite alternate;
+    
+    @keyframes attention {
+        0% { transform: rotate(-1deg) scale(1); }
+        100% { transform: rotate(1deg) scale(1.1); }
     }
 `;
 

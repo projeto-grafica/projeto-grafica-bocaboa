@@ -24,15 +24,15 @@ const AppRoutes = () => {
 
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/carrinho" element={<Carrinho />} />
                 <Route path="/pesquisa" element={<SearchResults />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/cadastro" element={<Cadastro />} />
                 <Route path="/verificar-email" element={<VerificarEmail />} />
-                <Route path="/perfil" element={<Perfil />} />
-                <Route path="/perfil/pedidos" element={<Pedidos />} />
+                <Route path="/perfil" element={<ProtectedRoute element={<Perfil />} />} />
+                <Route path="/perfil/pedidos" element={<ProtectedRoute element={<Pedidos />} />} />
+                <Route path="/perfil/favoritos" element={<ProtectedRoute element={<Favoritos />} />} />
+                <Route path="/carrinho" element={<ProtectedRoute element={< Carrinho/>} />}/>
                 <Route path="/produtos/:nome" element={<Produtos />} />
-                <Route path="/perfil/favoritos" element={<Favoritos />} />
                 <Route path="/produto/:nome" element={<Produto />} />
                 <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
                 <Route path="*" element={<h1>Not Found</h1>} />

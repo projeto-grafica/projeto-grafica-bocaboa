@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
             if (now > Number(expiration)) {
                 localStorage.removeItem("user");
                 localStorage.removeItem("session_expiration");
-                return null; // Sessão expirada
+                return null;
             }
             return JSON.parse(storedUser);
         }
@@ -22,15 +22,16 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         if (user) {
-            const expirationTime = new Date().getTime() + 30 * 60 * 1000; // 30 minutos
+            const expirationTime = new Date().getTime() + 30 * 60 * 1000;
             localStorage.setItem("session_expiration", expirationTime);
         }
     }, [user]);
 
     const login = (userData) => {
-        const expirationTime = new Date().getTime() + 30 * 60 * 1000; // 30 minutos
+        const expirationTime = new Date().getTime() + 30 * 60 * 1000;
         setUser(userData);
-        localStorage.setItem("user", JSON.stringify(userData)); // userData contém email e accessToken
+        console.log('userData', userData);
+        localStorage.setItem("user", JSON.stringify(userData));
         localStorage.setItem("session_expiration", expirationTime);
     };
 

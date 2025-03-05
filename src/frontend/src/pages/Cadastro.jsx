@@ -122,20 +122,20 @@ const ErrorMessage = styled.p`
 
 const Cadastro = () => {
     const navigate = useNavigate();
-    const [nome, setNome] = useState("");
+    const [name, setname] = useState("");
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const [loading, setLoading] = useState(false);
     const [errors, setErrors] = useState({
-        nome: "",
+        name: "",
         email: "",
         senha: "",
         geral: ""
     });
 
-    const validateNome = (nome) => {
-        if (!nome || nome.trim().length < 4) {
-            return "Nome deve ter pelo menos 4 caracteres";
+    const validatename = (name) => {
+        if (!name || name.trim().length < 4) {
+            return "name deve ter pelo menos 4 caracteres";
         }
         return "";
     };
@@ -158,20 +158,20 @@ const Cadastro = () => {
     };
 
     const handleCadastro = async () => {
-        const nomeError = validateNome(nome);
+        const nameError = validatename(name);
         const emailError = validateEmail(email);
         const senhaError = validateSenha(senha);
 
         setErrors({
-            nome: nomeError,
+            name: nameError,
             email: emailError,
             senha: senhaError
         });
 
-        if (!nomeError && !emailError && !senhaError) {
+        if (!nameError && !emailError && !senhaError) {
             setLoading(true);
             try {
-                console.log('Enviando requisição de cadastro:', { email, password: senha });
+                console.log('Enviando requisição de cadastro:', { name ,email, password: senha });
                 
                 const response = await fetch('https://v10k527pp4.execute-api.us-east-1.amazonaws.com/auth/signup', {
                     method: 'POST',
@@ -180,7 +180,8 @@ const Cadastro = () => {
                     },
                     body: JSON.stringify({
                         email,
-                        password: senha
+                        password: senha,
+                        name
                     })
                 });
 
@@ -193,6 +194,7 @@ const Cadastro = () => {
 
                 localStorage.setItem('tempUserEmail', email);
                 localStorage.setItem('userSub', data.userSub);
+                localStorage.setItem('userName', name);
                 navigate("/verificar-email");
             } catch (error) {
                 console.error('Erro no cadastro:', error);
@@ -215,10 +217,10 @@ const Cadastro = () => {
                     <Input 
                         type="text" 
                         placeholder="Nome" 
-                        value={nome} 
-                        onChange={(e) => setNome(e.target.value)}
+                        value={name} 
+                        onChange={(e) => setname(e.target.value)}
                     />
-                    {errors.nome && <ErrorMessage>{errors.nome}</ErrorMessage>}
+                    {errors.name && <ErrorMessage>{errors.name}</ErrorMessage>}
                 </div>
                 <div>
                     <Input

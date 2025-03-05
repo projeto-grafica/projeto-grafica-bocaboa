@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import {
@@ -40,12 +41,18 @@ const WelcomeHeading = styled.h1`
     margin: 0;
 `;
 
-const Picture = styled.img`
+// Atualize o componente Picture para exibir um avatar com a inicial do nome
+const Picture = styled.div`
     width: 80px;
     height: 80px;
     border-radius: 50%;
     background-color: #f5f5f5;
-`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    color: #2e2e30;
+`;
 
 const Email = styled.p`
     color: #666;
@@ -96,11 +103,15 @@ const CardDescription = styled.p`
 `;
 
 const Perfil = () => {
-  const { user } = useAuth();
-  console.log(user); // Exemplo de uso do user
+  const { user, logout } = useAuth();
+  
   if (user && user.accessToken) {
       console.log("Access Token:", user.accessToken);
   }
+
+  useEffect(() => {
+    console.log("Infos do usuário:", user);
+  }, [user]);
 
   const cards = [
     {
@@ -133,11 +144,16 @@ const Perfil = () => {
     <Container>
       <Welcome>
         <div className="blockProfile">
-          <Picture src={user?.photo || 'https://thispersondoesnotexist.com'} />
+          {/* Exibe a primeira letra do nome do usuário */}
+          <Picture>
+            {user?.name ? user.name[0].toUpperCase() : "U"}
+          </Picture>
           <div className="blockProfileInfos">
             <WelcomeHeading>Bem vindo, {user?.name || "usuário"}</WelcomeHeading>
             <Email>{user?.email || "email@email.com"}</Email>
           </div>
+          {/* LOGOUT BUTTON */}
+          <button onClick={logout}>Logout</button>
         </div>
       </Welcome>
 

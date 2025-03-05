@@ -152,13 +152,16 @@ const Login = () => {
                 throw new Error(data.message || 'Credenciais inválidas');
             }
     
-            // Supondo que a resposta contenha "tokens" e um objeto "user" com as infos do usuário
-            const { tokens, user: userData } = data;
+            const { tokens } = data;
+            // Utilize o nome salvo no localStorage ou fallback para email.split("@")[0]
             login({
-                ...userData,
+                name: localStorage.getItem("userName") || email.split("@")[0],
+                email,
+                photo: "https://thispersondoesnotexist.com",
                 accessToken: tokens.accessToken
             });
-    
+
+            console.log('Login realizado com sucesso:', data);
             navigate("/");
         } catch (err) {
             console.error('Erro no login:', err);
