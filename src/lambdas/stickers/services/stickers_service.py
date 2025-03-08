@@ -45,7 +45,7 @@ class StickerService:
 
     def get_sticker(self, sticker_id: str) -> Optional[Dict]:
         response = self.stickers_table.get_item(
-            Key={'id': sticker_id}
+            Key={'sticker_id': sticker_id}
         )
 
         return response.get('Item')
@@ -81,7 +81,7 @@ class StickerService:
                 self.s3_service.delete_image(image_url)
 
         self.stickers_table.delete_item(
-            Key={'id': sticker_id}
+            Key={'sticker_id': sticker_id}
         )
 
         return True
@@ -127,7 +127,7 @@ class StickerService:
         }
 
         self.stickers_table.update_item(
-            Key={'id': sticker_id},
+            Key={'sticker_id': sticker_id},
             UpdateExpression=update_expr,
             ExpressionAttributeValues=expr_values
         )
@@ -155,7 +155,7 @@ class StickerService:
             }
 
             self.stickers_table.update_item(
-                Key={'id': sticker_id},
+                Key={'sticker_id': sticker_id},
                 UpdateExpression=update_expr,
                 ExpressionAttributeValues=expr_values
             )
