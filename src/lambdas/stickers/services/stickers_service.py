@@ -31,7 +31,7 @@ class StickerService:
             paper_type=data['paperType'],
             color=data['color'],
             shape=data['shape'],
-            price=['price'],
+            price=data['price'],
             created_by=user_id,
             tipo=data.get('tipo', 'etiqueta'),
             images=data.get('images', []),
