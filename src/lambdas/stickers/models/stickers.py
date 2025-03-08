@@ -17,7 +17,6 @@ class Sticker:
                  created_by: str = None,
                  tipo: str = 'etiqueta',
                  images: List[str] = None,
-                 addresses: List[Dict] = None,
                  promotion_id: str = None):
 
         self.sticker_id = sticker_id
@@ -32,7 +31,6 @@ class Sticker:
         self.created_by = created_by
         self.tipo = tipo
         self.images = images or []
-        self.addresses = addresses or []
         self.promotion_id = promotion_id
         self.created_at = datetime.now().isoformat()
 
@@ -51,7 +49,6 @@ class Sticker:
             created_by=data.get('created_by'),
             tipo=data.get('tipo', 'etiqueta'),
             images=data.get('images', []),
-            addresses=data.get('addresses', []),
             promotion_id=data.get('promotion_id')
         )
 
@@ -74,7 +71,6 @@ class Sticker:
             'created_by': self.created_by,
             'tipo': self.tipo,
             'images': self.images,
-            'addresses': self.addresses,
             'promotion_id': self.promotion_id,
             'created_at': self.created_at
         }
@@ -96,10 +92,3 @@ class Sticker:
             raise ValueError("Invalid color option")
         if data['shape'] not in ['rectangle', 'circle', 'custom']:
             raise ValueError("Invalid shape")
-
-        if 'addresses' in data and data['addresses']:
-            for address in data['addresses']:
-                required_address_fields = ['cep', 'cidade', 'estado', 'logradouro', 'numero']
-                for field in required_address_fields:
-                    if field not in address:
-                        raise ValueError(f"Missing required address field: {field}")
