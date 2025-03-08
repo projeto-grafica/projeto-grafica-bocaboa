@@ -384,7 +384,7 @@ module "stickers_images_upload_route" {
   method            = "POST"
   path              = "/stickers/{id}/images"
   lambda_invoke_arn = module.stickers_lambda.invoke_arn
-  authorizer_id     = aws_apigatewayv2_authorizer.main.id
+  # authorizer_id     = aws_apigatewayv2_authorizer.main.id
 }
 
 module "stickers_images_add_route" {
@@ -393,7 +393,7 @@ module "stickers_images_add_route" {
   method            = "PUT"
   path              = "/stickers/{id}/images"
   lambda_invoke_arn = module.stickers_lambda.invoke_arn
-  authorizer_id     = aws_apigatewayv2_authorizer.main.id
+  # authorizer_id     = aws_apigatewayv2_authorizer.main.id
 }
 
 module "stickers_images_delete_route" {
@@ -402,7 +402,7 @@ module "stickers_images_delete_route" {
   method            = "DELETE"
   path              = "/stickers/{id}/images"
   lambda_invoke_arn = module.stickers_lambda.invoke_arn
-  authorizer_id     = aws_apigatewayv2_authorizer.main.id
+  # authorizer_id     = aws_apigatewayv2_authorizer.main.id
 }
 
 # Orders
