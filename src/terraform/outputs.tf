@@ -13,7 +13,3 @@ output "stickers_table_name" {
 output "orders_table_name" {
   value = module.orders_table.table_name
 }
-
-output "promotions_table_name" {
-  value = module.promotions_table.table_name
-}

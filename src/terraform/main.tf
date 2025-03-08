@@ -86,20 +86,13 @@ module "users_table" {
 module "stickers_table" {
   source        = "./modules/dynamodb"
   table_name    = "stickers"
-  hash_key_name = "id"
+  hash_key_name = "sticker_id"
   hash_key_type = "S"
 }
 
 module "orders_table" {
   source        = "./modules/dynamodb"
   table_name    = "orders"
-  hash_key_name = "id"
-  hash_key_type = "S"
-}
-
-module "promotions_table" {
-  source        = "./modules/dynamodb"
-  table_name    = "promotions"
   hash_key_name = "id"
   hash_key_type = "S"
 }
@@ -167,7 +160,6 @@ resource "aws_iam_role_policy" "dynamodb_policy" {
           module.users_table.table_arn,
           module.stickers_table.table_arn,
           module.orders_table.table_arn,
-          module.promotions_table.table_arn
         ]
       }
     ]
