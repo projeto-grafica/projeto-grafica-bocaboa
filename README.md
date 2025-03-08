@@ -501,7 +501,7 @@ async function uploadImage(file, uploadData) {
   // Adicionar o arquivo - IMPORTANTE: o arquivo deve ser o último campo
   formData.append('file', file);
   
-  // Fazer o upload diretamente para o S3
+  // Fazer o upload diretamente para o S3 (já deixei o cors liberado para vcs)
   const response = await fetch(uploadData.upload_url, {
     method: 'POST',
     body: formData
