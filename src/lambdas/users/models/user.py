@@ -1,15 +1,16 @@
 from datetime import datetime
 from typing import Dict, Optional
+
+import boto3
+
 from src.lambdas.users.models.address import Address
+
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table('users')
 
 
 class User:
-    def __init__(self,
-                 user_id: str,
-                 email: str,
-                 name: str,
-                 role: str = 'client',
-                 address: Optional[Address] = None):
+    def __init__(self, user_id: str, email: str, name: str, role: str = 'client', address: Optional[Address] = None):
         self.id = user_id
         self.email = email
         self.name = name
@@ -39,7 +40,7 @@ class User:
 
         return user
 
-    def to_dict(self) -> Dict:
+    def to_dict(self):
         result = {
             'id': self.id,
             'email': self.email,
@@ -54,10 +55,5 @@ class User:
 
         return result
 
-    def set_address(self, address: Address) -> None:
-        self.address = address
-        self.updated_at = datetime.now().isoformat()
-
-    def remove_address(self) -> None:
-        self.address = None
-        self.updated_at = datetime.now().isoformat()
+    def save(self):
+        table.put_item(Item=self.to_dict())
