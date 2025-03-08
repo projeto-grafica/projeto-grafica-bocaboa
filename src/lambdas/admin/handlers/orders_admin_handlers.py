@@ -12,7 +12,6 @@ def list_orders(event, context):
     try:
         query_params = event.get('queryStringParameters', {}) or {}
 
-        # Parâmetros de paginação
         limit = int(query_params.get('limit', 50))
         last_key = query_params.get('lastEvaluatedKey')
 
