@@ -105,6 +105,25 @@ module "promotions_table" {
 }
 
 # ---------------------
+#   S3 Bucket para Imagens
+# ---------------------
+
+resource "aws_s3_bucket" "stickers_images" {
+  bucket = "boca-boa-stickers-images"
+}
+
+resource "aws_s3_bucket_cors_configuration" "stickers_images_cors" {
+  bucket = aws_s3_bucket.stickers_images.id
+
+  cors_rule {
+    allowed_headers = ["*"]
+    allowed_methods = ["GET", "PUT", "POST", "DELETE"]
+    allowed_origins = ["*"] # ! Substituir aqui pelo domínio do frontend depois
+    max_age_seconds = 3000
+  }
+}
+
+# ---------------------
 #   IAM Roles
 # ---------------------
 
@@ -177,6 +196,30 @@ resource "aws_iam_role_policy" "cognito_policy" {
   })
 }
 
+resource "aws_iam_role_policy" "s3_policy" {
+  name = "sticker_shop_s3_policy"
+  role = aws_iam_role.lambda_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:PutObject",
+          "s3:GetObject",
+          "s3:DeleteObject",
+          "s3:ListBucket"
+        ]
+        Resource = [
+          aws_s3_bucket.stickers_images.arn,
+          "${aws_s3_bucket.stickers_images.arn}/*"
+        ]
+      }
+    ]
+  })
+}
+
 # CloudWatch Logs policy
 resource "aws_iam_role_policy_attachment" "lambda_logs" {
   role       = aws_iam_role.lambda_role.name
@@ -216,13 +259,15 @@ module "auth_lambda" {
 
 # Stickers
 module "stickers_lambda" {
-  source               = "./modules/lambda"
-  function_name        = "stickers_handler"
-  role_arn             = aws_iam_role.lambda_role.arn
-  handler              = "lambda_function.lambda_handler"
-  zip_file             = "./deployments/stickers.zip"
+  source        = "./modules/lambda"
+  function_name = "stickers_handler"
+  role_arn      = aws_iam_role.lambda_role.arn
+  handler       = "lambda_function.lambda_handler"
+  zip_file      = "./deployments/stickers.zip"
   layers = []
-  environment_variables = {}
+  environment_variables = {
+    STICKERS_BUCKET_NAME = aws_s3_bucket.stickers_images.bucket
+  }
   api_gw_execution_arn = aws_apigatewayv2_api.main.execution_arn
 }
 
@@ -339,6 +384,33 @@ module "stickers_delete_route" {
   method            = "DELETE"
   path              = "/stickers/{id}"
   lambda_invoke_arn = module.stickers_lambda.invoke_arn
+}
+
+module "stickers_images_upload_route" {
+  source            = "./modules/api_gateway"
+  api_id            = aws_apigatewayv2_api.main.id
+  method            = "POST"
+  path              = "/stickers/{id}/images"
+  lambda_invoke_arn = module.stickers_lambda.invoke_arn
+  authorizer_id     = aws_apigatewayv2_authorizer.main.id
+}
+
+module "stickers_images_add_route" {
+  source            = "./modules/api_gateway"
+  api_id            = aws_apigatewayv2_api.main.id
+  method            = "PUT"
+  path              = "/stickers/{id}/images"
+  lambda_invoke_arn = module.stickers_lambda.invoke_arn
+  authorizer_id     = aws_apigatewayv2_authorizer.main.id
+}
+
+module "stickers_images_delete_route" {
+  source            = "./modules/api_gateway"
+  api_id            = aws_apigatewayv2_api.main.id
+  method            = "DELETE"
+  path              = "/stickers/{id}/images"
+  lambda_invoke_arn = module.stickers_lambda.invoke_arn
+  authorizer_id     = aws_apigatewayv2_authorizer.main.id
 }
 
 # Orders
