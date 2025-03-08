@@ -4,6 +4,112 @@ import { IoCartOutline } from "react-icons/io5";
 import { IoStar } from "react-icons/io5";
 import ProdutCard from "../components/ProductCard";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+const Produto = () => {
+    const { nome } = useParams();
+    const navigate = useNavigate();
+    const [activeOption, setActiveOption] = useState('tamanho');
+
+    const handleGoToCart = () => {
+        navigate('/carrinho');
+    }
+
+    return (
+        <Container>
+            <Breadcrumb>
+                <a href="/">Início</a> &gt; <a href={"/produtos/" + nome}>Produtos</a> &gt; {nome.charAt(0).toUpperCase() + nome.slice(1)}
+            </Breadcrumb>
+
+            <ProductContainer>
+                <div className="photos">
+                    <ProductImage src="https://d1br4h274rc9sc.cloudfront.net/content/shortcut_adesivos_cfc551fd54.png" alt={nome} />
+                    <div className="subPhotos">
+                        <img src="https://d1br4h274rc9sc.cloudfront.net/content/shortcut_adesivos_cfc551fd54.png" alt="Foto do produto" />
+                        <img src="https://d1br4h274rc9sc.cloudfront.net/content/shortcut_adesivos_cfc551fd54.png" alt="Foto do produto" />
+                        <img src="https://d1br4h274rc9sc.cloudfront.net/content/shortcut_adesivos_cfc551fd54.png" alt="Foto do produto" />
+                        <img src="https://d1br4h274rc9sc.cloudfront.net/content/shortcut_adesivos_cfc551fd54.png" alt="Foto do produto" />
+                    </div>
+                </div>
+                <ProductDetails>
+                    <ProductTitle>{nome.charAt(0).toUpperCase() + nome.slice(1)}</ProductTitle>
+                    <div className="rate">
+                        <IoStar size={14} color="#F27E16" />
+                        <IoStar size={14} color="#F27E16" />
+                        <IoStar size={14} color="#F27E16" />
+                        <IoStar size={14} color="#F27E16" />
+                        <IoStar size={14} color="#F27E16" />
+                        <p className="starQuantity">5</p>
+                        <p className="rateQuantity">(4.200)</p>
+                    </div>
+                    <ProductDescription>
+                        Adesivos personalizados para promover sua marca ou produto com alta durabilidade e qualidade de impressão. Cite adesivos que chamam a atenção e transmitem sua mensagem de forma eficaz. Personalize agora e aumente sua visibilidade.
+                    </ProductDescription>
+
+                    <ProductFeatures>
+                    </ProductFeatures>
+
+                    <PriceContainer>
+                        <div className="priceSpace">
+                            <h1>Total:</h1>
+                            <TotalPrice>R$ 260,00</TotalPrice>
+                        </div>
+                        <Actions>
+                            <p>Calcular Frete</p>
+                            <div className="buttons">
+                                <button onClick={handleGoToCart}><IoCartOutline size={20} /> Adicionar ao carrinho</button>
+                                <button onClick={handleGoToCart}>Comprar Agora</button>
+                            </div>
+                        </Actions>
+                    </PriceContainer>
+                </ProductDetails>
+            </ProductContainer>
+
+            <TemplatesSection>
+                <SectionTitle>Gabaritos</SectionTitle>
+                <TemplateOptions>
+                    <button>PDF</button>
+                    <button>Imagem</button>
+                    <button>Outro Formato</button>
+                </TemplateOptions>
+            </TemplatesSection>
+
+            <DetailsSection>
+                <SectionTitle>Detalhes das opções</SectionTitle>
+                <div className="options">
+                    {Object.keys(detailContents).map((key) => (
+                        <button
+                            key={key}
+                            onClick={() => setActiveOption(key)}
+                            active={activeOption === key}
+                        >
+                            {key.charAt(0).toUpperCase() + key.slice(1)}
+                        </button>
+                    ))}
+                </div>
+
+                <div className="content">
+                    <div className="info-column">
+                        <h3>{detailContents[activeOption].title}</h3>
+                    </div>
+                    <div className="description">
+                        <p>{detailContents[activeOption].description}</p>
+                    </div>
+                </div>
+            </DetailsSection>
+
+            <SimilarProducts>
+                <SectionTitle>Produtos similares</SectionTitle>
+                <div className="cards">
+                    <ProdutCard />
+                    <ProdutCard />
+                    <ProdutCard />
+                    <ProdutCard />
+                </div>
+            </SimilarProducts>
+        </Container>
+    );
+};
 
 const Container = styled.div`
     padding: 2rem 7.5vw;
@@ -289,6 +395,23 @@ const DetailsSection = styled.div`
     }
 `;
 
+
+
+const SimilarProducts = styled.div`
+    margin-top: 2rem;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+    }
+`;
+
+
 const detailContents = {
     tamanho: {
         title: "4x2 cm",
@@ -310,124 +433,6 @@ const detailContents = {
         title: "Quantidade Flexível",
         description: "Encomendas a partir de 100 unidades. Descontos progressivos para grandes quantidades. Entrega rápida para pedidos acima de 1000 unidades."
     }
-};
-
-const SimilarProducts = styled.div`
-    margin-top: 2rem;
-    background-color: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-
-    .cards {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 2rem;
-    }
-`;
-
-const Produto = () => {
-    const { nome } = useParams();
-    const [activeOption, setActiveOption] = useState('tamanho');
-
-    const handleGoToCart = () => {
-        window.location.href = "/carrinho";
-    }
-
-    return (
-        <Container>
-            <Breadcrumb>
-                <a href="/">Início</a> &gt; <a href={"/produtos/" + nome}>Produtos</a> &gt; {nome.charAt(0).toUpperCase() + nome.slice(1)}
-            </Breadcrumb>
-
-            <ProductContainer>
-                <div className="photos">
-                    <ProductImage src="https://d1br4h274rc9sc.cloudfront.net/content/shortcut_adesivos_cfc551fd54.png" alt={nome} />
-                    <div className="subPhotos">
-                        <img src="https://d1br4h274rc9sc.cloudfront.net/content/shortcut_adesivos_cfc551fd54.png" alt="Foto do produto" />
-                        <img src="https://d1br4h274rc9sc.cloudfront.net/content/shortcut_adesivos_cfc551fd54.png" alt="Foto do produto" />
-                        <img src="https://d1br4h274rc9sc.cloudfront.net/content/shortcut_adesivos_cfc551fd54.png" alt="Foto do produto" />
-                        <img src="https://d1br4h274rc9sc.cloudfront.net/content/shortcut_adesivos_cfc551fd54.png" alt="Foto do produto" />
-                    </div>
-                </div>
-                <ProductDetails>
-                    <ProductTitle>{nome.charAt(0).toUpperCase() + nome.slice(1)}</ProductTitle>
-                    <div className="rate">
-                        <IoStar size={14} color="#F27E16" />
-                        <IoStar size={14} color="#F27E16" />
-                        <IoStar size={14} color="#F27E16" />
-                        <IoStar size={14} color="#F27E16" />
-                        <IoStar size={14} color="#F27E16" />
-                        <p className="starQuantity">5</p>
-                        <p className="rateQuantity">(4.200)</p>
-                    </div>
-                    <ProductDescription>
-                        Adesivos personalizados para promover sua marca ou produto com alta durabilidade e qualidade de impressão. Cite adesivos que chamam a atenção e transmitem sua mensagem de forma eficaz. Personalize agora e aumente sua visibilidade.
-                    </ProductDescription>
-
-                    <ProductFeatures>
-                    </ProductFeatures>
-
-                    <PriceContainer>
-                        <div className="priceSpace">
-                            <h1>Total:</h1>
-                            <TotalPrice>R$ 260,00</TotalPrice>
-                        </div>
-                        <Actions>
-                            <p>Calcular Frete</p>
-                            <div className="buttons">
-                                <button onClick={handleGoToCart}><IoCartOutline size={20} /> Adicionar ao carrinho</button>
-                                <button onClick={handleGoToCart}>Comprar Agora</button>
-                            </div>
-                        </Actions>
-                    </PriceContainer>
-                </ProductDetails>
-            </ProductContainer>
-
-            <TemplatesSection>
-                <SectionTitle>Gabaritos</SectionTitle>
-                <TemplateOptions>
-                    <button>PDF</button>
-                    <button>Imagem</button>
-                    <button>Outro Formato</button>
-                </TemplateOptions>
-            </TemplatesSection>
-
-            <DetailsSection>
-                <SectionTitle>Detalhes das opções</SectionTitle>
-                <div className="options">
-                    {Object.keys(detailContents).map((key) => (
-                        <button
-                            key={key}
-                            onClick={() => setActiveOption(key)}
-                            active={activeOption === key}
-                        >
-                            {key.charAt(0).toUpperCase() + key.slice(1)}
-                        </button>
-                    ))}
-                </div>
-
-                <div className="content">
-                    <div className="info-column">
-                        <h3>{detailContents[activeOption].title}</h3>
-                    </div>
-                    <div className="description">
-                        <p>{detailContents[activeOption].description}</p>
-                    </div>
-                </div>
-            </DetailsSection>
-
-            <SimilarProducts>
-                <SectionTitle>Produtos similares</SectionTitle>
-                <div className="cards">
-                    <ProdutCard />
-                    <ProdutCard />
-                    <ProdutCard />
-                    <ProdutCard />
-                </div>
-            </SimilarProducts>
-        </Container>
-    );
 };
 
 export default Produto;

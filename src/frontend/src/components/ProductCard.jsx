@@ -3,11 +3,11 @@ import { IoStar } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 
 // Componente de cartão de produto
-const ProdutCard = () => {
+const ProdutCard = ({ data }) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/produto/etiqueta');
+        navigate(`/produto/etiqueta?id=${data.id}`);
     };
 
     return (
@@ -24,9 +24,9 @@ const ProdutCard = () => {
                     <p className="starQuantity">5</p>
                     <p className="rateQuantity">(4.200)</p>
                 </div>
-                <p>Etiqueta Redonda</p>
+                <p>{data?.name}</p>
                 <p className="priceText">a partir de</p>
-                <p className="price"><b>R$100,00</b> / 100 un</p>
+                <p className="price"><b>R${data?.price ? parseFloat(data.price).toFixed(2) : '0.00'}</b> / 100 un</p>
             </div>
         </Container>
     );

@@ -135,7 +135,6 @@ const Login = () => {
         setError("");
     
         try {
-            console.log('Enviando requisição de login:', { email, password });
     
             const response = await fetch('https://v10k527pp4.execute-api.us-east-1.amazonaws.com/auth/login', {
                 method: 'POST',
@@ -146,22 +145,25 @@ const Login = () => {
             });
     
             const data = await response.json();
-            console.log('Resposta do login:', data);
     
             if (!response.ok) {
                 throw new Error(data.message || 'Credenciais inválidas');
             }
     
             const { tokens } = data;
-            // Utilize o nome salvo no localStorage ou fallback para email.split("@")[0]
+
+            const base64Url = tokens.idToken.split('.')[1]; 
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            const jwt = JSON.parse(window.atob(base64));
+            const userName = jwt.name;
+
             login({
-                name: localStorage.getItem("userName") || email.split("@")[0],
+                name: userName,
                 email,
-                photo: "https://thispersondoesnotexist.com",
-                accessToken: tokens.accessToken
+                accessToken: tokens.accessToken,
+                idToken: tokens.idToken
             });
 
-            console.log('Login realizado com sucesso:', data);
             navigate("/");
         } catch (err) {
             console.error('Erro no login:', err);

@@ -30,8 +30,11 @@ export const AuthProvider = ({ children }) => {
     const login = (userData) => {
         const expirationTime = new Date().getTime() + 30 * 60 * 1000;
         setUser(userData);
-        console.log('userData', userData);
-        localStorage.setItem("user", JSON.stringify(userData));
+        console.log("userData", userData);
+        localStorage.setItem("email", userData.email);
+        localStorage.setItem("accessToken", userData.accessToken);
+        localStorage.setItem("idToken", userData.idToken);
+        localStorage.setItem("userName", userData.name);
         localStorage.setItem("session_expiration", expirationTime);
     };
 

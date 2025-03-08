@@ -3,12 +3,14 @@ import styled from "styled-components";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import ProdutCard from "./ProductCard";
 
-// Componente de bloco de cartões com carrossel
-const BlockCards = ({ title }) => {
+const BlockCards = ({ title, stickers }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const products = Array(10).fill(null);
+    let cardList = stickers;
+    if (stickers.length < 4) {
+        cardList = [...stickers, ...stickers];
+    }
     const itemsPerPage = 4;
-    const totalItems = products.length;
+    const totalItems = cardList.length;
 
     const cardWidth = (100 / itemsPerPage) - (1  * (itemsPerPage - 1) / itemsPerPage);
 
@@ -35,7 +37,7 @@ const BlockCards = ({ title }) => {
                         transform: `translateX(-${currentIndex * (cardWidth + 1)}%)`,
                     }}
                 >
-                    {products.map((_, index) => (
+                    {cardList && cardList.map((sticker, index) => (
                         <div
                             key={index}
                             style={{
@@ -43,7 +45,9 @@ const BlockCards = ({ title }) => {
                                 maxWidth: `${cardWidth}%`
                             }}
                         >
-                            <ProdutCard />
+                            <ProdutCard
+                                data={sticker}
+                            />
                         </div>
                     ))}
                 </div>
@@ -57,7 +61,6 @@ const BlockCards = ({ title }) => {
     );
 }
 
-// Estilização dos componentes do bloco de cartões
 const Container = styled.div`
     display: flex;
     flex-direction: column;
