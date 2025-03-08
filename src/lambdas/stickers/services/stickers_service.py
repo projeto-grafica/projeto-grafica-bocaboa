@@ -1,5 +1,7 @@
 import uuid
 import logging
+from decimal import Decimal
+
 import boto3
 from boto3.dynamodb.conditions import Key
 from typing import Dict, List, Optional
@@ -31,7 +33,7 @@ class StickerService:
             paper_type=data['paperType'],
             color=data['color'],
             shape=data['shape'],
-            price=data['price'],
+            price=Decimal(str(data['price'])),
             created_by=user_id,
             tipo=data.get('tipo', 'etiqueta'),
             images=data.get('images', []),
