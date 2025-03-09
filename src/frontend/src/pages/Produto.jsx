@@ -14,14 +14,13 @@ const Produto = () => {
     const { productId } = useContext(OtherContext);
     const [activeOption, setActiveOption] = useState('tamanho');  
     const [product, setProduct] = useState({});
+    const [relatedProducts, setRelatedProducts] = useState([]);
     let name = product?.name;
     let formattedName = name ? (name.charAt(0).toUpperCase() + name.slice(1)) : "";
     let price = product?.price;
     let type = product?.tipo;
     let formattedType = type ? (type.charAt(0).toUpperCase() + type.slice(1)) : "";
     let description = product?.description;
-
-    console.log(product);
 
     const handleGoToCart = () => {
         const cartProducts = JSON.parse(localStorage.getItem('cartProducts') || '[]');
@@ -36,6 +35,13 @@ const Produto = () => {
             .then(response => response.json())
             .then(data => setProduct(data));
     }, [productId]);
+
+    useEffect(() => {
+        fetch(`https://v10k527pp4.execute-api.us-east-1.amazonaws.com/stickers?tipo=${type}`)
+            .then(response => response.json())
+            .then(data => setRelatedProducts(data.items))
+            .then(console.log("feito"))
+    }, [type]);
 
     return (
         <Container>
@@ -123,10 +129,9 @@ const Produto = () => {
             <SimilarProducts>
                 <SectionTitle>Produtos similares</SectionTitle>
                 <div className="cards">
-                    <ProdutCard />
-                    <ProdutCard />
-                    <ProdutCard />
-                    <ProdutCard />
+                    {relatedProducts?.map((product) => (
+                        <ProdutCard key={product.id} data={product} />
+                    ))}
                 </div>
             </SimilarProducts>
         </Container>

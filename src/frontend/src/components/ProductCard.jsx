@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { IoStar } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { OtherContext } from '../context/OtherContext';
 
 const ProdutCard = ({ data }) => {
@@ -10,13 +10,13 @@ const ProdutCard = ({ data }) => {
 
     const handleClick = () => {
         addProduct(data.sticker_id);        
-        navigate(`/produto/etiqueta`);
+        navigate(`/produto/${data.tipo}`);
     };
 
     return (
         <Container onClick={handleClick}>
             <div className="img">
-                {data.promotion_id && ( 
+                {data?.promotion_id && ( 
                     <div className="promotionTag">
                         <p className="promotionText">-{data.promotion_id}%</p>
                     </div>
