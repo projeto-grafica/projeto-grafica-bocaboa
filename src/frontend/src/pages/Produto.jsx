@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { OtherContext } from "../context/OtherContext";
+import Botao from "../components/Botoes";
 
 const Produto = () => {
     const { nome } = useParams();
@@ -84,8 +85,8 @@ const Produto = () => {
                         <Actions>
                             <p>Calcular Frete</p>
                             <div className="buttons">
-                                <button onClick={handleGoToCart}><IoCartOutline size={20} /> Adicionar ao carrinho</button>
-                                <button onClick={handleGoToCart}>Comprar Agora</button>
+                                <Botao Text={'Adicionar ao carrinho'} Type={'vazado'} onClick={handleGoToCart} Icon={<IoCartOutline size={20}/>}/>
+                                <Botao Text={'Comprar agora'} Type={'cheio'} onClick={handleGoToCart}/>
                             </div>
                         </Actions>
                     </PriceContainer>
@@ -287,40 +288,6 @@ const Actions = styled.div`
     .buttons {
         display: flex;  
         gap: 1rem;
-    }
-
-    button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5vw;
-        width: 15vw;
-        height: 6vh;
-        border: none;
-        border-radius: 8px;
-        font-size: 14px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-
-        &:first-child {
-            background-color: transparent;
-            color: #4e8c4c;
-            border: 1.5px solid #4e8c4c;
-
-            &:hover {
-                background-color: #4e8c4c;
-                color: white;
-            }
-        }
-
-        &:last-child {
-            background-color: #4e8c4c;
-            color: white;
-
-            &:hover {
-                background-color: #5ea95c;
-            }
-        }
     }
 `;
 
