@@ -51,7 +51,7 @@ const Navbar = () => {
                         <Link to="produtos/etiqueta">Etiquetas</Link>
                         <Link to="produtos/envelope">Envelopes</Link>
                         <Link to="produtos/adesivo">Adesivos</Link>
-                        <Link to="produtos/cartoe">Cartões</Link>
+                        <Link to="produtos/cartão">Cartões</Link>
                     </div>
                 </LinksBar>
             )}
