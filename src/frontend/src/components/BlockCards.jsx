@@ -10,14 +10,13 @@ const BlockCards = ({ title, stickers }) => {
         cardList = [...stickers, ...stickers];
     }
     const itemsPerPage = 4;
-    const totalItems = cardList.length;
-
-    const cardWidth = (100 / itemsPerPage) - (1  * (itemsPerPage - 1) / itemsPerPage);
+    const totalOriginal = stickers.length;
+    // Slide step: 18vw (card) + 4.3vw (gap) = 22.3vw
+    const slideStep = 22.3; 
 
     const handleNext = () => {
-        setCurrentIndex(prev => Math.min(prev + 1, totalItems - itemsPerPage));
+        setCurrentIndex(prev => Math.min(prev + 1, totalOriginal - itemsPerPage));
     };
-
     const handlePrev = () => {
         setCurrentIndex(prev => Math.max(prev - 1, 0));
     };
@@ -31,28 +30,30 @@ const BlockCards = ({ title, stickers }) => {
                 </button>
             )}
             <div className="carousel-container">
-                <div
-                    className="cards"
-                    style={{
-                        transform: `translateX(-${currentIndex * (cardWidth + 1)}%)`,
-                    }}
-                >
-                    {cardList && cardList.map((sticker, index) => (
-                        <div
-                            key={index}
-                            style={{
-                                flex: `0 0 ${cardWidth}%`,
-                                maxWidth: `${cardWidth}%`
-                            }}
-                        >
-                            <ProdutCard
-                                data={sticker}
-                            />
-                        </div>
-                    ))}
+                <div className="carousel-wrapper"> {/* container centralizado */}
+                    <div
+                        className="cards"
+                        style={{
+                            transform: `translateX(-${currentIndex * slideStep}vw)`,
+                        }}
+                    >
+                        {cardList && cardList.map((sticker, index) => (
+                            <div
+                                key={index}
+                                style={{
+                                    width: "18vw",
+                                    ...(index === 0 && { marginLeft: "9.1vw" })
+                                }}
+                            >
+                                <ProdutCard
+                                    data={sticker}
+                                />
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
-            {currentIndex < totalItems - itemsPerPage && (
+            {stickers && (stickers.length > currentIndex + itemsPerPage) && (
                 <button className="arrow arrow-right" onClick={handleNext}>
                     <IoIosArrowForward size={24} color="#2E2E30" />
                 </button>
@@ -65,7 +66,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: start;
-    width: 85vw;
+    width: 100%;
     margin-top: 5vh;
     position: relative;
 
@@ -74,26 +75,36 @@ const Container = styled.div`
         font-weight: 700;
         color: #2E2E30;
         margin: 0;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
+        margin-left: 7.5vw;
     }
 
     .carousel-container {
         width: 100%;
         position: relative;
         overflow: hidden;
-        padding: 0; /* Espaço para as setas */
+        padding: 0;
+    }
+
+    .carousel-wrapper {
+        width: 88vw;
+        margin: 0 auto;
+        overflow: hidden;
     }
 
     .cards {
         display: flex;
+        align-items: center;
         transition: transform 0.5s ease-in-out;
-        gap: 1vw;
-        width: calc(100% + 2vw);
+        width: 100vw;
+        height: 26.5vw;
+        gap: 4.3vw;
+        margin-left: -7.5vw;                  
     }
 
     .arrow {
         position: absolute;
-        top: 55%;
+        top: 50%;                   /* centraliza verticalmente */
         transform: translateY(-50%);
         background: white;
         border: 1px solid #ddd;
@@ -120,11 +131,11 @@ const Container = styled.div`
     }
 
     .arrow-left {
-        left: -50px;
+        left: 20px; /* fixa à esquerda */
     }
 
     .arrow-right {
-        right: -50px;
+        right: 20px; /* fixa à direita */
     }
 `;
 

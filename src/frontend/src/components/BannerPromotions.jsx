@@ -17,6 +17,7 @@ const ContainerPromotions = styled.div`
     background-color: #F27E16;
     width: 85vw;
     height: 55vh;
+    align-self: center;
 
     img {
         width: 100%;
