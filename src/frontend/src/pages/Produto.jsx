@@ -14,6 +14,14 @@ const Produto = () => {
     const { productId } = useContext(OtherContext);
     const [activeOption, setActiveOption] = useState('tamanho');  
     const [product, setProduct] = useState({});
+    let name = product?.name;
+    let formattedName = name ? (name.charAt(0).toUpperCase() + name.slice(1)) : "";
+    let price = product?.price;
+    let type = product?.tipo;
+    let formattedType = type ? (type.charAt(0).toUpperCase() + type.slice(1)) : "";
+    let description = product?.description;
+
+    console.log(product);
 
     const handleGoToCart = () => {
         const cartProducts = JSON.parse(localStorage.getItem('cartProducts') || '[]');
@@ -29,13 +37,10 @@ const Produto = () => {
             .then(data => setProduct(data));
     }, [productId]);
 
-    console.log("produ", product);
-
-
     return (
         <Container>
             <Breadcrumb>
-                <a href="/">Início</a> &gt; <a href={"/produtos/" + nome}>Produtos</a> &gt; {nome.charAt(0).toUpperCase() + nome.slice(1)}
+                <a href="/">Início</a> &gt; <a href={"/produtos/" + type}>{formattedType}</a> &gt; {formattedName}
             </Breadcrumb>
 
             <ProductContainer>
@@ -49,7 +54,7 @@ const Produto = () => {
                     </div>
                 </div>
                 <ProductDetails>
-                    <ProductTitle>{nome.charAt(0).toUpperCase() + nome.slice(1)}</ProductTitle>
+                    <ProductTitle>{formattedName}</ProductTitle>
                     <div className="rate">
                         <IoStar size={14} color="#F27E16" />
                         <IoStar size={14} color="#F27E16" />
@@ -60,7 +65,7 @@ const Produto = () => {
                         <p className="rateQuantity">(4.200)</p>
                     </div>
                     <ProductDescription>
-                        Adesivos personalizados para promover sua marca ou produto com alta durabilidade e qualidade de impressão. Cite adesivos que chamam a atenção e transmitem sua mensagem de forma eficaz. Personalize agora e aumente sua visibilidade.
+                        {description}
                     </ProductDescription>
 
                     <ProductFeatures>
@@ -69,7 +74,7 @@ const Produto = () => {
                     <PriceContainer>
                         <div className="priceSpace">
                             <h1>Total:</h1>
-                            <TotalPrice>R$ 260,00</TotalPrice>
+                            <TotalPrice>R$ {price}</TotalPrice>
                         </div>
                         <Actions>
                             <p>Calcular Frete</p>
