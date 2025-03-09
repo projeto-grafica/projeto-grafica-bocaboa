@@ -16,6 +16,11 @@ const ProdutCard = ({ data }) => {
     return (
         <Container onClick={handleClick}>
             <div className="img">
+                {data.promotion_id && ( 
+                    <div className="promotionTag">
+                        <p className="promotionText">-{data.promotion_id}%</p>
+                    </div>
+                )}
             </div>
             <div className="info">
                 <div className="rate">
@@ -66,6 +71,27 @@ const Container = styled.div`
         background-image: url("https://d1br4h274rc9sc.cloudfront.net/content/shortcut_adesivos_cfc551fd54.png");
         background-size: cover;
         background-position: center;
+    }
+
+    .promotionTag {
+        position: relative;
+        top: 0.5vw;
+        right: -5.2vw;
+        background: #62A860;
+        font-size: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.3vw 1.4vw;
+        border-radius: 6px;
+    }
+
+    .promotionText {
+        font-size: 10px;
+        margin: 0;
+        padding: 0;
+        color: white;
+        font-weight: 500;
     }
     
     .rate {

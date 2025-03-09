@@ -8,7 +8,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     padding-top: 5vh;
-    widht: 100%;
+    width: 100%;
 `
 
 const Home = () => {
@@ -18,8 +18,7 @@ const Home = () => {
         fetch('https://v10k527pp4.execute-api.us-east-1.amazonaws.com/stickers')
             .then(response => response.json())
             .then(data => setStickers(data.items));
-    }, []);
-    
+    }, []);   
 
 
     return (
