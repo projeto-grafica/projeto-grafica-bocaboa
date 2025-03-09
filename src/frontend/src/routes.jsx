@@ -13,6 +13,7 @@ import ProtectedRoute from "./ProtectedRoute.jsx";
 import Navbar from "./components/NavBar.jsx";
 import Cadastro from "./pages/Cadastro.jsx";
 import VerificarEmail from "./pages/VerificarEmail.jsx";
+import Suporte from "./pages/Suporte.jsx";
 
 const AppRoutes = () => {
     const location = useLocation(); 
@@ -28,6 +29,7 @@ const AppRoutes = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/cadastro" element={<Cadastro />} />
                 <Route path="/verificar-email" element={<VerificarEmail />} />
+                <Route path="/suporte" element={<Suporte />} />
                 <Route path="/perfil" element={<ProtectedRoute element={<Perfil />} />} />
                 <Route path="/perfil/pedidos" element={<ProtectedRoute element={<Pedidos />} />} />
                 <Route path="/perfil/favoritos" element={<ProtectedRoute element={<Favoritos />} />} />

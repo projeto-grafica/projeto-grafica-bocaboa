@@ -11,7 +11,7 @@ import { useState } from "react";
 // Componente de barra de navegação
 const Navbar = () => {
     const { user, logout } = useAuth();
-    const location = useLocation(); 
+    const location = useLocation();
     const showElements = ["/"].includes(location.pathname);
     const [searchWords, setSearchWords] = useState("");
 
@@ -21,21 +21,21 @@ const Navbar = () => {
                 <Promotion>
                     <p>Transforme suas ideias em realidade! Garanta 30% de desconto com o código <PromotionHighlight>CRIE30</PromotionHighlight>. Válido até 21/05!</p>
                 </Promotion>
-            )}      
+            )}
 
             <NavBar>
                 <div className="container">
                     <Link to={'/'}>Share Print</Link>
-                    <SearchBar search={searchWords} setSearchWords={setSearchWords}/>
+                    <SearchBar search={searchWords} setSearchWords={setSearchWords} />
                     <ContainerIcons>
-                        <Link to={'perfil/favoritos'}>
-                            <IoHeartOutline size={24} color="white" />
+                        <Link className="icons" to={'perfil/favoritos'}>
+                            <IoHeartOutline size={24} />
                         </Link>
-                        <Link to={'/carrinho'}>
-                            <IoCartOutline size={24} color="white" />
+                        <Link className="icons" to={'/carrinho'}>
+                            <IoCartOutline size={24} />
                         </Link>
-                        <Link to="/perfil">
-                            <IoPersonOutline size={24} color="white" />
+                        <Link className="icons" to="/perfil">
+                            <IoPersonOutline size={24} />
                         </Link>
                     </ContainerIcons>
                 </div>
@@ -47,14 +47,14 @@ const Navbar = () => {
             {showElements && (
                 <LinksBar>
                     <div className="container">
-                        <Link to="produtos/panfletos">Panfletos</Link>
-                        <Link to="produtos/etiquetas">Etiquetas</Link>
-                        <Link to="produtos/envelopes">Envelopes</Link>
-                        <Link to="produtos/adesivos">Adesivos</Link>
-                        <Link to="produtos/cartoes">Cartões</Link>
+                        <Link to="produtos/panfleto">Panfletos</Link>
+                        <Link to="produtos/etiqueta">Etiquetas</Link>
+                        <Link to="produtos/envelope">Envelopes</Link>
+                        <Link to="produtos/adesivo">Adesivos</Link>
+                        <Link to="produtos/cartão">Cartões</Link>
                     </div>
                 </LinksBar>
-            )}   
+            )}
         </Nav>
     );
 }
@@ -182,8 +182,12 @@ const LinksBar = styled.nav`
         a {
             font-size: 14px;
             color: #2E2E30;
+            transition: color 0.3s;
             font-weight: 400;
             text-decoration: none;
+            &:hover {
+                color: #F27E16;
+            }
         }
     }
 `;
@@ -193,6 +197,15 @@ const ContainerIcons = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 12vw;
+
+    .icons {
+        color: white;
+        transition: color 0.3s;
+    }
+    
+    .icons:hover {
+        color: orange;
+    }
 `;
 
 export default Navbar;

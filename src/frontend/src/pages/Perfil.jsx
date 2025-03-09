@@ -104,13 +104,8 @@ const CardDescription = styled.p`
 
 const Perfil = () => {
   const { user, logout } = useAuth();
-  
-  if (user && user.accessToken) {
-      console.log("Access Token:", user.accessToken);
-  }
 
   useEffect(() => {
-    console.log("Infos do usuário:", user);
   }, [user]);
 
   const cards = [

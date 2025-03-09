@@ -1,18 +1,26 @@
 import styled from "styled-components";
 import { IoStar } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
+import { OtherContext } from '../context/OtherContext';
 
-// Componente de cartão de produto
-const ProdutCard = () => {
+const ProdutCard = ({ data }) => {
     const navigate = useNavigate();
+    const { addProduct } = useContext(OtherContext);
 
     const handleClick = () => {
-        navigate('/produto/etiqueta');
+        addProduct(data.sticker_id);        
+        navigate(`/produto/${data.tipo}`);
     };
 
     return (
         <Container onClick={handleClick}>
             <div className="img">
+                {data?.promotion_id && ( 
+                    <div className="promotionTag">
+                        <p className="promotionText">-{data.promotion_id}%</p>
+                    </div>
+                )}
             </div>
             <div className="info">
                 <div className="rate">
@@ -24,9 +32,9 @@ const ProdutCard = () => {
                     <p className="starQuantity">5</p>
                     <p className="rateQuantity">(4.200)</p>
                 </div>
-                <p>Etiqueta Redonda</p>
+                <p>{data?.name}</p>
                 <p className="priceText">a partir de</p>
-                <p className="price"><b>R$100,00</b> / 100 un</p>
+                <p className="price"><b>R${data?.price ? parseFloat(data.price).toFixed(2) : '0.00'}</b> / 100 un</p>
             </div>
         </Container>
     );
@@ -63,6 +71,27 @@ const Container = styled.div`
         background-image: url("https://d1br4h274rc9sc.cloudfront.net/content/shortcut_adesivos_cfc551fd54.png");
         background-size: cover;
         background-position: center;
+    }
+
+    .promotionTag {
+        position: relative;
+        top: 0.5vw;
+        right: -5.2vw;
+        background: #62A860;
+        font-size: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.3vw 1.4vw;
+        border-radius: 6px;
+    }
+
+    .promotionText {
+        font-size: 10px;
+        margin: 0;
+        padding: 0;
+        color: white;
+        font-weight: 500;
     }
     
     .rate {

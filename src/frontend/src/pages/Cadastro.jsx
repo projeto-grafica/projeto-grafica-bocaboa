@@ -170,9 +170,7 @@ const Cadastro = () => {
 
         if (!nameError && !emailError && !senhaError) {
             setLoading(true);
-            try {
-                console.log('Enviando requisição de cadastro:', { name ,email, password: senha });
-                
+            try {                
                 const response = await fetch('https://v10k527pp4.execute-api.us-east-1.amazonaws.com/auth/signup', {
                     method: 'POST',
                     headers: {
@@ -186,8 +184,6 @@ const Cadastro = () => {
                 });
 
                 const data = await response.json();
-                console.log('Resposta do cadastro:', data);
-
                 if (!response.ok) {
                     throw new Error(data.message || 'Erro ao realizar cadastro');
                 }
