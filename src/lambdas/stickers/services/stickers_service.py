@@ -1,9 +1,8 @@
 import uuid
 import logging
-from decimal import Decimal
-
 import boto3
 from boto3.dynamodb.conditions import Key
+from decimal import Decimal
 from typing import Dict, List, Optional
 
 from src.lambdas.stickers.models.stickers import Sticker
@@ -33,11 +32,10 @@ class StickerService:
             paper_type=data['paperType'],
             color=data['color'],
             shape=data['shape'],
-            price=Decimal(str(data['price'])),
+            price=Decimal(str(data['price'])) if 'price' in data else None,
             created_by=user_id,
             tipo=data.get('tipo', 'etiqueta'),
             images=data.get('images', []),
-            addresses=data.get('addresses', []),
             promotion_id=data.get('promotion_id')
         )
 
@@ -61,6 +59,10 @@ class StickerService:
             raise ValueError("Permission denied")
 
         Sticker.validate(data)
+
+        # Convert price to Decimal if present
+        if 'price' in data:
+            data['price'] = Decimal(str(data['price']))
 
         sticker_data = {**existing_sticker, **data}
 
