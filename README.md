@@ -27,7 +27,15 @@ https://v10k527pp4.execute-api.us-east-1.amazonaws.com
    {
      "email": "user@example.com",
      "password": "StrongP@ssw0rd123",
-     "name": "User"
+     "name": "User",
+     "address": {
+       "cep": "12345678",
+       "cidade": "São Paulo",
+       "estado": "SP",
+       "logradouro": "Avenida Paulista",
+       "numero": "123",
+       "complemento": "Sala 456"
+     }
    }
    ```
 
@@ -133,7 +141,15 @@ https://v10k527pp4.execute-api.us-east-1.amazonaws.com
      "created_at": "2025-02-22T14:28:28.007141",
      "id": "44c8d4e8-90a1-7001-13a0-48ff0aa14dd0",
      "role": "client",
-     "email": "user@example.com"
+     "email": "user@example.com",
+     "address": {
+       "cep": "12345678",
+       "cidade": "São Paulo",
+       "estado": "SP",
+       "logradouro": "Avenida Paulista",
+       "numero": "123",
+       "complemento": "Sala 456"
+     }
    }
    ```
 
@@ -186,30 +202,15 @@ https://v10k527pp4.execute-api.us-east-1.amazonaws.com
    {
      "items": [
        {
-         "created_at": "2025-01-12T20:58:43.656330",
-         "width": "100",
-         "height": "100",
-         "created_by": null,
-         "paperType": "glossy",
-         "promotion_id": null,
-         "shape": "rectangle",
-         "price": "18",
-         "description": "A test sticker",
-         "id": "4153299416331907745",
-         "name": "Test Sticker",
-         "color": "full_color",
-         "tipo": "etiqueta",
-         "images": ["https://bucket-s3.amazonaws.com/path/to/image1.jpg"],
-         "addresses": [
-           {
-             "cep": "12345678",
-             "cidade": "São Paulo",
-             "estado": "SP",
-             "logradouro": "Avenida Paulista",
-             "numero": "123",
-             "complemento": "Sala 456"
-           }
-         ]
+        "name": "Test Sticker",
+        "description": "A test sticker",
+        "width": 100,
+        "height": 100,
+        "paperType": "glossy",
+        "color": "full_color",
+        "shape": "rectangle",
+        "price": 18.00,
+        "tipo": "etiqueta"
        }
      ],
      "lastEvaluatedKey": null,
@@ -230,24 +231,14 @@ https://v10k527pp4.execute-api.us-east-1.amazonaws.com
      "color": "full_color",
      "shape": "rectangle",
      "price": 18.00,
-     "tipo": "etiqueta",
-     "addresses": [
-       {
-         "cep": "12345678",
-         "cidade": "São Paulo",
-         "estado": "SP",
-         "logradouro": "Avenida Paulista",
-         "numero": "123",
-         "complemento": "Sala 456"
-       }
-     ]
+     "tipo": "etiqueta"
    }
    ```
 
    Exemplo de Output:
    ```json
    {
-     "id": "4153299416331907745",
+     "sticker_id": "4153299416331907745",
      "name": "Test Sticker",
      "description": "A test sticker",
      "width": 100,
@@ -260,17 +251,7 @@ https://v10k527pp4.execute-api.us-east-1.amazonaws.com
      "created_at": "2025-01-12T20:58:43.656330",
      "promotion_id": null,
      "tipo": "etiqueta",
-     "images": [],
-     "addresses": [
-       {
-         "cep": "12345678",
-         "cidade": "São Paulo",
-         "estado": "SP",
-         "logradouro": "Avenida Paulista",
-         "numero": "123",
-         "complemento": "Sala 456"
-       }
-     ]
+     "images": []
    }
    ```
 
@@ -279,30 +260,20 @@ https://v10k527pp4.execute-api.us-east-1.amazonaws.com
    Exemplo de Output:
    ```json
    {
-     "created_at": "2025-01-12T20:58:43.656330",
-     "width": "100",
-     "height": "100",
-     "created_by": "user-123",
-     "paperType": "glossy",
-     "promotion_id": null,
-     "shape": "rectangle",
-     "price": "18",
-     "description": "A test sticker",
-     "id": "4153299416331907745",
+     "sticker_id": "4153299416331907745",
      "name": "Test Sticker",
+     "description": "A test sticker",
+     "width": 100,
+     "height": 100,
+     "paperType": "glossy",
      "color": "full_color",
+     "shape": "rectangle",
+     "price": "18.00",
+     "created_by": "user-123",
+     "created_at": "2025-01-12T20:58:43.656330",
+     "promotion_id": null,
      "tipo": "etiqueta",
-     "images": ["https://bucket-s3.amazonaws.com/path/to/image1.jpg"],
-     "addresses": [
-       {
-         "cep": "12345678",
-         "cidade": "São Paulo",
-         "estado": "SP",
-         "logradouro": "Avenida Paulista",
-         "numero": "123",
-         "complemento": "Sala 456"
-       }
-     ]
+     "images": []
    }
    ```
 
@@ -311,45 +282,36 @@ https://v10k527pp4.execute-api.us-east-1.amazonaws.com
    Exemplo de Body:
    ```json
    {
-     "name": "Updated Sticker Name",
-     "description": "Updated description for the sticker.",
-     "width": 10,
-     "height": 20,
+     "name": "Adesivo Premium",
+     "description": "Adesivo resistente a água e exposição solar",
+     "width": 150,
+     "height": 100,
      "paperType": "glossy",
      "color": "full_color",
-     "shape": "circle",
-     "price": 0.43,
-     "promotion_id": "promo123"
+     "shape": "rectangle",
+     "price": 24.90,
+     "promotion_id": "summer2025"
    }
    ```
 
    Exemplo de Output:
    ```json
    {
-     "created_at": "2025-01-12T20:58:43.656330",
-     "height": "20",
-     "width": "10",
-     "created_by": "user-123",
+     "sticker_id": "4153299416331907745",
+     "name": "Adesivo Premium",
+     "description": "Adesivo resistente a água e exposição solar",
+     "width": 150,
+     "height": 100,
      "paperType": "glossy",
-     "promotion_id": "promo123",
-     "shape": "circle",
-     "description": "Updated description for the sticker.",
-     "id": "4153299416331907745",
-     "price": "0.43",
-     "name": "Updated Sticker Name",
      "color": "full_color",
+     "shape": "rectangle",
+     "price": "24.90",
+     "created_by": "user-123",
+     "created_at": "2025-01-12T20:58:43.656330",
+     "updated_at": "2025-03-08T15:43:21.123456",
+     "promotion_id": "",
      "tipo": "etiqueta",
-     "images": ["https://bucket-s3.amazonaws.com/path/to/image1.jpg"],
-     "addresses": [
-       {
-         "cep": "12345678",
-         "cidade": "São Paulo",
-         "estado": "SP",
-         "logradouro": "Avenida Paulista",
-         "numero": "123",
-         "complemento": "Sala 456"
-       }
-     ]
+     "images": []
    }
    ```
 
