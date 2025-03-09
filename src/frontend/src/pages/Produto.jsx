@@ -3,17 +3,34 @@ import styled from "styled-components";
 import { IoCartOutline } from "react-icons/io5";
 import { IoStar } from "react-icons/io5";
 import ProdutCard from "../components/ProductCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { OtherContext } from "../context/OtherContext";
 
 const Produto = () => {
     const { nome } = useParams();
     const navigate = useNavigate();
-    const [activeOption, setActiveOption] = useState('tamanho');
+    const { productId } = useContext(OtherContext);
+    const [activeOption, setActiveOption] = useState('tamanho');  
+    const [product, setProduct] = useState({});
 
     const handleGoToCart = () => {
-        navigate('/carrinho');
+        const cartProducts = JSON.parse(localStorage.getItem('cartProducts') || '[]');
+        const value = Array.isArray(productId) ? productId[0] : productId;
+        cartProducts.push(value);
+        localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
+        navigate('/carrinho');  
     }
+
+    useEffect(() => {
+        fetch(`https://v10k527pp4.execute-api.us-east-1.amazonaws.com/stickers/${productId}`)
+            .then(response => response.json())
+            .then(data => setProduct(data));
+    }, [productId]);
+
+    console.log("produ", product);
+
 
     return (
         <Container>

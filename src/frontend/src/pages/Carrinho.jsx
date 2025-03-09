@@ -2,38 +2,27 @@ import styled from "styled-components";
 import CarrinhoComponente from "../components/CarrinhoComponente";
 import React, { useEffect } from "react";
 
-const produtos = [
-    {
-        imagem: 'https://d1br4h274rc9sc.cloudfront.net/content/adesivo_redondo_1_ac420d46a8.webp',
-        titulo: 'Etiqueta',
-        tamanho: '3cm x 7cm',
-        cores: 'Preto e Branco',
-        substrato: 'Papel Couche',
-        corte: 'Redondo',
-        quantidade: 1,
-        precoTotal: '120,00',
-        precoUnitario: '12,00'
-    }
-];
-
 const Carrinho = () => {
     const [produtos, setProdutos] = React.useState([]);
-    const [id, setId] = React.useState(0);
 
     useEffect(() => {
-        const produtosCarrinho = localStorage.getItem('produtosCarrinho');
-        if (produtosCarrinho) {
-            for (let i = 0; i < produtosCarrinho.length; i++) {
-                setId([...produtos, produtosCarrinho[i]]);
-            }
-        }
-    }, [id]);
-
-    useEffect(() => {
-        fetch('https://v10k527pp4.execute-api.us-east-1.amazonaws.com/stickers')
-            .then(response => response.json())
-            .then(data => setProdutos(data.items));
-    } , [produtos]);
+        const cartProducts = JSON.parse(localStorage.getItem('cartProducts') || '[]');
+        // Agrega os IDs e conta ocorrência
+        const productCounts = {};
+        cartProducts.forEach(id => {
+            productCounts[id] = (productCounts[id] || 0) + 1;
+        });
+        const uniqueIds = Object.keys(productCounts);
+        Promise.all(
+            uniqueIds.map(id =>
+                fetch(`https://v10k527pp4.execute-api.us-east-1.amazonaws.com/stickers/${id}`)
+                    .then(response => response.json())
+                    .then(data => ({ ...data, quantidade: productCounts[id] }))
+            )
+        ).then(productsWithQuantity => {
+            setProdutos(productsWithQuantity);
+        });
+    }, []);
 
     return (
         <Container>
@@ -72,9 +61,8 @@ const Container = styled.div`
         padding: 20px;
         height: 45dvh;
         box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
-
     }
-`
+`;
 
 const CarrinhoContainer = styled.div`
     display: flex;
@@ -116,6 +104,6 @@ const CarrinhoContainer = styled.div`
         width: 95%;
         border-bottom: 1px solid #e0e0e0;   
     }
-`
+`;
 
 export default Carrinho;

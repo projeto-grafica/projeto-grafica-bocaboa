@@ -1,13 +1,16 @@
 import styled from "styled-components";
 import { IoStar } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { OtherContext } from '../context/OtherContext';
 
-// Componente de cartão de produto
 const ProdutCard = ({ data }) => {
     const navigate = useNavigate();
+    const { addProduct } = useContext(OtherContext);
 
     const handleClick = () => {
-        navigate(`/produto/etiqueta?id=${data.id}`);
+        addProduct(data.sticker_id);        
+        navigate(`/produto/etiqueta`);
     };
 
     return (

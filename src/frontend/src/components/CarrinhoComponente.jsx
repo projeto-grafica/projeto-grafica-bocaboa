@@ -1,43 +1,62 @@
 import styled from "styled-components";
 import React from "react";
 
-// Componente de item do carrinho
 const CarrinhoComponente = ({ produto }) => {
-    return (
-        <Container>
-            <ProductCard>
-                <ImageContainer style={{ backgroundImage: `url(${produto.imagem})` }}>
-                </ImageContainer>
+  const [quantity, setQuantity] = React.useState(produto.quantidade);
+  console.log(produto);
+  const handleIncrement = () => {
+    const cart = JSON.parse(localStorage.getItem("cartProducts")) || [];
+    cart.push(produto.sticker_id);
+    localStorage.setItem("cartProducts", JSON.stringify(cart));
+    setQuantity(quantity + 1);
+  };
 
-                <ProductInfo>
-                    <Title>{produto.titulo}</Title>
-                    <Specs>Tamanho: {produto.tamanho}</Specs>
-                    <Specs>Cores: {produto.cores}</Specs>
-                    <Specs>Substrato: {produto.substrato}</Specs>
-                    <Specs>Corte: {produto.corte}</Specs>
-                </ProductInfo>
+  const handleDecrement = () => {
+    const cart = JSON.parse(localStorage.getItem("cartProducts")) || [];
+    const index = cart.indexOf(produto.sticker_id);
+    if (index !== -1) {
+      cart.splice(index, 1);
+      localStorage.setItem("cartProducts", JSON.stringify(cart));
+      setQuantity(quantity - 1);
+    }
+  };
 
-                <QuantityContainer>
-                    <QuantityControls>
-                        <QuantityButton>-</QuantityButton>
-                        <QuantityDisplay>{produto.quantidade}</QuantityDisplay>
-                        <QuantityButton>+</QuantityButton>
-                    </QuantityControls>
-                    <RemoveButton>
-                        Remover
-                    </RemoveButton>
-                </QuantityContainer>
+  const imageUrl = produto?.images?.length ? produto.images[0] : "https://d1br4h274rc9sc.cloudfront.net/content/shortcut_adesivos_cfc551fd54.png";
+  
+  return (
+      <Container>
+          <ProductCard>
+              <ImageContainer style={{ backgroundImage: `url(${imageUrl})` }}>
+              </ImageContainer>
 
-                <Price>
-                    <MainPrice>R$ {produto.precoTotal}</MainPrice>
-                    <UnitPrice>R$ {produto.precoUnitario} cada</UnitPrice>
-                </Price>
-            </ProductCard>
-        </Container>
-    );
+              <ProductInfo>
+                  <Title>{produto.name}</Title>
+                  <Specs>Tamanho: {produto.width} x {produto.height}</Specs>
+                  <Specs>Cores: {produto.color}</Specs>
+                  <Specs>Substrato: {produto.paperType}</Specs>
+                  <Specs>Corte: {produto.shape}</Specs>
+              </ProductInfo>
+
+              <QuantityContainer>
+                  <QuantityControls>
+                      <QuantityButton onClick={handleDecrement}>-</QuantityButton>
+                      <QuantityDisplay>{quantity}</QuantityDisplay>
+                      <QuantityButton onClick={handleIncrement}>+</QuantityButton>
+                  </QuantityControls>
+                  <RemoveButton>
+                      Remover
+                  </RemoveButton>
+              </QuantityContainer>
+
+              <Price>
+                  <MainPrice>R$ {produto.price * quantity}</MainPrice>
+                  <UnitPrice>R$ {produto.price/100} cada</UnitPrice>
+              </Price>
+          </ProductCard>
+      </Container>
+  );
 }
 
-// Estilização dos componentes do item do carrinho
 const Container = styled.div`
   display: flex;
   justify-content: center;
