@@ -16,7 +16,7 @@ const ProdutCard = ({ data }) => {
     return (
         <Container onClick={handleClick}>
             <div className="img">
-                {data.promotion_id && ( 
+                {data?.promotion_id && ( 
                     <div className="promotionTag">
                         <p className="promotionText">-{data.promotion_id}%</p>
                     </div>
