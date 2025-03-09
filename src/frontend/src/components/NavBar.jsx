@@ -47,11 +47,11 @@ const Navbar = () => {
             {showElements && (
                 <LinksBar>
                     <div className="container">
-                        <Link to="produtos/panfletos">Panfletos</Link>
-                        <Link to="produtos/etiquetas">Etiquetas</Link>
-                        <Link to="produtos/envelopes">Envelopes</Link>
-                        <Link to="produtos/adesivos">Adesivos</Link>
-                        <Link to="produtos/cartoes">Cartões</Link>
+                        <Link to="produtos/panfleto">Panfletos</Link>
+                        <Link to="produtos/etiqueta">Etiquetas</Link>
+                        <Link to="produtos/envelope">Envelopes</Link>
+                        <Link to="produtos/adesivo">Adesivos</Link>
+                        <Link to="produtos/cartoe">Cartões</Link>
                     </div>
                 </LinksBar>
             )}

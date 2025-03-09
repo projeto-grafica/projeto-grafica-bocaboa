@@ -215,8 +215,6 @@ const VerificarEmail = () => {
             const email = localStorage.getItem('tempUserEmail');
             const enteredCode = code.join("");
             
-            console.log('Enviando código de verificação:', { email, code: enteredCode });
-
             const response = await fetch('https://v10k527pp4.execute-api.us-east-1.amazonaws.com/auth/confirm', {
                 method: 'POST',
                 headers: {
@@ -229,7 +227,6 @@ const VerificarEmail = () => {
             });
 
             const data = await response.json();
-            console.log('Resposta da verificação:', data);
 
             if (!response.ok) {
                 throw new Error(data.message || 'Código inválido');

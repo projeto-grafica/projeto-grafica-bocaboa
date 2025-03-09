@@ -40,7 +40,6 @@ const Produto = () => {
         fetch(`https://v10k527pp4.execute-api.us-east-1.amazonaws.com/stickers?tipo=${type}`)
             .then(response => response.json())
             .then(data => setRelatedProducts(data.items))
-            .then(console.log("feito"))
     }, [type]);
 
     return (

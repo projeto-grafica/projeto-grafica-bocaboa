@@ -3,7 +3,6 @@ import React from "react";
 
 const CarrinhoComponente = ({ produto }) => {
   const [quantity, setQuantity] = React.useState(produto.quantidade);
-  console.log(produto);
   const handleIncrement = () => {
     const cart = JSON.parse(localStorage.getItem("cartProducts")) || [];
     cart.push(produto.sticker_id);
