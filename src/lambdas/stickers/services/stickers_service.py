@@ -90,14 +90,25 @@ class StickerService:
 
         return True
 
-    def list_stickers(self, limit: int = 50, last_evaluated_key: Dict = None,
-                      user_id: str = None, user_role: str = None) -> Dict:
+    def list_stickers(self, limit: int = 50, last_evaluated_key: Dict = None, user_id: str = None, user_role: str = None, tipo: str = None) -> Dict:
         scan_params = {
             'Limit': limit
         }
 
+        expression_values = {}
+        filter_expressions = []
+
+        if tipo:
+            filter_expressions.append('tipo = :tipo_val')
+            expression_values[':tipo_val'] = tipo
+
         if user_role == 'client':
-            scan_params['FilterExpression'] = Key('created_by').eq(user_id)
+            filter_expressions.append('created_by = :user_id')
+            expression_values[':user_id'] = user_id
+
+        if filter_expressions:
+            scan_params['FilterExpression'] = ' AND '.join(filter_expressions)
+            scan_params['ExpressionAttributeValues'] = expression_values
 
         if last_evaluated_key:
             scan_params['ExclusiveStartKey'] = last_evaluated_key

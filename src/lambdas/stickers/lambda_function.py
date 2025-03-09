@@ -55,6 +55,7 @@ def lambda_handler(event, context):
         elif http_method == 'GET' and path.endswith('/stickers'):
             limit = int(query_parameters.get('limit', 50))
             last_key = query_parameters.get('lastEvaluatedKey')
+            tipo = query_parameters.get('tipo')  # Obter o parâmetro tipo da consulta
 
             if last_key:
                 try:
@@ -65,7 +66,14 @@ def lambda_handler(event, context):
                         'body': json.dumps({'message': 'Invalid lastEvaluatedKey format'})
                     }
 
-            result = sticker_service.list_stickers(limit, last_key, user_id, user_role)
+            result = sticker_service.list_stickers(
+                limit=limit,
+                last_evaluated_key=last_key,
+                user_id=user_id,
+                user_role=user_role,
+                tipo=tipo
+            )
+
             return {
                 'statusCode': 200,
                 'body': json.dumps(result, default=str)
