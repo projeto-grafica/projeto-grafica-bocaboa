@@ -197,6 +197,18 @@ https://v10k527pp4.execute-api.us-east-1.amazonaws.com
 
 1. **Listar stickers disponíveis (GET /stickers)** - 200
 
+   Parâmetros de consulta:
+    - `limit` (opcional): Número máximo de resultados a retornar (padrão: 50)
+    - `lastEvaluatedKey` (opcional): Chave para paginação
+    - `tipo` (opcional): Filtra stickers por tipo específico (ex: "etiqueta")
+
+   Exemplo de consulta:
+   ```
+   GET /stickers
+   GET /stickers?limit=10
+   GET /stickers?tipo=etiqueta
+   ```
+
    Exemplo de Output:
    ```json
    {
