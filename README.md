@@ -556,11 +556,11 @@ function StickerImageUploader({ stickerId }) {
 4. O campo do arquivo (`file`) deve ser adicionado por último no FormData para funcionar corretamente com o S3.
 5. Após o upload bem-sucedido para o S3, é necessário informar o backend sobre as URLs das imagens para associá-las ao sticker no banco de dados.
 6. Por que esta abordagem é superior? Este método de upload em duas etapas (gerar URL pré-assinada + upload direto para S3) oferece várias vantagens:
-   - Escalabilidade: O backend não precisa lidar com o processamento de arquivos grandes, permitindo que ele atenda mais requisições
-   - Melhor performance: Uploads são mais rápidos, pois vão diretamente do cliente para o S3
-   - Menor custo: Reduz o consumo de recursos do Lambda e a transferência de dados, já que os arquivos não passam pelo backend
-   - Maior confiabilidade: Se o backend tiver um problema durante o upload, o arquivo não fica perdido
-   - Segurança: O controle de acesso é garantido pelas políticas e assinaturas nas URLs pré-assinadas
+    - Escalabilidade: O backend não precisa lidar com o processamento de arquivos grandes, permitindo que ele atenda mais requisições
+    - Melhor performance: Uploads são mais rápidos, pois vão diretamente do cliente para o S3
+    - Menor custo: Reduz o consumo de recursos do Lambda e a transferência de dados, já que os arquivos não passam pelo backend
+    - Maior confiabilidade: Se o backend tiver um problema durante o upload, o arquivo não fica perdido
+    - Segurança: O controle de acesso é garantido pelas políticas e assinaturas nas URLs pré-assinadas
 
 ---
 
