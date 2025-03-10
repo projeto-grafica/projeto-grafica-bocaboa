@@ -1,22 +1,29 @@
 import styled from "styled-components";
 import React from "react";
 
-const CarrinhoComponente = ({ produto }) => {
+const CarrinhoComponente = ({ produto, refreshCart }) => {
   const [quantity, setQuantity] = React.useState(produto.quantidade);
+
+  // Removendo o item do carrinho se a quantidade for 0
+  if (quantity === 0) return null;
+  
   const handleIncrement = () => {
     const cart = JSON.parse(localStorage.getItem("cartProducts")) || [];
     cart.push(produto.sticker_id);
     localStorage.setItem("cartProducts", JSON.stringify(cart));
     setQuantity(quantity + 1);
+    if (refreshCart) refreshCart();
   };
 
   const handleDecrement = () => {
+    if (quantity === 0) return;
     const cart = JSON.parse(localStorage.getItem("cartProducts")) || [];
     const index = cart.indexOf(produto.sticker_id);
     if (index !== -1) {
       cart.splice(index, 1);
       localStorage.setItem("cartProducts", JSON.stringify(cart));
       setQuantity(quantity - 1);
+      if (refreshCart) refreshCart();
     }
   };
 
@@ -25,6 +32,7 @@ const CarrinhoComponente = ({ produto }) => {
   return (
       <Container>
           <ProductCard>
+            <div className="product-info-container">
               <ImageContainer style={{ backgroundImage: `url(${imageUrl})` }}>
               </ImageContainer>
 
@@ -35,6 +43,7 @@ const CarrinhoComponente = ({ produto }) => {
                   <Specs>Substrato: {produto.paperType}</Specs>
                   <Specs>Corte: {produto.shape}</Specs>
               </ProductInfo>
+            </div>
 
               <QuantityContainer>
                   <QuantityControls>
@@ -48,8 +57,8 @@ const CarrinhoComponente = ({ produto }) => {
               </QuantityContainer>
 
               <Price>
-                  <MainPrice>R$ {produto.price * quantity}</MainPrice>
-                  <UnitPrice>R$ {produto.price/100} cada</UnitPrice>
+                  <MainPrice>R$ {(produto.price * quantity).toFixed(2)}</MainPrice>
+                  <UnitPrice>R$ {(produto.price/100).toFixed(2)} cada</UnitPrice>
               </Price>
           </ProductCard>
       </Container>
@@ -68,7 +77,13 @@ const ProductCard = styled.div`
   display: flex;
   width: 100%;
   align-items: center;
-  gap: 20px;
+
+  .product-info-container{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 60%;
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -97,6 +112,7 @@ const Specs = styled.p`
 `;
 
 const QuantityContainer = styled.div`
+  width: 20%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -145,8 +161,8 @@ const QuantityDisplay = styled.span`
 `;
 
 const Price = styled.div`
+  width: 20%;
   text-align: right;
-  min-width: 120px;
 `;
 
 const MainPrice = styled.div`
