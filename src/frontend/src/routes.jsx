@@ -13,6 +13,7 @@ import Navbar from "./components/NavBar.jsx";
 import Cadastro from "./pages/Cadastro.jsx";
 import VerificarEmail from "./pages/VerificarEmail.jsx";
 import Suporte from "./pages/Suporte.jsx";
+import CompraFinalizada from "./pages/CompraFinalizada.jsx";
 
 const AppRoutes = () => {
     const location = useLocation(); 
@@ -35,6 +36,7 @@ const AppRoutes = () => {
                 <Route path="/produtos/:nome" element={<Produtos />} />
                 <Route path="/produto/:nome" element={<Produto />} />
                 <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
+                <Route path="/compra-finalizada" element={<ProtectedRoute element={< CompraFinalizada/>} />}/>
                 <Route path="*" element={<h1>Not Found</h1>} />
             </Routes>
         </>
