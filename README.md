@@ -28,14 +28,24 @@ https://v10k527pp4.execute-api.us-east-1.amazonaws.com
      "email": "user@example.com",
      "password": "StrongP@ssw0rd123",
      "name": "User",
-     "address": {
-       "cep": "12345678",
-       "cidade": "São Paulo",
-       "estado": "SP",
-       "logradouro": "Avenida Paulista",
-       "numero": "123",
-       "complemento": "Sala 456"
-     }
+     "addresses": [
+       {
+         "cep": "12345678",
+         "city": "São Paulo",
+         "state": "SP",
+         "street": "Avenida Paulista",
+         "number": "123",
+         "complement": "Sala 456"
+       },
+       {
+         "cep": "87654321",
+         "city": "Rio de Janeiro",
+         "state": "RJ",
+         "street": "Avenida Atlântica",
+         "number": "789",
+         "complement": "Bloco B"
+       }
+     ]
    }
    ```
 
@@ -142,14 +152,24 @@ https://v10k527pp4.execute-api.us-east-1.amazonaws.com
      "id": "44c8d4e8-90a1-7001-13a0-48ff0aa14dd0",
      "role": "client",
      "email": "user@example.com",
-     "address": {
-       "cep": "12345678",
-       "cidade": "São Paulo",
-       "estado": "SP",
-       "logradouro": "Avenida Paulista",
-       "numero": "123",
-       "complemento": "Sala 456"
-     }
+     "addresses": [
+       {
+         "cep": "12345678",
+         "city": "São Paulo",
+         "state": "SP",
+         "street": "Avenida Paulista",
+         "number": "123",
+         "complement": "Sala 456"
+       },
+       {
+         "cep": "87654321",
+         "city": "Rio de Janeiro",
+         "state": "RJ",
+         "street": "Avenida Atlântica",
+         "number": "789",
+         "complement": "Bloco B"
+       }
+     ]
    }
    ```
 
@@ -171,7 +191,25 @@ https://v10k527pp4.execute-api.us-east-1.amazonaws.com
      "created_at": "2025-02-22T14:28:28.007141",
      "email": "user@example.com",
      "id": "44c8d4e8-90a1-7001-13a0-48ff0aa14dd0",
-     "role": "admin"
+     "role": "admin",
+     "addresses": [
+       {
+         "cep": "12345678",
+         "city": "São Paulo",
+         "state": "SP",
+         "street": "Avenida Paulista",
+         "number": "123",
+         "complement": "Sala 456"
+       },
+       {
+         "cep": "87654321",
+         "city": "Rio de Janeiro",
+         "state": "RJ",
+         "street": "Avenida Atlântica",
+         "number": "789",
+         "complement": "Bloco B"
+       }
+     ]
    }
    ```
 
