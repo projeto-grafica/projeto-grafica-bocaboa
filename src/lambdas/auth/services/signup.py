@@ -2,6 +2,7 @@ import json
 import boto3
 
 from src.lambdas.auth.models.user import User
+from src.lambdas.auth.models.address import Address
 
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table('users')
@@ -29,8 +30,28 @@ def handle(body, cognito, user_pool_id, client_id):
             ]
         )
 
-        # Criar e salvar o usuário no DynamoDB
-        user = User(response['UserSub'], email, name)
+        addresses = []
+        if 'addresses' in body and isinstance(body['addresses'], list):
+            for addr_data in body['addresses']:
+                try:
+                    Address.validate(addr_data)
+                    addresses.append(Address.from_dict(addr_data))
+                except ValueError as e:
+                    return {
+                        'statusCode': 400,
+                        'body': json.dumps({'message': str(e)})
+                    }
+        elif 'address' in body and body['address']:
+            try:
+                Address.validate(body['address'])
+                addresses.append(Address.from_dict(body['address']))
+            except ValueError as e:
+                return {
+                    'statusCode': 400,
+                    'body': json.dumps({'message': str(e)})
+                }
+
+        user = User(response['UserSub'], email, name, addresses)
         user.save()
 
         return {

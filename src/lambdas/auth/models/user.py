@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Dict
+from typing import Dict, List, Optional
 
 import boto3
 
@@ -10,27 +10,29 @@ table = dynamodb.Table('users')
 
 
 class User:
-    def __init__(self, user_sub: str, email: str, name: str, address: Address, role='client'):
+    def __init__(self, user_sub: str, email: str, name: str, addresses: Optional[List[Address]] = None, role='client'):
         self.id = user_sub
         self.email = email
         self.name = name
-        self.address = address
+        self.addresses = addresses or []
         self.role = role
         self.created_at = datetime.now().isoformat()
         self.updated_at = datetime.now().isoformat()
 
     @classmethod
     def from_dict(cls, data: Dict) -> 'User':
-        address = None
-        if 'address' in data and data['address']:
-            address = Address.from_dict(data['address'])
+        addresses = []
+        if 'addresses' in data and isinstance(data['addresses'], list):
+            addresses = [Address.from_dict(addr) for addr in data['addresses']]
+        elif 'address' in data and data['address']:
+            addresses = [Address.from_dict(data['address'])]
 
         user = cls(
             user_sub=data.get('id'),
             email=data.get('email'),
             name=data.get('name'),
             role=data.get('role', 'client'),
-            address=address
+            addresses=addresses
         )
 
         if 'created_at' in data:
@@ -47,11 +49,9 @@ class User:
             'name': self.name,
             'role': self.role,
             'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'updated_at': self.updated_at,
+            'addresses': [address.to_dict() for address in self.addresses]
         }
-
-        if self.address:
-            result['address'] = self.address.to_dict()
 
         return result
 
