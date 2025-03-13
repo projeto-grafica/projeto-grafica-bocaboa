@@ -50,6 +50,13 @@ const Carrinho = () => {
             setCepInput(storedCep);
             aplicarFrete();
         }
+
+        // Atualiza o estado de progresso
+        const completedStages = localStorage.getItem('completedStages') ? JSON.parse(localStorage.getItem('completedStages')) : [];
+        if (!completedStages.includes(0)) {
+            completedStages.push(0);
+            localStorage.setItem('completedStages', JSON.stringify(completedStages));
+        }
     }, []);
 
     const aplicarFrete = () => {
@@ -110,10 +117,16 @@ const Carrinho = () => {
             frete: frete,
             desconto: desconto,
             total: totalPrice + frete - desconto,
-            valorCarrinho: totalPrice, // Adiciona o valor do carrinho
+            valorCarrinho: totalPrice,
             cep: cepInput
         };
         localStorage.setItem('checkoutData', JSON.stringify(dataToSave));
+
+        const completedStages = localStorage.getItem('completedStages') ? JSON.parse(localStorage.getItem('completedStages')) : [];
+
+        completedStages.push(1);
+        localStorage.setItem('completedStages', JSON.stringify(completedStages));
+
         navigate('/compras/endereco');
     };
 

@@ -16,7 +16,7 @@ import {
 } from "./styles/FormEnderecoStyles";
 import ModalEnderecos from "./ModalEnderecos";
 
-const FormEndereco = ({cep}) => {
+const FormEndereco = ({cep, setNext}) => {
     const [formData, setFormData] = useState({
         cep: cep,
         endereco: '',
@@ -36,6 +36,18 @@ const FormEndereco = ({cep}) => {
             buscarEndereco(cep);
         }
     }, [cep]);
+
+    useEffect(() => {
+        const camposObrigatoriosPreenchidos =
+            formData.cep !== '' &&
+            formData.endereco !== '' &&
+            formData.numero !== '' &&
+            formData.bairro !== '' &&
+            formData.cidade !== '' &&
+            formData.estado !== '';
+
+        setNext(camposObrigatoriosPreenchidos);
+    }, [formData, setNext]);
 
     const handleChange = (e) => {
         const { id, value } = e.target;
@@ -113,112 +125,110 @@ const FormEndereco = ({cep}) => {
                 <StyledButton onClick={() => setIsModalOpen(true)}>Meus endereços</StyledButton>
             </Header>
             
-            <FormStyled as="form">
-                <Row>
-                    <FormGroup>
-                        <Label htmlFor="cep">CEP</Label>
-                        <Input 
-                            type="text" 
-                            id="cep" 
-                            placeholder="00000-000" 
-                            value={formData.cep}
-                            onChange={handleChange}
-                            maxLength="9"
-                        />
-                    </FormGroup>
-                </Row>
+            <Row>
+                <FormGroup>
+                    <Label htmlFor="cep">CEP</Label>
+                    <Input 
+                        type="text" 
+                        id="cep" 
+                        placeholder="00000-000" 
+                        value={formData.cep}
+                        onChange={handleChange}
+                        maxLength="9"
+                    />
+                </FormGroup>
+            </Row>
+            
+            <Row>
+                <FormGroup $flex="2">
+                    <Label htmlFor="endereco">Endereço</Label>
+                    <Input 
+                        type="text" 
+                        id="endereco" 
+                        placeholder="Rua, Avenida, etc." 
+                        value={formData.endereco}
+                        onChange={handleChange}
+                        readOnly={enderecoBloqueado}
+                    />
+                </FormGroup>
                 
-                <Row>
-                    <FormGroup $flex="2">
-                        <Label htmlFor="endereco">Endereço</Label>
-                        <Input 
-                            type="text" 
-                            id="endereco" 
-                            placeholder="Rua, Avenida, etc." 
-                            value={formData.endereco}
-                            onChange={handleChange}
-                            readOnly={enderecoBloqueado}
-                        />
-                    </FormGroup>
-                    
-                    <FormGroup $flex="1">
-                        <Label htmlFor="numero">Número</Label>
-                        <Input 
-                            type="text" 
-                            id="numero" 
-                            placeholder="Nº" 
-                            value={formData.numero}
-                            onChange={handleChange}
-                        />
-                    </FormGroup>
-                </Row>
+                <FormGroup $flex="1">
+                    <Label htmlFor="numero">Número</Label>
+                    <Input 
+                        type="text" 
+                        id="numero" 
+                        placeholder="Nº" 
+                        value={formData.numero}
+                        onChange={handleChange}
+                    />
+                </FormGroup>
+            </Row>
+            
+            <Row>
+                <FormGroup $flex="1">
+                    <Label htmlFor="complemento">Complemento</Label>
+                    <Input 
+                        type="text" 
+                        id="complemento" 
+                        placeholder="Apto, bloco, etc. (opcional)" 
+                        value={formData.complemento}
+                        onChange={handleChange}
+                    />
+                </FormGroup>
                 
-                <Row>
-                    <FormGroup $flex="1">
-                        <Label htmlFor="complemento">Complemento</Label>
-                        <Input 
-                            type="text" 
-                            id="complemento" 
-                            placeholder="Apto, bloco, etc. (opcional)" 
-                            value={formData.complemento}
-                            onChange={handleChange}
-                        />
-                    </FormGroup>
-                    
-                    <FormGroup $flex="1">
-                        <Label htmlFor="bairro">Bairro</Label>
-                        <Input 
-                            type="text" 
-                            id="bairro" 
-                            placeholder="Bairro" 
-                            value={formData.bairro}
-                            onChange={handleChange}
-                            readOnly={enderecoBloqueado}
-                        />
-                    </FormGroup>
-                </Row>
+                <FormGroup $flex="1">
+                    <Label htmlFor="bairro">Bairro</Label>
+                    <Input 
+                        type="text" 
+                        id="bairro" 
+                        placeholder="Bairro" 
+                        value={formData.bairro}
+                        onChange={handleChange}
+                        readOnly={enderecoBloqueado}
+                    />
+                </FormGroup>
+            </Row>
+            
+            <Row>
+                <FormGroup $flex="2">
+                    <Label htmlFor="cidade">Cidade</Label>
+                    <Input 
+                        type="text" 
+                        id="cidade" 
+                        placeholder="Cidade" 
+                        value={formData.cidade}
+                        onChange={handleChange}
+                        readOnly={enderecoBloqueado}
+                    />
+                </FormGroup>
                 
-                <Row>
-                    <FormGroup $flex="2">
-                        <Label htmlFor="cidade">Cidade</Label>
-                        <Input 
-                            type="text" 
-                            id="cidade" 
-                            placeholder="Cidade" 
-                            value={formData.cidade}
-                            onChange={handleChange}
-                            readOnly={enderecoBloqueado}
-                        />
-                    </FormGroup>
-                    
-                    <FormGroup $flex="1">
-                        <Label htmlFor="estado">Estado</Label>
-                        <Input 
-                            type="text" 
-                            id="estado" 
-                            placeholder="UF" 
-                            maxLength="2"
-                            value={formData.estado}
-                            onChange={handleChange}
-                            readOnly={enderecoBloqueado}
-                        />
-                    </FormGroup>
-                </Row>
-                
-                <SaveAddressRow>
-                    <CheckboxContainer>
-                        <Checkbox 
-                            type="checkbox" 
-                            id="saveAddress" 
-                            checked={saveAddress}
-                            onChange={() => setSaveAddress(!saveAddress)} 
-                        />
-                        <CheckboxLabel htmlFor="saveAddress">
-                            Salvar esse endereço para compras futuras
-                        </CheckboxLabel>
-                    </CheckboxContainer>
-                </SaveAddressRow>
-            </FormStyled>
+                <FormGroup $flex="1">
+                    <Label htmlFor="estado">Estado</Label>
+                    <Input 
+                        type="text" 
+                        id="estado" 
+                        placeholder="UF" 
+                        maxLength="2"
+                        value={formData.estado}
+                        onChange={handleChange}
+                        readOnly={enderecoBloqueado}
+                    />
+                </FormGroup>
+            </Row>
+            
+            <SaveAddressRow>
+                <CheckboxContainer>
+                    <Checkbox 
+                        type="checkbox" 
+                        id="saveAddress" 
+                        checked={saveAddress}
+                        onChange={() => setSaveAddress(!saveAddress)} 
+                    />
+                    <CheckboxLabel htmlFor="saveAddress">
+                        Salvar esse endereço para compras futuras
+                    </CheckboxLabel>
+                </CheckboxContainer>
+            </SaveAddressRow>
             {isModalOpen && <ModalEnderecos onClose={() => setIsModalOpen(false)} />}
             {endereco && (
                 <div>

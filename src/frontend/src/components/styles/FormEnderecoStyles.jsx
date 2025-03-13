@@ -73,6 +73,7 @@ export const FormStyled = styled.form`
 export const Row = styled.div`
     display: flex;
     gap: 1rem;
+    margin-bottom: 0.5rem;
     width: 100%;
     
     @media (max-width: 768px) {

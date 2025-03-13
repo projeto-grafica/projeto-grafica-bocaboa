@@ -2,6 +2,8 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import Carrinho from "./pages/Carrinho.jsx";
 import Endereco from "./pages/Endereco.jsx";
+import Pagamento from "./pages/Pagamento.jsx";
+import Confirmacao from "./pages/Confirmacao.jsx";
 import Login from "./pages/Login.jsx";
 import Perfil from "./pages/Perfil.jsx";
 import Produtos from "./pages/Produtos.jsx";
@@ -20,10 +22,10 @@ import Footer from "./components/Footer";
 const AppRoutes = () => {
     const location = useLocation(); 
     const hideNavbar = ["/login", "/cadastro", "/verificar-email"].includes(location.pathname);
-    const hideFooter = ["/login", "/cadastro", "/verificar-email", "/compras/endereco"].includes(location.pathname);
+    const hideFooter = ["/login", "/cadastro", "/verificar-email", "/compra-finalizada"].includes(location.pathname);
 
     return (
-        <body style={{ display: "flex", flexDirection: "column", minHeight: "100vh", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", justifyContent: "space-between" }}>
             {!hideNavbar && <Navbar />} 
 
             <Routes>
@@ -43,6 +45,8 @@ const AppRoutes = () => {
 
                 {/* Rotas de Compras Autenticadas */}
                 <Route path="/compras/endereco" element={<ProtectedRoute element={<Endereco />} />} />
+                <Route path="/compras/pagamento" element={<ProtectedRoute element={<Pagamento />} />} />
+                <Route path="/compras/confirmacao" element={<ProtectedRoute element={<Confirmacao />} />} />
 
                 {/* Rotas de Produtos */}
                 <Route path="/produtos/:nome" element={<Produtos />} />
@@ -53,8 +57,8 @@ const AppRoutes = () => {
                 <Route path="*" element={<h1>Not Found</h1>} />
             </Routes>
 
-            {!hideNavbar && <Footer />}
-        </body>
+            {!hideFooter && <Footer />}
+        </div>
     );
 };
 

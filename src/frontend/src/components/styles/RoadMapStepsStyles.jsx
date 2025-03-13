@@ -25,14 +25,14 @@ export const StepCircle = styled.div`
   align-items: center;
   justify-content: center;
   background-color: ${props => 
-    props.completed ? '#5cb85c' : 
+    props.completed ? '#62A860' : 
     props.active ? '#ffffff' : 'white'};
   color: ${props => 
     props.completed ? '#ffffff' : 
-    props.active ? '#5cb85c' : '#9e9e9e'};
+    props.active ? '#62A860' : '#C8C8C8'};
   border: 2px solid ${props => 
-    props.completed ? '#5cb85c' : 
-    props.active ? '#5cb85c' : '#9e9e9e'};
+    props.completed ? '#62A860' : 
+    props.active ? '#62A860' : '#C8C8C8'};
   margin-bottom: 4px;
   z-index: 3;
 `;
@@ -49,8 +49,8 @@ export const StepLabel = styled.div`
 `;
 
 export const StepConnector = styled.div`
-  height: 2px;
-  background-color: #9e9e9e;
+  height: 1px;
+  background-color: #C8C8C8;
   flex-grow: 1;
   position: absolute;
   top: 50%;

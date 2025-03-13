@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { Container, RoadMap, Content, FormEndereco as FormEnderecoStyled, ResumePayment } from './styles/Endereco.styles.jsx';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Container, RoadMap, Content, ContentPayments, ResumePayment, CarrinhoResumo, ResumoItem, Divisor, ResumoTotal, BotaoProximo } from './styles/Endereco.styles.jsx';
 import { RoadMapSteps } from '../components/RoadMapSteps.jsx';
-import FormEndereco from '../components/FormEndereco.jsx';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-import { CarrinhoResumo, ResumoItem, Divisor, ResumoTotal, BotaoProximo } from './styles/Endereco.styles.jsx';
-import { useNavigate } from 'react-router-dom';
+import PaymentMethodSelection from '../components/PaymentMethodSelection.jsx';
 
-const Endereco = () => {
+const Pagamento = () => {
+    const navigate = useNavigate();
     const [checkoutData, setCheckoutData] = useState({ frete: 0, desconto: 0, total: 0 });
-    const [cep, setCep] = useState('');
     const [CountCarrinho, setCountCarrinho] = useState(0);
     const [allowNext, setAllowNext] = useState(false);
-    const navigate = useNavigate();
+    const [pagamentoMetodo, setPagamentoMetodo] = useState('');
 
     useEffect(() => {
         const completedStages = localStorage.getItem('completedStages') ? JSON.parse(localStorage.getItem('completedStages')) : [];
@@ -30,47 +30,24 @@ const Endereco = () => {
         const CountCarrinho = JSON.parse(localStorage.getItem('cartProducts') || '[]').length;
         setCountCarrinho(CountCarrinho);
 
-        const storedCep = localStorage.getItem('cep');
-        if (storedCep) {
-            setCep(storedCep);
-        }
+
     }, []);
 
-    const handleProximoClick = () => {
-        const completedStages = localStorage.getItem('completedStages') ? JSON.parse(localStorage.getItem('completedStages')) : [];
-        
-        // Recupera os dados do checkout do localStorage
-        const storedCheckoutData = localStorage.getItem('checkoutData');
-        let checkoutData = storedCheckoutData ? JSON.parse(storedCheckoutData) : {};
-        
-        // Salva os dados atualizados no localStorage
-        localStorage.setItem('checkoutData', JSON.stringify(checkoutData));
-
-        // Recupera os dados do formulário de endereço do localStorage
-        const storedEndereco = localStorage.getItem('endereco');
-
-        // Se já existir, remove para garantir que os dados sejam frescos
-        if (storedEndereco) {
-            localStorage.removeItem('endereco');
+    const handleGoToConfirm = () => {
+        const storedData = localStorage.getItem('checkoutData');
+        if (storedData) {
+            const checkoutData = JSON.parse(storedData);
+            checkoutData.pagamento = pagamentoMetodo;
+            localStorage.setItem('checkoutData', JSON.stringify(checkoutData));
         }
 
-        // Salva os dados do formulário de endereço no localStorage
-        const enderecoData = JSON.stringify({
-            cep: localStorage.getItem('cep'),
-            rua: localStorage.getItem('rua'),
-            numero: localStorage.getItem('numero'),
-            complemento: localStorage.getItem('complemento'),
-            bairro: localStorage.getItem('bairro'),
-            cidade: localStorage.getItem('cidade'),
-            estado: localStorage.getItem('estado')
-        });
-        localStorage.setItem('endereco', enderecoData);
+        const completedStages = localStorage.getItem('completedStages') ? JSON.parse(localStorage.getItem('completedStages')) : [];
 
         completedStages.push(2);
         localStorage.setItem('completedStages', JSON.stringify(completedStages));
 
-        navigate('/compras/pagamento');
-    };
+        navigate('/compras/confirmacao');
+    }
 
     return (
         <Container>
@@ -78,9 +55,9 @@ const Endereco = () => {
                 <RoadMapSteps />
             </RoadMap>
             <Content>
-                <FormEnderecoStyled>
-                    <FormEndereco cep={cep} setNext={setAllowNext}/>
-                </FormEnderecoStyled>
+                <ContentPayments>
+                    <PaymentMethodSelection allow={setAllowNext} pagamentoMetodo={setPagamentoMetodo}/>
+                </ContentPayments>
                 <ResumePayment>
                     <CarrinhoResumo>
                         <div className='carrinho-resumo-header'>
@@ -96,7 +73,7 @@ const Endereco = () => {
                         </div>
 
                         <Divisor />
-                        
+
                         <ResumoItem>
                             <span>Carrinho</span>
                             <span>R$ {checkoutData.valorCarrinho}</span>
@@ -114,7 +91,9 @@ const Endereco = () => {
                             <span>Total</span>
                             <span>R$ {checkoutData.total.toFixed(2)}</span>
                         </ResumoTotal>
-                        <BotaoProximo disabled={!allowNext} onClick={handleProximoClick}>Próximo</BotaoProximo>
+                        <BotaoProximo onClick={handleGoToConfirm} disabled={!allowNext}>
+                            <span>Próximo</span>
+                        </BotaoProximo>
                     </CarrinhoResumo>
                 </ResumePayment>
             </Content>
@@ -122,4 +101,4 @@ const Endereco = () => {
     );
 }
 
-export default Endereco;
+export default Pagamento;
