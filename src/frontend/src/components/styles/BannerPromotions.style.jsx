@@ -5,8 +5,8 @@ export const ContainerPromotions = styled.div`
     justify-content: center;
     align-items: center;
     background-color: #F27E16;
-    width: 85vw;
-    height: 55vh;
+    width: 1100px;
+    height: 300px;
     align-self: center;
 
     img {

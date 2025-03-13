@@ -3,9 +3,8 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   justify-content: center;
-  width: 51.5vw;
-  height: 18vh;
-  margin: 3vh 0;
+  width: 650px;
+  margin: 20px 0;
 `;
 
 export const ProductCard = styled.div`
@@ -22,8 +21,8 @@ export const ProductCard = styled.div`
 `;
 
 export const ImageContainer = styled.div`
-  height: 18vh;
-    width: 18vh;
+  height: 100px;
+    width: 100px;
   background-image: url('https://d1br4h274rc9sc.cloudfront.net/content/adesivo_redondo_1_ac420d46a8.webp');
   border-radius: 8px;
     background-size: cover;

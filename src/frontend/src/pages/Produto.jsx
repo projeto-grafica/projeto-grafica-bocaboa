@@ -4,10 +4,9 @@ import { IoStar } from "react-icons/io5";
 import ProdutCard from "../components/ProductCard";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { OtherContext } from "../context/OtherContext";
 import Botao from "../components/Botoes";
 import { 
+    ContainerMain,
     Container,
     Breadcrumb,
     ProductContainer,
@@ -29,7 +28,7 @@ import {
 const Produto = () => {
     const { nome } = useParams();
     const navigate = useNavigate();
-    const { productId } = useContext(OtherContext);
+    const [productId, setProductId] = useState(localStorage.getItem('lastAcess') || '');
     const [activeOption, setActiveOption] = useState('tamanho');  
     const [product, setProduct] = useState({});
     const [relatedProducts, setRelatedProducts] = useState([]);
@@ -42,7 +41,7 @@ const Produto = () => {
 
     const handleGoToCart = () => {
         const cartProducts = JSON.parse(localStorage.getItem('cartProducts') || '[]');
-        const value = Array.isArray(productId) ? productId[0] : productId;
+        const value = productId;
         cartProducts.push(value);
         localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
         navigate('/carrinho');  
@@ -61,97 +60,99 @@ const Produto = () => {
     }, [type]);
 
     return (
-        <Container>
-            <Breadcrumb>
-                <a href="/">Início</a> &gt; <a href={"/produtos/" + type}>{formattedType}</a> &gt; {formattedName}
-            </Breadcrumb>
+        <ContainerMain>
+            <Container>
+                <Breadcrumb>
+                    <a href="/">Início</a> &gt; <a href={"/produtos/" + type}>{formattedType}</a> &gt; {formattedName}
+                </Breadcrumb>
 
-            <ProductContainer>
-                <div className="photos">
-                    <ProductImage src="https://d1br4h274rc9sc.cloudfront.net/content/shortcut_adesivos_cfc551fd54.png" alt={nome} />
-                    <div className="subPhotos">
-                        <img src="https://d1br4h274rc9sc.cloudfront.net/content/shortcut_adesivos_cfc551fd54.png" alt="Foto do produto" />
-                        <img src="https://d1br4h274rc9sc.cloudfront.net/content/shortcut_adesivos_cfc551fd54.png" alt="Foto do produto" />
-                        <img src="https://d1br4h274rc9sc.cloudfront.net/content/shortcut_adesivos_cfc551fd54.png" alt="Foto do produto" />
-                        <img src="https://d1br4h274rc9sc.cloudfront.net/content/shortcut_adesivos_cfc551fd54.png" alt="Foto do produto" />
-                    </div>
-                </div>
-                <ProductDetails>
-                    <ProductTitle>{formattedName}</ProductTitle>
-                    <div className="rate">
-                        <IoStar size={14} color="#F27E16" />
-                        <IoStar size={14} color="#F27E16" />
-                        <IoStar size={14} color="#F27E16" />
-                        <IoStar size={14} color="#F27E16" />
-                        <IoStar size={14} color="#F27E16" />
-                        <p className="starQuantity">5</p>
-                        <p className="rateQuantity">(4.200)</p>
-                    </div>
-                    <ProductDescription>
-                        {description}
-                    </ProductDescription>
-
-                    <ProductFeatures>
-                    </ProductFeatures>
-
-                    <PriceContainer>
-                        <div className="priceSpace">
-                            <h1>Total:</h1>
-                            <TotalPrice>R$ {price}</TotalPrice>
+                <ProductContainer>
+                    <div className="photos">
+                        <ProductImage src="https://d1br4h274rc9sc.cloudfront.net/content/shortcut_adesivos_cfc551fd54.png" alt={nome} />
+                        <div className="subPhotos">
+                            <img src="https://d1br4h274rc9sc.cloudfront.net/content/shortcut_adesivos_cfc551fd54.png" alt="Foto do produto" />
+                            <img src="https://d1br4h274rc9sc.cloudfront.net/content/shortcut_adesivos_cfc551fd54.png" alt="Foto do produto" />
+                            <img src="https://d1br4h274rc9sc.cloudfront.net/content/shortcut_adesivos_cfc551fd54.png" alt="Foto do produto" />
+                            <img src="https://d1br4h274rc9sc.cloudfront.net/content/shortcut_adesivos_cfc551fd54.png" alt="Foto do produto" />
                         </div>
-                        <Actions>
-                            <p>Calcular Frete</p>
-                            <div className="buttons">
-                                <Botao Text={'Adicionar ao carrinho'} Type={'vazado'} onClick={handleGoToCart} Icon={<IoCartOutline size={20}/>}/>
-                                <Botao Text={'Comprar agora'} Type={'cheio'} onClick={handleGoToCart}/>
+                    </div>
+                    <ProductDetails>
+                        <ProductTitle>{formattedName}</ProductTitle>
+                        <div className="rate">
+                            <IoStar size={14} color="#F27E16" />
+                            <IoStar size={14} color="#F27E16" />
+                            <IoStar size={14} color="#F27E16" />
+                            <IoStar size={14} color="#F27E16" />
+                            <IoStar size={14} color="#F27E16" />
+                            <p className="starQuantity">5</p>
+                            <p className="rateQuantity">(4.200)</p>
+                        </div>
+                        <ProductDescription>
+                            {description}
+                        </ProductDescription>
+
+                        <ProductFeatures>
+                        </ProductFeatures>
+
+                        <PriceContainer>
+                            <div className="priceSpace">
+                                <h1>Total:</h1>
+                                <TotalPrice>R$ {price}</TotalPrice>
                             </div>
-                        </Actions>
-                    </PriceContainer>
-                </ProductDetails>
-            </ProductContainer>
+                            <Actions>
+                                <p>Calcular Frete</p>
+                                <div className="buttons">
+                                    <Botao Text={'Adicionar ao carrinho'} Type={'vazado'} onClick={handleGoToCart} Icon={<IoCartOutline size={20}/>}/>
+                                    <Botao Text={'Comprar agora'} Type={'cheio'} onClick={handleGoToCart}/>
+                                </div>
+                            </Actions>
+                        </PriceContainer>
+                    </ProductDetails>
+                </ProductContainer>
 
-            <TemplatesSection>
-                <SectionTitle>Gabaritos</SectionTitle>
-                <TemplateOptions>
-                    <button>PDF</button>
-                    <button>Imagem</button>
-                    <button>Outro Formato</button>
-                </TemplateOptions>
-            </TemplatesSection>
+                <TemplatesSection>
+                    <SectionTitle>Gabaritos</SectionTitle>
+                    <TemplateOptions>
+                        <button>PDF</button>
+                        <button>Imagem</button>
+                        <button>Outro Formato</button>
+                    </TemplateOptions>
+                </TemplatesSection>
 
-            <DetailsSection>
-                <SectionTitle>Detalhes das opções</SectionTitle>
-                <div className="options">
-                    {Object.keys(detailContents).map((key) => (
-                        <button
-                            key={key}
-                            onClick={() => setActiveOption(key)}
-                            active={activeOption === key}
-                        >
-                            {key.charAt(0).toUpperCase() + key.slice(1)}
-                        </button>
-                    ))}
-                </div>
-
-                <div className="content">
-                    <div className="info-column">
-                        <h3>{detailContents[activeOption].title}</h3>
+                <DetailsSection>
+                    <SectionTitle>Detalhes das opções</SectionTitle>
+                    <div className="options">
+                        {Object.keys(detailContents).map((key) => (
+                            <button
+                                key={key}
+                                onClick={() => setActiveOption(key)}
+                                active={activeOption === key}
+                            >
+                                {key.charAt(0).toUpperCase() + key.slice(1)}
+                            </button>
+                        ))}
                     </div>
-                    <div className="description">
-                        <p>{detailContents[activeOption].description}</p>
-                    </div>
-                </div>
-            </DetailsSection>
 
-            <SimilarProducts>
-                <SectionTitle>Produtos similares</SectionTitle>
-                <div className="cards">
-                    {relatedProducts?.map((product) => (
-                        <ProdutCard key={product.id} data={product} />
-                    ))}
-                </div>
-            </SimilarProducts>
-        </Container>
+                    <div className="content">
+                        <div className="info-column">
+                            <h3>{detailContents[activeOption].title}</h3>
+                        </div>
+                        <div className="description">
+                            <p>{detailContents[activeOption].description}</p>
+                        </div>
+                    </div>
+                </DetailsSection>
+
+                <SimilarProducts>
+                    <SectionTitle>Produtos similares</SectionTitle>
+                    <div className="cards">
+                        {relatedProducts?.map((product) => (
+                            <ProdutCard key={product.id} data={product} />
+                        ))}
+                    </div>
+                </SimilarProducts>
+            </Container>
+        </ContainerMain>
     );
 };
 

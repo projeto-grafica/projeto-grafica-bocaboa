@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Container, Card, Input, Button, Title, LinkCadastro } from "./styles/Login.style";
 
 const Login = () => {
     const { login } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -46,7 +47,7 @@ const Login = () => {
                 idToken: tokens.idToken
             });
 
-            navigate("/");
+            navigate(location?.state?.from?.pathname || "/");
         } catch (err) {
             console.error('Erro no login:', err);
             setError(err.message || "Erro ao realizar login. Verifique suas credenciais.");

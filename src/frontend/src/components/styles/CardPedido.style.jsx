@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const CardPedidoContainer = styled.div`
-  width: 65vw;
+  width: 700px;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -45,8 +45,8 @@ export const OrderInfo = styled.div`
 `;
 
 export const Status = styled.span`
-  width: 8vw;
-  height: 3vh;
+  width: 100px;
+  height: 20px;
   border-radius: 10px;
   background-color: #00a65038;
   color: #00a650;
@@ -63,8 +63,8 @@ export const DetailsContainer = styled.div`
 export const DetailItem = styled.div`
   display: flex;
   justify-content: start;
-  gap: 1vw;
-  margin-bottom: 0.8vh;
+  gap: 8px;
+  margin-bottom: 5px;
   font-size: 12px;
 `;
 
@@ -88,7 +88,7 @@ export const DetailValue = styled.span`
 export const Actions = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4vh;
+  gap: 28px;
 `;
 
 export const ActionLink = styled(Link)`
@@ -98,8 +98,8 @@ export const ActionLink = styled(Link)`
   font-size: 14px;
   transition: opacity 0.2s;
   border: 1px solid #2e2e30ab;
-  width: 15vw;
-  height: 5vh;
+  width: 180px;
+  height: 30px;
   display: flex;  
   justify-content: center;
   align-items: center;

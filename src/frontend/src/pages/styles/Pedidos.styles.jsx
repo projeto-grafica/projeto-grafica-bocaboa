@@ -1,17 +1,25 @@
 import styled from 'styled-components';
 
 export const PageContainer = styled.div`
-  padding: 2rem 7.5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
   background-color: #f9f9f9;
+  padding: 20px 0;
 
   .list-cards {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2vh;
+    gap: 20px;
   }
 `;
+
+export const Container = styled.div`
+  width: 1100px;
+`
 
 export const HeaderSection = styled.div`
   display: flex;

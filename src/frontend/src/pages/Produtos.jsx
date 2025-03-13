@@ -30,44 +30,46 @@ const Produtos = () => {
     let count = results?.count;
 
     return (
-        <S.PageContainer>
-            <S.ResultHeader>
-                <h1>Resultados para "{nome}"</h1>
-                <S.FilterSection>
-                    <div style={{ display: 'flex', gap: '2rem' }}>
-                        <S.FilterGroup>
-                            <label>Ordenar:</label>
-                            <select
-                                defaultValue="mais-avaliados"
-                                onChange={(e) => setOrderBy(e.target.value)}
-                            >
-                                <option value="mais-avaliados">Mais avaliados</option>
-                                <option value="menor-preco">Menor preço</option>
-                                <option value="maior-preco">Maior preço</option>
-                            </select>
-                        </S.FilterGroup>
-                        <S.FilterGroup>
-                            <label>Exibir:</label>
-                            <select
-                                defaultValue="20"
-                                onChange={(e) => setItemsPerPage(Number(e.target.value))}
-                            >
-                                <option value="20">20 por página</option>
-                                <option value="40">40 por página</option>
-                                <option value="60">60 por página</option>
-                            </select>
-                        </S.FilterGroup>
-                    </div>
-                    <S.ResultCount>{count} Produtos</S.ResultCount>
-                </S.FilterSection>
-            </S.ResultHeader>
+        <S.PageContainerMain>
+            <S.PageContainer>
+                <S.ResultHeader>
+                    <h1>Resultados para "{nome}"</h1>
+                    <S.FilterSection>
+                        <div style={{ display: 'flex', gap: '2rem' }}>
+                            <S.FilterGroup>
+                                <label>Ordenar:</label>
+                                <select
+                                    defaultValue="mais-avaliados"
+                                    onChange={(e) => setOrderBy(e.target.value)}
+                                >
+                                    <option value="mais-avaliados">Mais avaliados</option>
+                                    <option value="menor-preco">Menor preço</option>
+                                    <option value="maior-preco">Maior preço</option>
+                                </select>
+                            </S.FilterGroup>
+                            <S.FilterGroup>
+                                <label>Exibir:</label>
+                                <select
+                                    defaultValue="20"
+                                    onChange={(e) => setItemsPerPage(Number(e.target.value))}
+                                >
+                                    <option value="20">20 por página</option>
+                                    <option value="40">40 por página</option>
+                                    <option value="60">60 por página</option>
+                                </select>
+                            </S.FilterGroup>
+                        </div>
+                        <S.ResultCount>{count} Produtos</S.ResultCount>
+                    </S.FilterSection>
+                </S.ResultHeader>
 
-            <S.ProductGrid>
-                {paginatedItems?.map((item) => (
-                    <ProdutCard key={item.sticker_id} data={item} />
-                ))}
-            </S.ProductGrid>
-        </S.PageContainer>
+                <S.ProductGrid>
+                    {paginatedItems?.map((item) => (
+                        <ProdutCard key={item.sticker_id} data={item} />
+                    ))}
+                </S.ProductGrid>
+            </S.PageContainer>     
+        </S.PageContainerMain>
     );
 };
 

@@ -1,15 +1,23 @@
 import styled from "styled-components";
 
+export const ContainerMain = styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 40px 0;
+`
+
 export const Container = styled.div`
     display: flex;
     justify-content: space-between;
-    padding: 5dvh 7.5dvw;
+    max-width: 1100px;
+    width: 100%;
 
     .carrinho-resumo {
         display: flex;
         flex-direction: column;
         background-color: white;
-        width: 22dvw;
+        width: 260px;
         border-radius: 10px;
         padding: 25px;
         height: fit-content;
@@ -33,12 +41,12 @@ export const CarrinhoContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 54dvw;
+    width: 680px;
     background-color: white;
     border-radius: 10px;
-    min-height: 70dvh;
+    min-height: 400px;
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
-    padding: 0 2dvw;
+    padding: 0 20px;
 
     h1 {
         margin-top: 4dvh;

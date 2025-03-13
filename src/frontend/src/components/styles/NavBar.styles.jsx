@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Nav = styled.nav`
     display: flex;
     flex-direction: column;
+    width: 100%;
 `;
 
 export const Promotion = styled.div`
@@ -11,9 +12,8 @@ export const Promotion = styled.div`
     justify-content: center;
     background: linear-gradient(to right, #62A860, #F27E16);
     background-size: 200% auto;
-    width: 100vw;
+    width: 100%;
     padding: 6px 0;
-
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     position: relative;
     overflow: hidden;
@@ -34,7 +34,7 @@ export const Promotion = styled.div`
 
     p {
         margin: 0;
-        font-size: 15px;
+        font-size: 0.9375rem;
         color: #2E2E30;
         font-weight: 600;
         letter-spacing: 0.3px;
@@ -79,28 +79,37 @@ export const NavBar = styled.nav`
     justify-content: space-between;
     align-items: center;
     background-color: #2E2E30;
-    width: 100vw;
-    height: 12vh;
-    padding: 0 7.5vw;
+    width: 100%;
+    height: 80px;
 
     a {
-        font-size: 32px;
+        font-size: 2rem;
         color: white;
         font-weight: 700;
         text-decoration: none;
         cursor: pointer;
+
+        @media (max-width: 768px) {
+            font-size: 1.5rem;
+        }
     }
 
-    .container{
+    .container {
         display: flex;
         justify-content: space-between;
-        width: 85vw;
+        width: 100%;
+        max-width: 1080px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+        height: 70px;
     }
 `;
 
 export const Line = styled.div`
-    width: 100vw;
-    height: 0.7vh;
+    width: 100%;
+    height: 5px;
     background-color: #F27E16;    
 `;
 
@@ -109,18 +118,25 @@ export const LinksBar = styled.nav`
     justify-content: center;
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100vw;
-    gap: 5vw;
+    width: 100%;
+    padding: 0 60px;
 
     .container {
         display: flex;
-        justify-content: start;
-        width: 85vw;
+        justify-content: flex-start;
+        width: 100%;
+        max-width: 1200px;
         padding: 15px 0;
-        gap: 5vw;
+        gap: 2rem;
+        flex-wrap: wrap;
+
+        @media (max-width: 768px) {
+            justify-content: center;
+            gap: 1rem;
+        }
 
         a {
-            font-size: 14px;
+            font-size: 0.875rem;
             color: #2E2E30;
             transition: color 0.3s;
             font-weight: 400;
@@ -136,7 +152,11 @@ export const ContainerIcons = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 12vw;
+    gap: 1.5rem;
+
+    @media (max-width: 768px) {
+        gap: 1rem;
+    }
 
     .icons {
         color: white;

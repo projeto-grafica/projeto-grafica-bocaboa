@@ -1,16 +1,12 @@
-import styled from "styled-components";
 import { IoStar } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
-import { useContext, useEffect } from 'react';
-import { OtherContext } from '../context/OtherContext';
 import { Container } from './styles/ProductCard.styles';
 
 const ProdutCard = ({ data }) => {
     const navigate = useNavigate();
-    const { addProduct } = useContext(OtherContext);
 
     const handleClick = () => {
-        addProduct(data.sticker_id);        
+        localStorage.setItem('lastAcess', data.sticker_id);        
         navigate(`/produto/${data.tipo}`);
     };
 

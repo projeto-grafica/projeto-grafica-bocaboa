@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 import {
   IoCubeOutline,
   IoHelpCircleOutline,
@@ -7,7 +6,7 @@ import {
   IoHeartOutline,
 } from "react-icons/io5";
 import { useAuth } from "../context/AuthContext";
-import { Container, Welcome, WelcomeHeading, Picture, Email, CardsContainer, CardLink, IconContainer, TextContainer, CardTitle, CardDescription } from "./styles/Perfil.style";
+import { Container, Main, Welcome, WelcomeHeading, Picture, Email, CardsContainer, CardLink, IconContainer, TextContainer, CardTitle, CardDescription } from "./styles/Perfil.style";
 
 const Perfil = () => {
   const { user, logout } = useAuth();
@@ -40,36 +39,38 @@ const Perfil = () => {
       title: "Favoritos",
       description: "Consulte sua lista de produtos favoritados",
     },
-  ];  
+  ];
 
   return (
     <Container>
-      <Welcome>
-        <div className="blockProfile">
-          {/* Exibe a primeira letra do nome do usuário */}
-          <Picture>
-            {user?.name ? user.name[0].toUpperCase() : "U"}
-          </Picture>
-          <div className="blockProfileInfos">
-            <WelcomeHeading>Bem vindo, {user?.name || "usuário"}</WelcomeHeading>
-            <Email>{user?.email || "email@email.com"}</Email>
+      <Main>
+        <Welcome>
+          <div className="blockProfile">
+            {/* Exibe a primeira letra do nome do usuário */}
+            <Picture>
+              {user?.name ? user.name[0].toUpperCase() : "U"}
+            </Picture>
+            <div className="blockProfileInfos">
+              <WelcomeHeading>Bem vindo, {user?.name || "usuário"}</WelcomeHeading>
+              <Email>{user?.email || "email@email.com"}</Email>
+            </div>
+            {/* LOGOUT BUTTON */}
+            <button onClick={logout}>Logout</button>
           </div>
-          {/* LOGOUT BUTTON */}
-          <button onClick={logout}>Logout</button>
-        </div>
-      </Welcome>
+        </Welcome>
 
-      <CardsContainer>
-        {cards.map((card, index) => (
-          <CardLink to={card.to} key={index}>
-            <IconContainer>{card.icon}</IconContainer>
-            <TextContainer>
-              <CardTitle>{card.title}</CardTitle>
-              <CardDescription>{card.description}</CardDescription>
-            </TextContainer>
-          </CardLink>
-        ))}
-      </CardsContainer>
+        <CardsContainer>
+          {cards.map((card, index) => (
+            <CardLink to={card.to} key={index}>
+              <IconContainer>{card.icon}</IconContainer>
+              <TextContainer>
+                <CardTitle>{card.title}</CardTitle>
+                <CardDescription>{card.description}</CardDescription>
+              </TextContainer>
+            </CardLink>
+          ))}
+        </CardsContainer>
+      </Main>
     </Container>
   );
 };

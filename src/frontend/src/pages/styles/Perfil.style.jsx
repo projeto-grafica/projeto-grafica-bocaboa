@@ -2,9 +2,16 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const Container = styled.div`
-    padding: 2rem 7.5vw;
+    width: 100%;
     background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
 `;
+
+export const Main = styled.div`
+    width: 1100px;
+`
 
 export const Welcome = styled.div`
     margin-bottom: 2rem;
@@ -53,12 +60,14 @@ export const Email = styled.p`
 `;
 
 export const CardsContainer = styled.div`
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(35vw, 2fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
 `;
 
 export const CardLink = styled(Link)`
+    width: 470px;
     display: flex;
     align-items: center;
     background-color: white;
