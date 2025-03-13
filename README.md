@@ -574,6 +574,69 @@ function StickerImageUploader({ stickerId }) {
     - Maior confiabilidade: Se o backend tiver um problema durante o upload, o arquivo não fica perdido
     - Segurança: O controle de acesso é garantido pelas políticas e assinaturas nas URLs pré-assinadas
 
+### Avaliações de Stickers (Ratings)
+
+Os usuários podem avaliar stickers com uma pontuação de 1 a 5 estrelas e adicionar comentários opcionais.
+
+1. **Avaliar um sticker (POST /stickers/{id}/ratings)** - 201
+
+   Exemplo de Body:
+   ```json
+   {
+     "score": 5
+   }
+   ```
+
+Exemplo de Output:
+
+   ```json
+   {
+  "rating_id": "7fb6b25d-13e7-4d2f-9c42-89b7f3d67a93",
+  "user_id": "44c8d4e8-90a1-7001-13a0-48ff0aa14dd0",
+  "sticker_id": "4153299416331907745",
+  "score": 5,
+  "created_at": "2025-03-13T15:47:23.128004"
+}
+   ```
+
+Observações:
+
+- O usuário deve estar autenticado para avaliar um sticker
+- Cada usuário só pode avaliar um sticker uma vez
+- O campo `score` deve ser um número entre 1 e 5
+
+2. **Listar avaliações de um sticker (GET /stickers/{id}/ratings)** - 200
+
+   Parâmetros de consulta:
+    - `limit` (opcional): Número máximo de resultados a retornar (padrão: 50)
+    - `lastEvaluatedKey` (opcional): Chave para paginação
+
+   Exemplo de Output:
+   ```json
+   {
+     "items": [
+       {
+         "rating_id": "7fb6b25d-13e7-4d2f-9c42-89b7f3d67a93",
+         "user_id": "44c8d4e8-90a1-7001-13a0-48ff0aa14dd0",
+         "sticker_id": "4153299416331907745",
+         "score": 5,
+         "comment": "Excelente qualidade, cores vibrantes!",
+         "created_at": "2025-03-13T15:47:23.128004"
+       },
+       {
+         "rating_id": "9d72fe3a-5b1c-4e89-b214-6f23a7c4a2d1",
+         "user_id": "12a9b3c4-56d7-89e0-12f3-456g789h0i1j",
+         "sticker_id": "4153299416331907745",
+         "score": 4,
+         "comment": "Muito bom, mas demorou um pouco para chegar.",
+         "created_at": "2025-03-12T10:21:15.438921"
+       }
+     ],
+     "lastEvaluatedKey": null,
+     "count": 2
+   }
+   ```
+
 ---
 
 ### /orders
