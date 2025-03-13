@@ -620,7 +620,6 @@ Observações:
          "user_id": "44c8d4e8-90a1-7001-13a0-48ff0aa14dd0",
          "sticker_id": "4153299416331907745",
          "score": 5,
-         "comment": "Excelente qualidade, cores vibrantes!",
          "created_at": "2025-03-13T15:47:23.128004"
        },
        {
@@ -628,7 +627,6 @@ Observações:
          "user_id": "12a9b3c4-56d7-89e0-12f3-456g789h0i1j",
          "sticker_id": "4153299416331907745",
          "score": 4,
-         "comment": "Muito bom, mas demorou um pouco para chegar.",
          "created_at": "2025-03-12T10:21:15.438921"
        }
      ],
