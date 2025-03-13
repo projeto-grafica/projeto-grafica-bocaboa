@@ -2,11 +2,16 @@ import json
 import boto3
 import logging
 
+from src.lambdas.stickers.services.ratings_service import RatingService
 from src.lambdas.stickers.services.stickers_service import StickerService
 
 dynamodb = boto3.resource('dynamodb')
+
 stickers_table = dynamodb.Table('stickers')
+ratings_table = dynamodb.Table('sticker_ratings')
+
 sticker_service = StickerService(stickers_table=stickers_table)
+rating_service = RatingService(stickers_table=stickers_table, ratings_table=ratings_table)
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -141,6 +146,41 @@ def lambda_handler(event, context):
             return {
                 'statusCode': 200,
                 'body': json.dumps(updated_sticker, default=str)
+            }
+
+        elif http_method == 'POST' and path.endswith('/ratings'):
+            sticker_id = path_parameters.get('id')
+            body['sticker_id'] = sticker_id
+
+            rating = rating_service.create_rating(body, user_id)
+            return {
+                'statusCode': 201,
+                'body': json.dumps(rating, default=str)
+            }
+
+        elif http_method == 'GET' and path.endswith('/ratings'):
+            sticker_id = path_parameters.get('id')
+            limit = int(query_parameters.get('limit', 50))
+            last_key = query_parameters.get('lastEvaluatedKey')
+
+            if last_key:
+                try:
+                    last_key = json.loads(last_key)
+                except:
+                    return {
+                        'statusCode': 400,
+                        'body': json.dumps({'message': 'Invalid lastEvaluatedKey format'})
+                    }
+
+            ratings = rating_service.get_sticker_ratings(
+                sticker_id=sticker_id,
+                limit=limit,
+                last_evaluated_key=last_key
+            )
+
+            return {
+                'statusCode': 200,
+                'body': json.dumps(ratings, default=str)
             }
 
         else:

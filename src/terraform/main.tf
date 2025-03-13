@@ -97,6 +97,13 @@ module "orders_table" {
   hash_key_type = "S"
 }
 
+module "sticker_ratings_table" {
+  source        = "./modules/dynamodb"
+  table_name    = "sticker_ratings"
+  hash_key_name = "rating_id"
+  hash_key_type = "S"
+}
+
 # ---------------------
 #   S3 Bucket para Imagens
 # ---------------------
@@ -403,6 +410,23 @@ module "stickers_images_delete_route" {
   path              = "/stickers/{id}/images"
   lambda_invoke_arn = module.stickers_lambda.invoke_arn
   # authorizer_id     = aws_apigatewayv2_authorizer.main.id
+}
+
+module "stickers_ratings_create_route" {
+  source            = "./modules/api_gateway"
+  api_id            = aws_apigatewayv2_api.main.id
+  method            = "POST"
+  path              = "/stickers/{id}/ratings"
+  lambda_invoke_arn = module.stickers_lambda.invoke_arn
+  # authorizer_id     = aws_apigatewayv2_authorizer.main.id
+}
+
+module "stickers_ratings_list_route" {
+  source            = "./modules/api_gateway"
+  api_id            = aws_apigatewayv2_api.main.id
+  method            = "GET"
+  path              = "/stickers/{id}/ratings"
+  lambda_invoke_arn = module.stickers_lambda.invoke_arn
 }
 
 # Orders
