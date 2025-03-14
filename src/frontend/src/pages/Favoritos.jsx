@@ -14,6 +14,10 @@ const PageContainerMain = styled.div`
 const PageContainer = styled.div`
   width: 1100px;
   background-color: #f9f9f9;
+
+  @media (max-aspect-ratio: 4/3) {
+    width: 90%;
+  }
 `;
 
 const HeaderSection = styled.div`
@@ -35,6 +39,11 @@ const ProductGrid = styled.div`
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
   margin-top: 1rem;
+
+  @media (max-aspect-ratio: 4/3) {
+    grid-template-columns: repeat(2);
+    gap: 0.6rem;
+  }
 `;
 
 const Favoritos = () => {

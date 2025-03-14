@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { ContainerPromotions } from "./styles/BannerPromotions.style";
 
 // Componente de banner de promoções

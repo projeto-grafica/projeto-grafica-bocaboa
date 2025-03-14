@@ -14,4 +14,10 @@ export const ContainerPromotions = styled.div`
         height: 100%;
         object-fit: cover;
     }
+
+    @media (max-aspect-ratio: 4/3) {
+        width: auto;
+        width: 85%;
+        height: 200px;  
+    }
 `;

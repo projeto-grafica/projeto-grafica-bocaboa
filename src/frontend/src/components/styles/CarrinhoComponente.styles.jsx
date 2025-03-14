@@ -18,6 +18,15 @@ export const ProductCard = styled.div`
     gap: 20px;
     width: 60%;
   }
+
+  @media (max-aspect-ratio: 4/3) {
+    flex-direction: column;
+    gap: 20px;
+    
+    .product-info-container {
+      width: 300px;
+    }
+  }
 `;
 
 export const ImageContainer = styled.div`
@@ -51,6 +60,13 @@ export const QuantityContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 15px;
+
+  @media (max-aspect-ratio: 4/3) {
+    width: 300px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+  }
 `;
 
 export const QuantityControls = styled.div`

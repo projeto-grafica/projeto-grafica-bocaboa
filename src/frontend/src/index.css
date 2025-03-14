@@ -34,3 +34,24 @@ body {
     scrollbar-width: thin;
     scrollbar-color: #F27E16 #f1f1f1;
 }
+
+/* Esconde a barra de rolagem em dispositivos móveis */
+@media (max-width: 768px) {
+    ::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    /* Para Firefox */
+    * {
+        scrollbar-width: none;
+    }
+}

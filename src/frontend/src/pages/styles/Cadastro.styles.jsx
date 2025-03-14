@@ -49,6 +49,10 @@ export const Card = styled.div`
     width: 320px;
     z-index: 2;
     position: relative;
+
+    @media (max-aspect-ratio: 4/3) {
+        width: 300px;
+    }
 `;
 
 export const Title = styled.h1`

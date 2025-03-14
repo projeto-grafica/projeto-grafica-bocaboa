@@ -86,6 +86,6 @@ export const ProductGrid = styled.div`
   }
   
   @media (max-width: 576px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 `;
