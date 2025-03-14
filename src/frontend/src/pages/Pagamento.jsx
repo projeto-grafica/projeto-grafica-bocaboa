@@ -17,7 +17,7 @@ const Pagamento = () => {
 
     useEffect(() => {
         const completedStages = localStorage.getItem('completedStages') ? JSON.parse(localStorage.getItem('completedStages')) : [];
-        if (!completedStages.includes(0)) {
+        if (!completedStages.includes(1)) {
             navigate('/carrinho');
             return;
         }

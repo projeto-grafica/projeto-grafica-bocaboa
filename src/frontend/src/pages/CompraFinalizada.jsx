@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import styled from 'styled-components';
 import { FaCircleCheck } from "react-icons/fa6";
@@ -6,7 +7,12 @@ import Botao from "../components/Botoes";
 
 const CompraFinalizada = () => {
     const { user } = useAuth();
-    
+
+    useEffect(() => {
+        localStorage.removeItem("checkoutData");
+        localStorage.removeItem("completedStages");
+    }, []);
+
     return (
         <Container>
             <div className="card">
@@ -67,7 +73,6 @@ const Container = styled.div`
                 font-weight: 500;
             }
 
-            
             .infos{
                 display: flex;
                 flex-direction: column;
@@ -75,7 +80,7 @@ const Container = styled.div`
                 font-size: 16px;
 
                 p{
-                    color- #2E2E30;
+                    color: #2E2E30;
                     margin: 2vh;
                     &:last-of-type{
                         color: #62A860
@@ -83,6 +88,5 @@ const Container = styled.div`
                 }
             }
         }
-    
     }
 `;

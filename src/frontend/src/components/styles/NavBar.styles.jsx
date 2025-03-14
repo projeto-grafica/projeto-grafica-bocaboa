@@ -150,6 +150,7 @@ export const LinksBar = styled.nav`
 
 export const ContainerIcons = styled.div`
     display: flex;
+    min-width: 150px;
     justify-content: space-between;
     align-items: center;
     gap: 1.5rem;
