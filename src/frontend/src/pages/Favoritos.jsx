@@ -3,16 +3,24 @@ import styled from 'styled-components';
 import { IoIosHeartEmpty } from "react-icons/io";
 import ProdutCard from '../components/ProductCard';
 
+const PageContainerMain = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  padding: 30px 0;
+`
+
 const PageContainer = styled.div`
-  padding: 2rem 4rem;
+  width: 1100px;
   background-color: #f9f9f9;
 `;
 
 const HeaderSection = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.8rem;
-  margin-bottom: 2rem;
+  gap: 10px;
+  margin-bottom: 30px;
   
   h1 {
     font-size: 1.5rem;
@@ -31,6 +39,7 @@ const ProductGrid = styled.div`
 
 const Favoritos = () => {
     return (
+      <PageContainerMain>
         <PageContainer>
             <HeaderSection>
                 <IoIosHeartEmpty size={24} />
@@ -52,6 +61,7 @@ const Favoritos = () => {
                 <ProdutCard />
             </ProductGrid>
         </PageContainer>
+       </PageContainerMain>
     );
 };
 

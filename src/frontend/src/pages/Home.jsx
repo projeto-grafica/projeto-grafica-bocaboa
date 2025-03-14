@@ -1,15 +1,8 @@
 import BannerPromotions from "../components/BannerPromotions";
-import styled from "styled-components";
 import BlockCards from "../components/BlockCards";
 import ImageBanner from "../assets/image.png";
 import { useEffect, useState } from "react";
-
-const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    padding-top: 5vh;
-    width: 100%;
-`
+import { Container } from "./styles/Home.styles";
 
 const Home = () => {
     const [stickers, setStickers] = useState([]);
