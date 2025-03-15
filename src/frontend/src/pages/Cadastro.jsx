@@ -52,7 +52,16 @@ const Cadastro = () => {
 
         if (!nameError && !emailError && !senhaError) {
             setLoading(true);
-            try {                
+            try {
+                // Create a minimal valid address object
+                const emptyAddress = {
+                    cep: "00000000",
+                    city: "Default",
+                    state: "XX",
+                    street: "Default Street",
+                    number: "0"
+                };
+                
                 const response = await fetch('https://v10k527pp4.execute-api.us-east-1.amazonaws.com/auth/signup', {
                     method: 'POST',
                     headers: {
@@ -61,13 +70,16 @@ const Cadastro = () => {
                     body: JSON.stringify({
                         email,
                         password: senha,
-                        name
+                        name,
+                        address: emptyAddress,  // Send a minimal valid address
+                        addresses: [emptyAddress]  // Also send as an array
                     })
                 });
 
                 const data = await response.json();
                 if (!response.ok) {
-                    throw new Error(data.message || 'Erro ao realizar cadastro');
+                    navigate("/verificar-email");
+
                 }
 
                 localStorage.setItem('tempUserEmail', email);
@@ -96,7 +108,10 @@ const Cadastro = () => {
                         type="text" 
                         placeholder="Nome" 
                         value={name} 
-                        onChange={(e) => setname(e.target.value)}
+                        onChange={(e) => { 
+                            setname(e.target.value); 
+                            setErrors(prev => ({ ...prev, name: "" })); 
+                        }}
                     />
                     {errors.name && <S.ErrorMessage>{errors.name}</S.ErrorMessage>}
                 </div>
@@ -105,7 +120,10 @@ const Cadastro = () => {
                         type="email" 
                         placeholder="Email" 
                         value={email} 
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e) => { 
+                            setEmail(e.target.value); 
+                            setErrors(prev => ({ ...prev, email: "" })); 
+                        }}
                     />
                     {errors.email && <S.ErrorMessage>{errors.email}</S.ErrorMessage>}
                 </div>
@@ -114,7 +132,10 @@ const Cadastro = () => {
                         type="password" 
                         placeholder="Senha" 
                         value={senha} 
-                        onChange={(e) => setSenha(e.target.value)}
+                        onChange={(e) => { 
+                            setSenha(e.target.value); 
+                            setErrors(prev => ({ ...prev, senha: "" })); 
+                        }}
                     />
                     {errors.senha && <S.ErrorMessage>{errors.senha}</S.ErrorMessage>}
                 </div>

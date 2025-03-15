@@ -49,6 +49,11 @@ export const Card = styled.div`
     width: 400px;
     z-index: 2;
     position: relative;
+    
+    @media (max-aspect-ratio: 4/3) {
+        width: 80%;
+        padding: 5%;
+    }
 `;
 
 export const Title = styled.h1`
@@ -94,6 +99,11 @@ export const CodeInput = styled.input`
     &::-webkit-outer-spin-button {
         -webkit-appearance: none;
         margin: 0;
+    }
+
+    @media (max-aspect-ratio: 4/3) {
+        width: 38px;
+        height: 38px;
     }
 `;
 
