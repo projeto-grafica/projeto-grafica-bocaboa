@@ -27,6 +27,39 @@ export const CardPedidoContainer = styled.div`
         }
     }
   }
+
+  @media (max-aspect-ratio: 4/3) {
+    width: 90%;
+    padding: 1rem;
+    
+    .card-body {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+      
+      .card-content {
+        width: 100%;
+        
+        img {
+          width: 80px;
+          height: 80px;
+        }
+      }
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .card-body {
+      .card-content {
+        flex-direction: column;
+        align-items: flex-start;
+        
+        img {
+          margin-bottom: 0.8rem;
+        }
+      }
+    }
+  }
 `;
 
 export const Header = styled.div`
@@ -36,6 +69,12 @@ export const Header = styled.div`
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid #C8C8C8;
+  
+  @media (max-aspect-ratio: 4/3) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
 `;
 
 export const OrderInfo = styled.div`
@@ -58,6 +97,9 @@ export const Status = styled.span`
 `;
 
 export const DetailsContainer = styled.div`
+  @media (max-aspect-ratio: 4/3) {
+    width: 100%;
+  }
 `;
 
 export const DetailItem = styled.div`
@@ -89,6 +131,18 @@ export const Actions = styled.div`
   display: flex;
   flex-direction: column;
   gap: 28px;
+  
+  @media (max-aspect-ratio: 4/3) {
+    flex-direction: row;
+    gap: 15px;
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 15px;
+  }
 `;
 
 export const ActionLink = styled(Link)`
@@ -107,5 +161,13 @@ export const ActionLink = styled(Link)`
 
   &:hover {
     opacity: 0.8;
+  }
+  
+  @media (max-aspect-ratio: 4/3) {
+    width: 48%;
+  }
+  
+  @media (max-width: 480px) {
+    width: 100%;
   }
 `;

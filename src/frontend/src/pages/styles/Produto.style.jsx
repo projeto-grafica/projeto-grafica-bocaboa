@@ -422,6 +422,20 @@ export const SimilarProducts = styled.div`
     .cards {
         display: flex;
         gap: 1.5rem;
+    }
 
+    @media (max-aspect-ratio: 4/3) {
+        .slick-track {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .slick-slide {
+            width: 80% !important;
+        }
+
+        .cards {
+            display: block;
+        }
     }
 `;

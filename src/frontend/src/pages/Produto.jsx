@@ -24,6 +24,9 @@ import {
     DetailsSection,
     SimilarProducts,
 } from "./styles/Produto.style"
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const Produto = () => {
     const { nome } = useParams();
@@ -74,6 +77,14 @@ const Produto = () => {
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
+
+    const sliderSettings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1.5,
+        slidesToScroll: 1
+    };
 
     return (
         <ContainerMain>
@@ -193,7 +204,13 @@ const Produto = () => {
                                 ))}
                             </div>
                         </>
-                    ) : null
+                    ) : (
+                        <Slider {...sliderSettings}>
+                            {relatedProducts?.map((product) => (
+                                <ProdutCard key={product.id} data={product} />
+                            ))}
+                        </Slider>
+                    )
                 }
                 </SimilarProducts>
             </Container>
