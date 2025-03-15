@@ -6,6 +6,11 @@ export const ContainerMain = styled.div`
     flex-direction: column;
     align-items: center;
     background-color: #f8f8f8; /* Fundo levemente cinza */
+
+    @media (max-aspect-ratio: 4/3) {
+        width: 100%;
+        padding: 1rem 0;
+    }
 `;
 
 export const Container = styled.div`
@@ -22,8 +27,9 @@ export const Container = styled.div`
         margin-top: 1rem;
     }
 
-    @media (max-width: 768px) {
+    @media (max-aspect-ratio: 4/3) {
         width: 95%;
+        padding: 0;
     }
 `;
 
@@ -37,12 +43,21 @@ export const RoadMap = styled.div`
     @media (max-width: 768px) {
         width: 95%;
     }
+
+    @media (max-aspect-ratio: 4/3) {
+        max-width: 100%;
+        overflow-x: auto;
+    }
 `;
 
 export const Content = styled.div`
     width: 100%;
     display: flex;
     justify-content: start;
+
+    @media (max-aspect-ratio: 4/3) {
+        padding: 0;
+    }
 `;
 
 export const Title = styled.h2`
@@ -51,6 +66,10 @@ export const Title = styled.h2`
     color: #333;
     margin: 0;
     margin-bottom: 1.5rem;
+
+    @media (max-aspect-ratio: 4/3) {
+        font-size: 1rem;
+    }
 `;
 
 export const BotaoFinalizar = styled.button`
@@ -73,6 +92,11 @@ export const BotaoFinalizar = styled.button`
     @media (max-width: 768px) {
         width: 100%;
     }
+
+    @media (max-aspect-ratio: 4/3) {
+        width: 100%;
+        height: 45px;
+    }
 `;
 
 export const GridCard = styled.div`
@@ -81,8 +105,9 @@ export const GridCard = styled.div`
     gap: 2rem;
     width: 100%;
 
-    @media (max-width: 1024px) {
+    @media (max-aspect-ratio: 4/3) {
         flex-direction: column;
+        gap: 1rem;
     }
 `;
 
@@ -199,6 +224,30 @@ export const Card = styled.div`
             padding: 1rem 2rem;
         }
     }
+
+    @media (max-aspect-ratio: 4/3) {
+        width: 90%;
+        padding: 5%;
+        max-height: none;
+        margin-bottom: 0.5rem;
+        
+        .content-carrinho {
+            max-height: 200px;
+        }
+        
+        .product {
+            padding: 0 0 0.75rem 0;
+        }
+        
+        .metodopag {
+            padding: 0.75rem 1rem;
+            font-size: 0.8rem;
+        }
+        
+        .valor .valorfinal {
+            padding: 0.75rem 1rem;
+        }
+    }
 `;
 
 /* Novo estilo para o cabeçalho dos cards */
@@ -215,6 +264,11 @@ export const CardHeader = styled.div`
         justify-content: start;
         align-items: center;
         gap: 0.5rem;
+    }
+
+    @media (max-aspect-ratio: 4/3) {
+        padding: 0.3rem 0;
+        margin-bottom: 0.75rem;
     }
 `;
 
@@ -244,4 +298,8 @@ export const CardTitle = styled.h3`
     font-weight: 500;
     color: #333;
     margin: 0;
+
+    @media (max-aspect-ratio: 4/3) {
+        font-size: 1rem;
+    }
 `;

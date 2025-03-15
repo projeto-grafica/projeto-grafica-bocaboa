@@ -10,15 +10,13 @@ export const ContainerMain = styled.div`
 
 export const Container = styled.div`
     max-width: 1080px;
+    width: 100%;
     padding: 2rem 1rem;
     background-color: #f5f5f5;
     
-    @media (min-width: 768px) {
-        padding: 2rem;
-    }
-    
-    @media (min-width: 1200px) {
-        padding: 2rem calc(5% + 1rem);
+    @media (max-aspect-ratio: 4/3) {
+        padding: 2rem 0;
+        width: 90%;
     }
 `;
 
@@ -35,20 +33,23 @@ export const Breadcrumb = styled.div`
             text-decoration: underline;
         }
     }
+
+    @media (max-aspect-ratio: 4/3) {
+        font-size: 0.8rem;
+    }
 `;
 
 export const ProductContainer = styled.div`
     display: flex;
-    flex-direction: column;
     gap: 2rem;
     background-color: white;
     padding: 1.5rem;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     
-    @media (min-width: 992px) {
-        flex-direction: row;
-        padding: 2rem;
+    @media (max-aspect-ratio: 4/3) {
+        flex-direction: column;
+        padding: 1rem;
     }
 
     .photos {
@@ -78,6 +79,44 @@ export const ProductContainer = styled.div`
             @media (min-width: 768px) {
                 width: 80px;
                 height: 80px;
+            }
+        }
+    }
+
+    @media (max-aspect-ratio: 4/3) {
+        .title{
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+
+            .rate {
+                display: flex;
+                gap: 2px;
+                align-items: center;
+                margin-top: 0.5rem;
+
+                .starQuantity {
+                    margin: 0;
+                    font-size: 0.8rem;
+                    font-weight: 500;
+                    color: #2E2E30;
+                }
+                
+                .rateQuantity {
+                    margin: 0;
+                    font-size: 0.8rem;
+                    font-weight: 400;
+                    color: #666;
+                }        
+            }
+        }   
+
+        .photos {
+            .subPhotos {
+                img {
+                    width: 4.3rem;
+                    height: 4.3rem;
+                }
             }
         }
     }
@@ -143,8 +182,8 @@ export const ProductDescription = styled.p`
     color: #2e2e30aa;
     margin: 1.5rem 0;
     
-    @media (min-width: 768px) {
-        margin: 2rem 0;
+    @media (max-aspect-ratio: 4/3) {
+        margin: 1rem 0;
     }
 `;
 
@@ -202,14 +241,17 @@ export const TotalPrice = styled.div`
 
 export const Actions = styled.div`
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
     width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    /* inverter os itens */ 
+    flex-direction: row-reverse;
     
-    @media (min-width: 768px) {
-        flex-direction: row;
-        justify-content: space-between;
+    @media (max-aspect-ratio: 4/3) {
+        flex-direction: column;
+        justify-content: start;
+        gap: 1rem;
     }
 
     p {
@@ -219,22 +261,26 @@ export const Actions = styled.div`
         text-decoration: underline;
         cursor: pointer;
         order: 2;
-        
-        @media (min-width: 768px) {
-            order: 1;
-        }
     }
 
     .buttons {
         display: flex;  
         gap: 1rem;
-        width: 100%;
         justify-content: center;
         order: 1;
+
+        button {
+            max-width: 200px;
+        }
         
-        @media (min-width: 768px) {
-            width: auto;
-            order: 2;
+        @media (max-aspect-ratio: 4/3) {
+            width: 100%;
+            gap: 1rem;
+            justify-content: center;        
+
+            button {
+                width: 150px;
+            }
         }
     }
 `;
@@ -245,10 +291,6 @@ export const TemplatesSection = styled.div`
     padding: 1.5rem;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    
-    @media (min-width: 768px) {
-        padding: 2rem;
-    }
 `;
 
 export const SectionTitle = styled.h2`
@@ -256,26 +298,19 @@ export const SectionTitle = styled.h2`
     font-weight: 500;
     color: #2E2E30;
     margin: 0 0 1.5rem 0;
-    
-    @media (min-width: 768px) {
-        font-size: 1.5rem;
-        margin: 0 0 2rem 0;
-    }
 `;
 
 export const TemplateOptions = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 1rem;
     margin-bottom: 1.5rem;
+    width: 100%;
     
-    @media (min-width: 768px) {
-        flex-direction: row;
-        gap: 2rem;
-    }
-
     button {
+        max-width: 300px;
         width: 100%;
         height: 3rem;
         border: 1px solid #ddd;
@@ -283,15 +318,6 @@ export const TemplateOptions = styled.div`
         background-color: white;
         cursor: pointer;
         transition: background-color 0.3s;
-        
-        @media (min-width: 768px) {
-            width: 24%;
-            height: 3.5rem;
-        }
-
-        @media (min-width: 992px) {
-            width: 20%;
-        }
 
         &:hover {
             background-color: #f5f5f5;
@@ -306,10 +332,6 @@ export const DetailsSection = styled.div`
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     
-    @media (min-width: 768px) {
-        padding: 2rem;
-    }
-
     .options {
         width: 100%;
         display: flex;
@@ -317,14 +339,8 @@ export const DetailsSection = styled.div`
         justify-content: center;
         gap: 1rem;
         margin-bottom: 1.5rem;
-        
-        @media (min-width: 768px) {
-            flex-wrap: nowrap;
-            margin-bottom: 2rem;
-        }
 
         button {
-            flex: 1;
             min-width: 120px;
             height: 2.5rem;
             border: 1px solid ${props => props.$active ? '#F27E16' : '#666'};
@@ -333,17 +349,26 @@ export const DetailsSection = styled.div`
             color: ${props => props.$active ? 'white' : '#666'};
             cursor: pointer;
             transition: all 0.3s;
-            
-            @media (min-width: 768px) {
-                flex: 0 1 auto;
-                width: auto;
-                padding: 0 1.5rem;
-            }
 
             &:hover {
                 border-color: #F27E16;
                 background: ${props => props.$active ? '#F27E16' : 'rgba(242, 126, 22, 0.1)'};
                 color: ${props => props.$active ? 'white' : '#F27E16'};
+            }
+        }
+
+        @media (max-aspect-ratio: 4/3) {
+            width: 100%;
+            gap: 0.5rem;
+            display: flex;
+            flex-wrap: wrap;
+
+            button {
+                padding: 0;
+                max-width: 60px;
+                width: 60px;
+                height: 2rem;
+
             }
         }
     }
@@ -355,16 +380,8 @@ export const DetailsSection = styled.div`
         align-items: center;
 
         .info-column {
-            width: 100%;
+            width: 65%;
             
-            @media (min-width: 768px) {
-                width: 80%;
-            }
-            
-            @media (min-width: 992px) {
-                width: 70%;
-            }
-
             h3 {
                 font-size: 1rem;
                 color: #2E2E30;
@@ -373,21 +390,23 @@ export const DetailsSection = styled.div`
         }
 
         .description {
-            width: 100%;
-            
-            @media (min-width: 768px) {
-                width: 80%;
-            }
-            
-            @media (min-width: 992px) {
-                width: 70%;
-            }
-            
+            width: 65%;
+
             p {
                 font-size: 0.875rem;
                 color: #666;
                 line-height: 1.5;
                 margin: 0;
+            }
+        }
+
+        @media (max-aspect-ratio: 4/3) {
+            .info-column {
+                width: 100%;
+            }
+
+            .description {
+                width: 100%;
             }
         }
     }
@@ -400,26 +419,23 @@ export const SimilarProducts = styled.div`
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     
-    @media (min-width: 768px) {
-        padding: 2rem;
+    .cards {
+        display: flex;
+        gap: 1.5rem;
     }
 
-    .cards {
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-        gap: 1.5rem;
-        
-        @media (min-width: 576px) {
-            grid-template-columns: repeat(2, 1fr);
+    @media (max-aspect-ratio: 4/3) {
+        .slick-track {
+            display: flex;
+            gap: 1rem;
         }
-        
-        @media (min-width: 992px) {
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+
+        .slick-slide {
+            width: 80% !important;
         }
-        
-        @media (min-width: 1200px) {
-            grid-template-columns: repeat(4, 1fr);
+
+        .cards {
+            display: block;
         }
     }
 `;

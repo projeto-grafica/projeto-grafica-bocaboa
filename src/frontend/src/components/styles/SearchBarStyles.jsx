@@ -5,6 +5,10 @@ export const SearchContainer = styled.form`
     width: 55%;
     display: flex;
     align-items: center;
+
+    @media (max-aspect-ratio: 4/3) {
+        width: 90%;
+    }
 `;
 
 export const StyledInput = styled.input`

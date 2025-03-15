@@ -19,7 +19,12 @@ export const PageContainer = styled.div`
 
 export const Container = styled.div`
   width: 1100px;
-`
+  
+  @media (max-aspect-ratio: 4/3) {
+    width: 90%;
+    max-width: 1100px;
+  }
+`;
 
 export const HeaderSection = styled.div`
   display: flex;
@@ -33,6 +38,12 @@ export const HeaderSection = styled.div`
     margin: 0;
     font-weight: 500;
   }
+  
+  @media (max-aspect-ratio: 4/3) {
+    h1 {
+      font-size: 1.2rem;
+    }
+  }
 `;
 
 export const ProductGrid = styled.div`
@@ -40,4 +51,12 @@ export const ProductGrid = styled.div`
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
   margin-top: 1rem;
+  
+  @media (max-aspect-ratio: 4/3) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
 `;

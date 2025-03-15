@@ -5,7 +5,7 @@ import ProdutCard from "../components/ProductCard";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Botao from "../components/Botoes";
-import { 
+import {
     ContainerMain,
     Container,
     Breadcrumb,
@@ -24,14 +24,19 @@ import {
     DetailsSection,
     SimilarProducts,
 } from "./styles/Produto.style"
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const Produto = () => {
     const { nome } = useParams();
     const navigate = useNavigate();
     const [productId, setProductId] = useState(localStorage.getItem('lastAcess') || '');
-    const [activeOption, setActiveOption] = useState('tamanho');  
+    const [activeOption, setActiveOption] = useState('tamanho');
     const [product, setProduct] = useState({});
     const [relatedProducts, setRelatedProducts] = useState([]);
+    const [isMobile, setIsMobile] = useState(false);
+
     let name = product?.name;
     let formattedName = name ? (name.charAt(0).toUpperCase() + name.slice(1)) : "";
     let price = product?.price;
@@ -44,7 +49,7 @@ const Produto = () => {
         const value = productId;
         cartProducts.push(value);
         localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
-        navigate('/carrinho');  
+        navigate('/carrinho');
     }
 
     useEffect(() => {
@@ -59,6 +64,28 @@ const Produto = () => {
             .then(data => setRelatedProducts(data.items))
     }, [type]);
 
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 768) {
+                setIsMobile(true);
+            } else {
+                setIsMobile(false);
+            }
+        };
+
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const sliderSettings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1.5,
+        slidesToScroll: 1
+    };
+
     return (
         <ContainerMain>
             <Container>
@@ -67,6 +94,22 @@ const Produto = () => {
                 </Breadcrumb>
 
                 <ProductContainer>
+                    {
+                        isMobile ? (
+                            <div className="title">
+                                <ProductTitle>{formattedName}</ProductTitle>
+                                <div className="rate">
+                                    <IoStar size={14} color="#F27E16" />
+                                    <IoStar size={14} color="#F27E16" />
+                                    <IoStar size={14} color="#F27E16" />
+                                    <IoStar size={14} color="#F27E16" />
+                                    <IoStar size={14} color="#F27E16" />
+                                    <p className="starQuantity">5</p>
+                                    <p className="rateQuantity">(4.200)</p>
+                                </div>
+                            </div>
+                        ) : null
+                    }
                     <div className="photos">
                         <ProductImage src="https://d1br4h274rc9sc.cloudfront.net/content/shortcut_adesivos_cfc551fd54.png" alt={nome} />
                         <div className="subPhotos">
@@ -77,16 +120,22 @@ const Produto = () => {
                         </div>
                     </div>
                     <ProductDetails>
-                        <ProductTitle>{formattedName}</ProductTitle>
-                        <div className="rate">
-                            <IoStar size={14} color="#F27E16" />
-                            <IoStar size={14} color="#F27E16" />
-                            <IoStar size={14} color="#F27E16" />
-                            <IoStar size={14} color="#F27E16" />
-                            <IoStar size={14} color="#F27E16" />
-                            <p className="starQuantity">5</p>
-                            <p className="rateQuantity">(4.200)</p>
-                        </div>
+                        {
+                            !isMobile ? (
+                                <>
+                                    <ProductTitle>{formattedName}</ProductTitle>
+                                    <div className="rate">
+                                        <IoStar size={14} color="#F27E16" />
+                                        <IoStar size={14} color="#F27E16" />
+                                        <IoStar size={14} color="#F27E16" />
+                                        <IoStar size={14} color="#F27E16" />
+                                        <IoStar size={14} color="#F27E16" />
+                                        <p className="starQuantity">5</p>
+                                        <p className="rateQuantity">(4.200)</p>
+                                    </div>
+                                </> 
+                            ) : null
+                        }
                         <ProductDescription>
                             {description}
                         </ProductDescription>
@@ -102,8 +151,8 @@ const Produto = () => {
                             <Actions>
                                 <p>Calcular Frete</p>
                                 <div className="buttons">
-                                    <Botao Text={'Adicionar ao carrinho'} Type={'vazado'} onClick={handleGoToCart} Icon={<IoCartOutline size={20}/>}/>
-                                    <Botao Text={'Comprar agora'} Type={'cheio'} onClick={handleGoToCart}/>
+                                    <Botao Text={'Adicionar ao carrinho'} Type={'vazado'} onClick={handleGoToCart} Icon={<IoCartOutline size={20} />} />
+                                    <Botao Text={'Comprar agora'} Type={'cheio'} onClick={handleGoToCart} />
                                 </div>
                             </Actions>
                         </PriceContainer>
@@ -143,13 +192,26 @@ const Produto = () => {
                     </div>
                 </DetailsSection>
 
+                
                 <SimilarProducts>
-                    <SectionTitle>Produtos similares</SectionTitle>
-                    <div className="cards">
-                        {relatedProducts?.map((product) => (
-                            <ProdutCard key={product.id} data={product} />
-                        ))}
-                    </div>
+                {
+                    !isMobile ? (
+                        <>
+                            <SectionTitle>Produtos similares</SectionTitle>
+                            <div className="cards">
+                                {relatedProducts?.map((product) => (
+                                    <ProdutCard key={product.id} data={product} />
+                                ))}
+                            </div>
+                        </>
+                    ) : (
+                        <Slider {...sliderSettings}>
+                            {relatedProducts?.map((product) => (
+                                <ProdutCard key={product.id} data={product} />
+                            ))}
+                        </Slider>
+                    )
+                }
                 </SimilarProducts>
             </Container>
         </ContainerMain>

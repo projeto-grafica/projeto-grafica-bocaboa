@@ -56,6 +56,10 @@ export const Card = styled.div`
         flex-direction: column;
         gap: 1rem;
     }
+
+    @media (max-aspect-ratio: 4/3) {
+        width: 300px;
+    }
 `;
 
 export const Input = styled.input`

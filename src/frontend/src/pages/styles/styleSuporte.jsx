@@ -5,6 +5,10 @@ export const Container = styled.div`
   margin: 0 auto;
   padding: 2rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  @media (max-aspect-ratio: 4/3) {
+    padding: 1rem;
+  }
 `
 
 export const Title = styled.h1`
@@ -18,6 +22,11 @@ export const SearchContainer = styled.div`
   position: relative;
   max-width: 40vw;
   margin: 0 auto 3rem auto;
+
+  @media (max-aspect-ratio: 4/3) {
+    max-width: 100%;
+    margin: 0;
+  }
 `
 
 export const SearchInput = styled.input`
@@ -33,6 +42,11 @@ export const SearchInput = styled.input`
     border-color: #4a90e2;
     box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
   }
+
+  @media (max-aspect-ratio: 4/3) {
+    width: 100%;
+    padding: 0.5rem 0;
+  }
 `
 
 export const SearchIcon = styled.div`
@@ -41,6 +55,10 @@ export const SearchIcon = styled.div`
   top: 50%;
   transform: translateY(-50%);
   color: #999;
+
+  @media (max-aspect-ratio: 4/3) {
+    display: none;
+  }
 `
 
 export const SectionContainer = styled.div`

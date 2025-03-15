@@ -13,7 +13,6 @@ const Home = () => {
             .then(data => setStickers(data.items));
     }, []);   
 
-
     return (
         <Container>
             <BannerPromotions Image={ImageBanner} />

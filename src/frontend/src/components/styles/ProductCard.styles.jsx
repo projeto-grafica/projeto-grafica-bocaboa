@@ -109,32 +109,38 @@ export const Container = styled.div`
         }
     }
 
-    /* Responsividade para diferentes tamanhos de tela */
-    @media (max-width: 1200px) {
-        max-width: 280px;
+    @media (max-aspect-ratio: 4/3) {
+        width: 140px;
+        height: 240px;
         
         .img {
-            height: 250px;
+            height: 140px;
         }
-    }
 
-    @media (max-width: 768px) {
-        max-width: 220px;
-        
-        .img {
-            height: 200px;
+        .rate {
+            .starQuantity {
+                font-size: 0.7rem;
+            }
+            
+            .rateQuantity {
+                font-size: 0.7rem;
+            }        
         }
-        
-        p {
-            font-size: 0.875rem;
-        }
-    }
 
-    @media (max-width: 480px) {
-        max-width: 100%;
-        
-        .img {
-            height: 180px;
-        }
-    }
+        .info {
+            p {
+                font-size: 1rem;
+            }
+
+            .priceText {
+                font-size: 0.8rem;
+            }
+
+            .price {
+                font-size: 0.7rem;
+
+                b {
+                    font-size: 1.1rem;
+                }
+    }}}
 `;

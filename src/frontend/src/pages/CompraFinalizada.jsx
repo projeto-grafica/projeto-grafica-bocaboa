@@ -89,4 +89,36 @@ const Container = styled.div`
             }
         }
     }
+
+    @media (max-aspect-ratio: 4/3) {
+        height: 100vh;
+        
+        .card {
+            width: 85vw;
+            padding: 4[vh 0;
+            
+            .divBotao {
+                width: 80%;
+            }
+            
+            .text {
+                margin-bottom: 4vh;
+                
+                > p {
+                    font-size: 20px;
+                    text-align: center;
+                }
+                
+                .infos {
+                    font-size: 14px;
+                    width: 90%;
+                    
+                    p {
+                        margin: 1.5vh;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
 `;
