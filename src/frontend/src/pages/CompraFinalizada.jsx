@@ -95,7 +95,7 @@ const Container = styled.div`
         
         .card {
             width: 85vw;
-            padding: 4[vh 0;
+            padding: 4vh 0;
             
             .divBotao {
                 width: 80%;
