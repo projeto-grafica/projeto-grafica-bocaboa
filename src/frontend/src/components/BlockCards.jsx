@@ -21,7 +21,7 @@ const BlockCards = ({ title, stickers }) => {
         dots: false,
         infinite: true,
         speed: 500,
-        slidesToShow: isMobile ? 1.2 : 4,
+        slidesToShow: isMobile ? 1.4 : 4.525,
         slidesToScroll: 1,
         arrows: true,
         autoplay: false,
@@ -29,7 +29,7 @@ const BlockCards = ({ title, stickers }) => {
             {
                 breakpoint: 768,
                 settings: {
-                    slidesToShow: 1.8,
+                    slidesToShow: 1.9,
                     slidesToScroll: 1,
                     infinite: true,
                     dots: true

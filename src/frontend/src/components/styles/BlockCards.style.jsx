@@ -37,22 +37,21 @@ export const Container = styled.div`
 
         .slick-arrow {
             position: absolute;
-            top: 45%;
+            top: 60%;
             z-index: 1;
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: white;
-            border: 1px solid #ddd;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            background: transparent;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s;
+            scale: 2;
             
             &:hover {
-                background: #f5f5f5;
+                top: 48%;
                 transform: scale(1.05);
             }
 
